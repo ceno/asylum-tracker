@@ -28,7 +28,7 @@ Deploy: push to `main`. GitHub Pages is set to deploy from the branch, from the 
 
 There is a private claude.ai artifact of the page at https://claude.ai/artifact/A8tFVv6s1ZnXcVVceQdeFL so changes can be previewed in claude.ai before merging. After any change to the page, republish it to that same URL with the Artifact tool:
 
-- `url`: the URL above (read it first with `action: "read"` if this session hasn't published it yet)
+- `url`: the URL above. If this session hasn't published it yet, first read it with `action: "read"` and also with `paths: ["style.css", "data.js", "app.js"]`, otherwise the publish is refused for overwriting files it hasn't read
 - `file_path`: `index.html`
 - `files`: `{"style.css": "style.css", "data.js": "data.js", "app.js": "app.js"}`
 
