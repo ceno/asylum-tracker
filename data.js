@@ -30,7 +30,6 @@ window.ROUTINE = [
   {
     id: "midday",
     title: "Midday",
-    time: "~3 min",
     tasks: [
       { id: "collect", text: "Collect resources and restart short timers" },
       { id: "help2", text: "Alliance help" },
