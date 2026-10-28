@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cut">
+  <meta name="theme-color" content="#14110f">
+  <title>Asylum Routine</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%238c2f1f'/><path d='M28 52l15 15 30-34' stroke='%23fffaf2' stroke-width='12' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="top-row">
+      <h1>Asylum Routine</h1>
+      <button id="settings-btn" class="icon-btn" aria-label="Settings" aria-expanded="false">⚙</button>
+    </div>
+    <p id="status" class="status"></p>
+    <nav id="day-tabs" class="day-tabs" aria-label="Duel day"></nav>
+  </header>
+
+  <section id="settings" class="card settings" hidden>
+    <h2>Settings</h2>
+    <label>Daily reset (your local time)
+      <input id="reset-hour" type="time" step="3600">
+    </label>
+    <label>Duel Day 1 falls on
+      <select id="start-weekday">
+        <option value="1">Monday</option><option value="2">Tuesday</option><option value="3">Wednesday</option>
+        <option value="4">Thursday</option><option value="5">Friday</option><option value="6">Saturday</option>
+        <option value="0">Sunday</option>
+      </select>
+    </label>
+    <button id="reset-today" class="link-btn" type="button">Clear today's ticks</button>
+  </section>
+
+  <main>
+    <section class="card duel">
+      <div class="duel-head">
+        <p class="eyebrow" id="duel-eyebrow"></p>
+        <div class="section-head"><h2 id="duel-title"></h2><span class="progress"></span></div>
+        <p id="duel-headline" class="headline"></p>
+      </div>
+      <ul id="duel-list" class="checks"></ul>
+      <div id="save-box" class="save-box"></div>
+    </section>
+
+    <section id="routine"></section>
+
+    <section class="card" id="prep-card">
+      <h2>Prep for tomorrow</h2>
+      <p class="sub" id="prep-sub"></p>
+      <ul id="prep-list" class="checks"></ul>
+    </section>
+
+    <details class="card cheat">
+      <summary><h2>Weekly saving cheat sheet</h2></summary>
+      <table>
+        <thead><tr><th>Item</th><th>Use on</th><th>Base pts</th></tr></thead>
+        <tbody id="cheat-body"></tbody>
+      </table>
+      <p class="sub">Base values from the <a href="https://last-asylum-plague.fandom.com/wiki/Alliance_Duell_Guide" target="_blank" rel="noopener">Alliance Duel guide</a>. Alliance Duel research raises them.</p>
+    </details>
+  </main>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
