@@ -1,7 +1,7 @@
 (() => {
   "use strict";
 
-  const STORE_KEY = "asylum-routine:v1";
+  const STORE_KEY = "asylum-routine:v1"; // pre-rename key, kept so saved ticks survive
   const KEEP_DAYS = 21;
   const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const $ = (id) => document.getElementById(id);

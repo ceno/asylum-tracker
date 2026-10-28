@@ -1,4 +1,4 @@
-# Asylum Routine
+# Asylum Tracker
 
 A daily checklist for **Last Asylum: Plague** for free-to-play players who want the most progress for the least time. It covers your daily routine (morning, midday and evening) and what to do on each Alliance Duel day.
 
