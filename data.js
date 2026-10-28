@@ -48,6 +48,16 @@ window.ROUTINE = [
       { id: "plunder", text: "Plunder caravans and ops" },
     ],
   },
+  {
+    id: "final-shift",
+    title: "Final shift",
+    tasks: [
+      { id: "chests", text: "Open up chests" },
+      { id: "dismantle-gear", text: "Disassemble gear" },
+      { id: "ur-gear", text: "Attempt to make UR gear" },
+      { id: "diamonds", text: "Consume Diamonds" },
+    ],
+  },
 ];
 
 // objectives: the few things that score best that day, shown under "Objective today".
