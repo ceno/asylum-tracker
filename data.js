@@ -1,5 +1,5 @@
 // Alliance Duel data from https://last-asylum-plague.fandom.com/wiki/Alliance_Duell_Guide
-// Points are base values (before Alliance Duel research bonuses).
+// Cheat-sheet points are base values (before Alliance Duel research bonuses).
 
 window.ROUTINE = [
   {
@@ -50,105 +50,16 @@ window.ROUTINE = [
   },
 ];
 
-// Each item: id, text, pts (base, display string), prio (high|med|low), note
+// objectives: the few things that score best that day, shown under "Objective today".
+// "Save for tomorrow" lists the next scoring day's objectives (the rest day is skipped).
 window.DUEL_DAYS = [
-  {
-    day: 1,
-    title: "Resources & Raven Items",
-    headline: "Use ALL Raven Fruit & Raven Essence you saved this week.",
-    actions: [
-      { id: "falcon", text: "Complete Falcon Quests", pts: "25,500", prio: "high", note: "Free points, so do these first" },
-      { id: "essence", text: "Consume Raven Essence", pts: "5,125", prio: "high", note: "Bulk-consume everything you saved" },
-      { id: "stamina", text: "Consume Stamina", pts: "307.5", prio: "high", note: "Use as much as you have" },
-      { id: "fruit", text: "Consume Raven Fruit", pts: "6.15", prio: "med", note: "Bulk-consume everything you saved" },
-      { id: "gather", text: "Gather Grain / Timber / Herbs", pts: "10.25 / 100", prio: "med", note: "Keep every squad busy" },
-      { id: "antitoxin", text: "Antitoxin (only if needed)", pts: "2.05 / 660", prio: "low", note: "Only if it's needed to reach the next chest and unlock more Fruit burns. Keep the rest for Day 4" },
-    ],
-    save: ["Hero Shards", "Skill Books", "Antitoxin", "Raven Gear Chests", "Speedups", "UR Caravans / Covert Ops"],
-  },
-  {
-    day: 2,
-    title: "Territory Development",
-    headline: "Send UR Caravans and Covert Ops, then use construction speedups.",
-    actions: [
-      { id: "urcaravan", text: "Dispatch UR Caravans", pts: "210,000", prio: "high", note: "Use as many as you can" },
-      { id: "urcovert", text: "Execute UR Covert Operations", pts: "157,500", prio: "high", note: "Use as many as you can" },
-      { id: "conspeed", text: "Use Construction Speedups", pts: "127.5 / min", prio: "high", note: "Only where it helps your current progress" },
-      { id: "recruit", text: "Recruit survivors", pts: "3,075", prio: "med", note: "Use all you have" },
-      { id: "bmight", text: "Collect building upgrades (Building Might)", pts: "22.5", prio: "med", note: "Points only count when you tap the hammer icon, so collect builds that finished overnight now" },
-    ],
-    save: ["Hero Shards", "Skill Books", "Antitoxin", "Raven Gear Chests", "Training Boosts"],
-  },
-  {
-    day: 3,
-    title: "Research & Raven Gear Chests",
-    headline: "Open every Raven Gear Chest you saved and use research speedups.",
-    actions: [
-      { id: "falcon", text: "Complete Falcon Quests", pts: "25,500", prio: "high", note: "Free points" },
-      { id: "chest3", text: "Open Lv.3 Raven Gear Chests", pts: "20,500", prio: "high", note: "Best realistic chest" },
-      { id: "chest2", text: "Open Lv.2 Raven Gear Chests", pts: "6,765", prio: "high", note: "" },
-      { id: "chest1", text: "Open Lv.1 Raven Gear Chests", pts: "2,255", prio: "high", note: "Open them all" },
-      { id: "resspeed", text: "Use Research Speedups", pts: "127.5 / min", prio: "high", note: "Use all of them" },
-      { id: "scroll", text: "Consume Study Scrolls", pts: "615", prio: "med", note: "Use all you have" },
-      { id: "tmight", text: "Collect research (Tech Might)", pts: "22", prio: "med", note: "Comes passively from finishing research" },
-      { id: "chest4", text: "Open Lv.4+ Raven Gear Chests", pts: "61,500+", prio: "low", note: "Rare. Open any you have" },
-    ],
-    save: ["Hero Shards", "Skill Books", "Antitoxin", "Training Boosts", "UR Caravans / Covert Ops"],
-  },
-  {
-    day: 4,
-    title: "Hero Day",
-    headline: "Use ALL Hero Shards, Skill Books and Antitoxin.",
-    actions: [
-      { id: "ssr", text: "Consume SSR Hero Shards", pts: "20,500", prio: "high", note: "Top priority. 10 shards = 205k" },
-      { id: "sr", text: "Consume SR Hero Shards", pts: "7,175", prio: "high", note: "" },
-      { id: "r", text: "Consume R Hero Shards", pts: "2,050", prio: "high", note: "" },
-      { id: "recruit", text: "Recruit heroes", pts: "3,825", prio: "high", note: "As many times as you can" },
-      { id: "antitoxin", text: "Use all Antitoxin", pts: "2.05 / 660", prio: "high", note: "Looks small, but a big stockpile can be worth 2M+ points" },
-      { id: "books", text: "Consume Skill Books", pts: "20.5", prio: "high", note: "Use every one you saved" },
-    ],
-    save: ["Training Boosts", "Raven Essence / Fruit", "Raven Gear Chests", "UR Caravans / Covert Ops"],
-  },
-  {
-    day: 5,
-    title: "Training & Speedups",
-    headline: "Train the highest-level soldiers you can (Lv.10 scores 5.5× Lv.1).",
-    actions: [
-      { id: "falcon", text: "Complete Falcon Quests", pts: "25,500", prio: "high", note: "Do these first" },
-      { id: "trainspeed", text: "Use Training Boosts", pts: "127.5 / min", prio: "high", note: "Use everything you saved" },
-      { id: "train10", text: "Train Lv.10 soldiers", pts: "264", prio: "high", note: "Lv.9 = 240, Lv.1 = 48" },
-      { id: "camps", text: "Give each camp a different tier", pts: "", prio: "high", note: "Promote troops one level at a time for the most points" },
-      { id: "otherspeed", text: "Use Construction / Research Speedups", pts: "127.5 / min", prio: "high", note: "Same rate as training boosts" },
-      { id: "might", text: "Collect builds and research (Might)", pts: "22–22.5", prio: "med", note: "" },
-    ],
-    save: ["UR Caravans / Covert Ops", "Healing Speedups", "Raven Essence / Fruit", "Raven Gear Chests"],
-  },
-  {
-    day: 6,
-    title: "Combat & Final Speedups",
-    headline: "Kills and losses both score. Fight in the right match.",
-    actions: [
-      { id: "urcaravan", text: "Dispatch UR Caravans", pts: "210,000", prio: "high", note: "Do this first" },
-      { id: "urcovert", text: "Execute UR Covert Operations", pts: "157,500", prio: "high", note: "" },
-      { id: "match", text: "Check which match counts as the \"specific match\"", pts: "", prio: "high", note: "Kills there score 5× normal kills" },
-      { id: "kills", text: "Defeat soldiers in the specific match", pts: "132 / Lv.10", prio: "high", note: "Any match: 26.4" },
-      { id: "losses", text: "Losses count too", pts: "22.55 / Lv.10", prio: "high", note: "" },
-      { id: "speed", text: "Use ALL remaining speedups", pts: "127.5 / min", prio: "high", note: "Construction / Research / Training" },
-      { id: "heal", text: "Use Healing Speedups after fighting", pts: "127.5 / min", prio: "med", note: "" },
-      { id: "shield", text: "Shield up if you'll be offline", pts: "", prio: "med", note: "" },
-    ],
-    save: ["Raven Essence / Fruit (for Day 1)", "Raven Gear Chests", "Hero Shards", "Skill Books"],
-  },
-  {
-    day: 7,
-    title: "Rest Day",
-    headline: "No Duel theme today. Just do the routine and get ready for Day 1.",
-    actions: [
-      { id: "falconstock", text: "Stock Falcon Quests for Day 1", pts: "", prio: "high", note: "Leave them on the red dot so they don't expire" },
-      { id: "nospend", text: "Don't use Raven Essence or Fruit", pts: "", prio: "high", note: "" },
-    ],
-    save: ["Raven Essence / Fruit", "Hero Shards", "Skill Books", "Antitoxin", "Raven Gear Chests", "Speedups", "UR Caravans / Covert Ops"],
-  },
+  { day: 1, title: "Resources & Raven Items", objectives: ["Raven Essence", "Raven Fruit", "Falcon Quests", "Stamina"] },
+  { day: 2, title: "Territory Development", objectives: ["UR Caravans", "UR Covert Ops", "Construction speedups", "Survivor recruitment"] },
+  { day: 3, title: "Research & Raven Gear Chests", objectives: ["Raven Gear Chests", "Falcon Quests", "Research speedups", "Study Scrolls"] },
+  { day: 4, title: "Hero Day", objectives: ["Hero Shards", "Skill Books", "Antitoxin", "Hero recruitment"] },
+  { day: 5, title: "Training & Speedups", objectives: ["Falcon Quests", "Training speedups", "Soldier training"] },
+  { day: 6, title: "Combat & Final Speedups", objectives: ["UR Caravans", "UR Covert Ops", "Combat in the specific match", "Healing speedups", "Remaining speedups"] },
+  { day: 7, title: "Rest Day", objectives: [], note: "Nothing scores today. Just do the routine." },
 ];
 
 // What to set up the day *before* each Duel day (indexed by the upcoming day)

@@ -78,7 +78,7 @@
     return n;
   }
 
-  function checkItem(dayKey, id, text, { note, pts, prio } = {}) {
+  function checkItem(dayKey, id, text, { note } = {}) {
     const ticks = state.days[dayKey] || {};
     const input = el("input", { type: "checkbox", "data-key": id });
     input.checked = !!ticks[id];
@@ -91,8 +91,7 @@
     return el("li", {},
       el("label", { class: "check" },
         input,
-        el("span", { class: "text" }, text, prio ? el("span", { class: `prio ${prio}` }, prio.toUpperCase()) : null),
-        el("span", { class: "pts" }, pts || ""),
+        el("span", { class: "text" }, text),
         note ? el("span", { class: "note" }, note) : null,
       ),
     );
@@ -100,6 +99,12 @@
 
   function dateForDuelDay(day) {
     return addDays(today, day - todayDay);
+  }
+
+  // "today" or "tomorrow" by the real game day, otherwise e.g. "on Thu".
+  function when(d, prep) {
+    const diff = Math.round((d - today) / 86400000);
+    return diff === 0 ? "today" : diff === 1 ? "tomorrow" : `${prep} ${WEEKDAYS[d.getDay()]}`.trim();
   }
 
   function renderTabs() {
@@ -118,22 +123,25 @@
 
   function renderDuel() {
     const info = window.DUEL_DAYS[selected - 1];
-    const key = dateKey(dateForDuelDay(selected));
+    const date = dateForDuelDay(selected);
     $("duel-eyebrow").textContent = selected === 7 ? "Alliance Duel · off day" : `Alliance Duel · Day ${selected}`;
     $("duel-title").textContent = info.title;
-    $("duel-headline").textContent = info.headline;
 
-    const list = $("duel-list");
-    list.replaceChildren(...info.actions.map((a) => checkItem(key, `duel:${a.id}`, a.text, a)));
-    if (selected !== todayDay) {
-      list.prepend(el("li", { class: "viewing-other" },
-        `Preview of ${WEEKDAYS[dateForDuelDay(selected).getDay()]}. Ticks here count for that day.`));
-    }
+    // The next day with objectives, so Day 6 saves for Day 1 instead of the rest day.
+    let gap = 1;
+    while (gap < 7 && !window.DUEL_DAYS[(selected + gap - 1) % 7].objectives.length) gap++;
+    const next = ((selected + gap - 1) % 7) + 1;
+    const nextDate = addDays(date, gap);
 
-    $("save-box").replaceChildren(
-      el("strong", {}, "Don't use today"),
-      el("div", { class: "chips" }, info.save.map((s) => el("span", {}, s))),
-    );
+    const bullets = (items) => el("ul", { class: "bullets" }, items.map((t) => el("li", {}, t)));
+    $("duel-body").replaceChildren(...[
+      el("h3", { class: "group-head" }, `Objective ${when(date, "on")}`),
+      info.objectives.length ? bullets(info.objectives) : el("p", { class: "sub" }, info.note || ""),
+      el("h3", { class: "group-head" },
+        gap === 1 ? `Save for ${when(nextDate, "")}` : `Save for Day ${next} (${WEEKDAYS[nextDate.getDay()]})`),
+      gap === 1 ? null : el("p", { class: "sub" }, "After the rest day"),
+      bullets(window.DUEL_DAYS[next - 1].objectives),
+    ].filter(Boolean));
   }
 
   function renderRoutine() {
@@ -151,9 +159,7 @@
           ? block.groups.flatMap((g) => [el("h3", { class: "group-head" }, g.title), list(block, g.tasks)])
           : list(block, block.tasks),
       );
-    // Morning sits above the Duel card; the rest follow it.
-    $("routine-top").replaceChildren(...window.ROUTINE.filter((b) => b.id === "morning").map(card));
-    $("routine").replaceChildren(...window.ROUTINE.filter((b) => b.id !== "morning").map(card));
+    $("routine").replaceChildren(...window.ROUTINE.map(card));
   }
 
   function renderPrep() {
@@ -173,7 +179,7 @@
   }
 
   function updateProgress() {
-    for (const card of document.querySelectorAll(".card.routine, .card.duel")) {
+    for (const card of document.querySelectorAll(".card.routine")) {
       const boxes = card.querySelectorAll("input[type=checkbox]");
       const done = [...boxes].filter((b) => b.checked).length;
       const p = card.querySelector(".progress");

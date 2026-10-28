@@ -1,11 +1,11 @@
 # Asylum Tracker
 
-A mobile-first daily checklist for the mobile game **Last Asylum: Plague**. It's for free-to-play players who want the most progress for the least time in game. The page has a daily routine (the Morning card sits at the top, then Midday and Evening). It also has a card for the current Alliance Duel day (Days 1–6 plus a rest day) that lists each scoring action with its base points, the items not to use today, a "prep for tomorrow" list, and a weekly saving cheat sheet. It is a static site served by GitHub Pages from the repo root. There is no build step, no framework and no dependencies. Ticks are stored in `localStorage` for each game day, so they reset at the in-game daily reset. The user can set the reset time and the weekday Duel Day 1 falls on in the ⚙ settings.
+A mobile-first daily checklist for the mobile game **Last Asylum: Plague**. It's for free-to-play players who want the most progress for the least time in game. The Alliance Duel card sits at the top. For the current Duel day (Days 1–6 plus a rest day) it lists the day's objectives as bullets under "Objective today", then the next scoring day's objectives under "Save for tomorrow". On Day 6 that skips the rest day and shows Day 1. Below it are the daily routine cards (Morning, Midday, Evening), a "prep for tomorrow" list and a weekly saving cheat sheet. It is a static site served by GitHub Pages from the repo root. There is no build step, no framework and no dependencies. Ticks are stored in `localStorage` for each game day, so they reset at the in-game daily reset. The user can set the reset time and the weekday Duel Day 1 falls on in the ⚙ settings.
 
 ## Files
 
 - `data.js`: all content (`ROUTINE`, `DUEL_DAYS`, `PREP`, `CHEATSHEET`). Most edits belong here. The Duel values come from https://last-asylum-plague.fandom.com/wiki/Alliance_Duell_Guide. WebFetch gets a 402 from Fandom, so read the page through the API instead: `curl -sL "https://last-asylum-plague.fandom.com/api.php?action=parse&page=Alliance_Duell_Guide&prop=wikitext&format=json&formatversion=2"`.
-- `app.js`: rendering, game-day maths and storage. Tick keys look like `duel:<id>`, `routine:<block>:<id>` and `prep:<day>:<n>`, grouped under a `YYYY-MM-DD` game date. Changing an item's `id` drops its saved tick.
+- `app.js`: rendering, game-day maths and storage. Tick keys look like `routine:<block>:<id>` and `prep:<day>:<n>`, grouped under a `YYYY-MM-DD` game date. Changing an item's `id` drops its saved tick.
 - `index.html`, `style.css`: markup and styles. Colours are CSS custom properties on `:root`, with dark-mode overrides.
 
 The storage key is still `asylum-routine:v1` from before the rename. Keep it so saved ticks aren't lost.

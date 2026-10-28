@@ -81,7 +81,6 @@ a { color: var(--accent); }
   padding: 16px; margin-top: 16px;
 }
 .eyebrow { margin: 0 0 2px; font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; color: var(--accent); font-weight: 600; }
-.headline { margin: 6px 0 0; color: var(--muted); }
 .sub { color: var(--muted); font-size: .85rem; margin: 4px 0 0; }
 
 .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
@@ -92,8 +91,12 @@ a { color: var(--accent); }
 .checks li + li { border-top: 1px solid var(--line); }
 .group-head { margin: 16px 0 0; font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 600; }
 .group-head + .checks { margin-top: 4px; }
+.bullets { margin: 6px 0 0; padding-left: 1.25rem; }
+.bullets li { padding: 2px 0; font-weight: 500; }
+.bullets li::marker { color: var(--accent); }
+.group-head + .sub { margin-top: 2px; }
 .check {
-  display: grid; grid-template-columns: 24px 1fr auto; gap: 4px 12px; align-items: start;
+  display: grid; grid-template-columns: 24px 1fr; gap: 4px 12px; align-items: start;
   padding: 10px 0; cursor: pointer;
 }
 .check input {
@@ -104,22 +107,9 @@ a { color: var(--accent); }
 .check input:checked::after { content: ""; width: 6px; height: 11px; border: solid var(--surface); border-width: 0 2.5px 2.5px 0; transform: translateY(-1px) rotate(45deg); }
 .check input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .check .text { font-weight: 500; }
-.check .note { grid-column: 2 / -1; color: var(--muted); font-size: .85rem; }
-.check .pts { font-variant-numeric: tabular-nums; font-size: .85rem; color: var(--muted); text-align: right; white-space: nowrap; }
+.check .note { grid-column: 2; color: var(--muted); font-size: .85rem; }
 .check:has(input:checked) .text { color: var(--done); text-decoration: line-through; }
-.check:has(input:checked) .note, .check:has(input:checked) .pts { opacity: .6; }
-
-.prio { display: inline-block; font-size: .65rem; font-weight: 700; letter-spacing: .06em; padding: 1px 6px; border-radius: 4px; margin-left: 6px; vertical-align: 2px; border: 1px solid currentColor; }
-.prio.high { color: var(--high); }
-.prio.med { color: var(--med); }
-.prio.low { color: var(--low); }
-
-.save-box { margin-top: 14px; padding: 10px 12px; background: var(--accent-soft); border-radius: 10px; font-size: .9rem; }
-.save-box strong { display: block; margin-bottom: 4px; }
-.chips { display: flex; flex-wrap: wrap; gap: 6px; }
-.chips span { background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 2px 10px; font-size: .8rem; }
-
-.viewing-other { margin: 10px 0 0; font-size: .85rem; color: var(--med); }
+.check:has(input:checked) .note { opacity: .6; }
 
 .settings label { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 12px; }
 .settings input, .settings select {
