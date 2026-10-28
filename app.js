@@ -138,7 +138,7 @@
 
   function renderRoutine() {
     const key = dateKey(today);
-    $("routine").replaceChildren(...window.ROUTINE.map((block) =>
+    const card = (block) =>
       el("section", { class: "card routine", "data-block": block.id },
         el("div", { class: "section-head" },
           el("h2", {}, block.title),
@@ -146,8 +146,10 @@
         ),
         el("p", { class: "sub" }, block.time),
         el("ul", { class: "checks" }, block.tasks.map((t) => checkItem(key, `routine:${block.id}:${t.id}`, t.text, t))),
-      ),
-    ));
+      );
+    // Morning sits above the Duel card; the rest follow it.
+    $("routine-top").replaceChildren(...window.ROUTINE.filter((b) => b.id === "morning").map(card));
+    $("routine").replaceChildren(...window.ROUTINE.filter((b) => b.id !== "morning").map(card));
   }
 
   function renderPrep() {
