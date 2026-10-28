@@ -16,6 +16,7 @@ window.ROUTINE = [
           { id: "camp-idle", text: "Claim Explorer's Camp idle rewards" },
           { id: "falcon", text: "Complete Falcon Quests" },
           { id: "alliance-research", text: "Donate to Alliance Research" },
+          { id: "caravans", text: "Dispatch 2 caravans" },
         ],
       },
       {
