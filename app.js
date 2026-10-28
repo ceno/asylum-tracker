@@ -138,14 +138,18 @@
 
   function renderRoutine() {
     const key = dateKey(today);
+    const list = (block, tasks) =>
+      el("ul", { class: "checks" }, tasks.map((t) => checkItem(key, `routine:${block.id}:${t.id}`, t.text, t)));
     const card = (block) =>
       el("section", { class: "card routine", "data-block": block.id },
         el("div", { class: "section-head" },
           el("h2", {}, block.title),
           el("span", { class: "progress" }),
         ),
-        el("p", { class: "sub" }, block.time),
-        el("ul", { class: "checks" }, block.tasks.map((t) => checkItem(key, `routine:${block.id}:${t.id}`, t.text, t))),
+        block.time ? el("p", { class: "sub" }, block.time) : null,
+        block.groups
+          ? block.groups.flatMap((g) => [el("h3", { class: "group-head" }, g.title), list(block, g.tasks)])
+          : list(block, block.tasks),
       );
     // Morning sits above the Duel card; the rest follow it.
     $("routine-top").replaceChildren(...window.ROUTINE.filter((b) => b.id === "morning").map(card));

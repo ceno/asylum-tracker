@@ -5,12 +5,25 @@ window.ROUTINE = [
   {
     id: "morning",
     title: "Morning",
-    time: "~2 min",
-    tasks: [
-      { id: "vip-pack", text: "Claim VIP daily free pack" },
-      { id: "vip-points", text: "Claim VIP 200 points" },
-      { id: "sanctuary-idle", text: "Claim Sanctuary idle rewards" },
-      { id: "camp-idle", text: "Claim Explorer's Camp idle rewards" },
+    // groups split a block under sub-headers; ids stay unique across the whole block
+    groups: [
+      {
+        title: "Base",
+        tasks: [
+          { id: "vip-pack", text: "Claim VIP daily free pack" },
+          { id: "vip-points", text: "Claim VIP 200 points" },
+          { id: "sanctuary-idle", text: "Claim Sanctuary idle rewards" },
+          { id: "camp-idle", text: "Claim Explorer's Camp idle rewards" },
+          { id: "falcon", text: "Complete Falcon Quests" },
+          { id: "alliance-research", text: "Donate to Alliance Research" },
+        ],
+      },
+      {
+        title: "Alliance duel",
+        tasks: [
+          { id: "research", text: "Initiate research" },
+        ],
+      },
     ],
   },
   {

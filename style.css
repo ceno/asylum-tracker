@@ -90,6 +90,8 @@ a { color: var(--accent); }
 
 .checks { list-style: none; margin: 12px 0 0; padding: 0; }
 .checks li + li { border-top: 1px solid var(--line); }
+.group-head { margin: 16px 0 0; font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 600; }
+.group-head + .checks { margin-top: 4px; }
 .check {
   display: grid; grid-template-columns: 24px 1fr auto; gap: 4px 12px; align-items: start;
   padding: 10px 0; cursor: pointer;
