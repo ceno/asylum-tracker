@@ -47,7 +47,7 @@ body {
   max-width: 640px;
   margin-inline: auto;
 }
-h1, h2 { font-family: ui-serif, Georgia, "Times New Roman", serif; font-weight: 600; margin: 0; }
+h1, h2 { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; font-weight: 600; margin: 0; }
 h1 { font-size: 1.35rem; letter-spacing: .01em; }
 h2 { font-size: 1.15rem; }
 a { color: var(--accent); }
