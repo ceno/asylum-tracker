@@ -22,4 +22,14 @@ playwright-cli console          # should show no errors
 playwright-cli close && rm -rf .playwright-cli
 ```
 
-Deploy: push to `main`. GitHub Pages is set to deploy from the branch, from the `main` root.
+Deploy: push to `main`. GitHub Pages is set to deploy from the branch, from the `main` root. Live site: https://ceno.github.io/asylum-tracker/
+
+## Preview artifact
+
+There is a private claude.ai artifact of the page at https://claude.ai/artifact/A8tFVv6s1ZnXcVVceQdeFL so changes can be previewed in claude.ai before merging. After any change to the page, republish it to that same URL with the Artifact tool:
+
+- `url`: the URL above (read it first with `action: "read"` if this session hasn't published it yet)
+- `file_path`: `index.html`
+- `files`: `{"style.css": "style.css", "data.js": "data.js", "app.js": "app.js"}`
+
+Never publish without `url`. That creates a second artifact instead of updating this one. Ticks saved in the artifact are separate from the live site's.
