@@ -40,12 +40,12 @@ window.ROUTINE = [
   {
     id: "evening",
     title: "Evening",
-    time: "~5–10 min",
     tasks: [
       { id: "dailies", text: "Finish daily quests and open the milestone chests" },
       { id: "events", text: "Claim free event rewards" },
       { id: "duelchests", text: "Check the Duel chests for today's theme", note: "Spend only the items that match today's day" },
       { id: "overnight", text: "Queue long timers overnight", note: "Again, time them to finish on their matching Duel day" },
+      { id: "falcon", text: "Complete 2 sets of Falcon Quests back to back" },
     ],
   },
 ];
