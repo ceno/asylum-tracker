@@ -5,13 +5,12 @@ window.ROUTINE = [
   {
     id: "morning",
     title: "Morning",
-    time: "~5 min",
+    time: "~2 min",
     tasks: [
-      { id: "login", text: "Claim login / attendance rewards and free chests" },
-      { id: "caravan", text: "Use the free daily caravan reroll" },
-      { id: "timers", text: "Start the longest build and research", note: "Try to have them finish on their Duel day (build → Day 2, research → Day 3)" },
-      { id: "gather", text: "Send all idle squads out gathering" },
-      { id: "help", text: "Alliance help and donations" },
+      { id: "vip-pack", text: "Claim VIP daily free pack" },
+      { id: "vip-points", text: "Claim VIP 200 points" },
+      { id: "sanctuary-idle", text: "Claim Sanctuary idle rewards" },
+      { id: "camp-idle", text: "Claim Explorer's Camp idle rewards" },
     ],
   },
   {
