@@ -17,6 +17,10 @@ window.ROUTINE = [
           { id: "falcon", text: "Complete Falcon Quests" },
           { id: "alliance-research", text: "Donate to Alliance Research" },
           { id: "caravans", text: "Dispatch 2 caravans" },
+          { id: "soldiers", text: "Collect and start new soldiers" },
+          { id: "covert-ops", text: "Dispatch and help covert ops" },
+          { id: "freebies", text: "Collect various freebies" },
+          { id: "builds-research", text: "Start new builds and research for the day" },
         ],
       },
       {
