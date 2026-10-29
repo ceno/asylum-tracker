@@ -40,7 +40,6 @@ window.ROUTINE = [
     tasks: [
       { id: "sanctuary-idle", text: "Claim Sanctuary idle rewards" },
       { id: "alliance-research", text: "Donate to Alliance Research" },
-      { id: "falcon", text: "Complete Falcon Quests" },
       { id: "covert-ops", text: "Dispatch and help covert ops" },
     ],
   },
