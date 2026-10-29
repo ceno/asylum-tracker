@@ -26,7 +26,8 @@ window.ROUTINE = [
       {
         title: "Alliance duel",
         tasks: [
-          { id: "research", text: "Initiate research" },
+          { id: "duel-research", text: "Check research for opportunities to maximise points" },
+          { id: "duel-plan", text: "Plan out tasks to complete to achieve points" },
         ],
       },
     ],
