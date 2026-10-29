@@ -55,6 +55,8 @@ window.ROUTINE = [
       { id: "falcon", text: "Complete 2 sets of Falcon Quests back to back" },
       { id: "hero-pass", text: "Complete daily objective for Hero Pass" },
       { id: "plunder", text: "Plunder caravans and ops" },
+      { id: "daily-quests", text: "Complete daily quests" },
+      { id: "alliance-duel", text: "Complete Alliance Duel" },
     ],
   },
   {
