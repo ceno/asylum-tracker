@@ -5,6 +5,7 @@ window.ROUTINE = [
   {
     id: "morning",
     title: "Morning",
+    time: "8:15",
     // groups split a block under sub-headers; ids stay unique across the whole block
     groups: [
       {
@@ -35,6 +36,7 @@ window.ROUTINE = [
   {
     id: "midday",
     title: "Midday",
+    time: "13:00",
     tasks: [
       { id: "sanctuary-idle", text: "Claim Sanctuary idle rewards" },
       { id: "alliance-research", text: "Donate to Alliance Research" },
@@ -45,6 +47,7 @@ window.ROUTINE = [
   {
     id: "evening",
     title: "Evening",
+    time: "20:15",
     tasks: [
       { id: "sanctuary-idle", text: "Claim Sanctuary idle rewards" },
       { id: "camp-idle", text: "Claim Explorer's Camp idle rewards" },
@@ -57,6 +60,7 @@ window.ROUTINE = [
   {
     id: "final-shift",
     title: "Final shift",
+    time: "22:30",
     tasks: [
       { id: "chests", text: "Open up chests" },
       { id: "dismantle-gear", text: "Disassemble gear" },
