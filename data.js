@@ -36,9 +36,10 @@ window.ROUTINE = [
     id: "midday",
     title: "Midday",
     tasks: [
-      { id: "collect", text: "Collect resources and restart short timers" },
-      { id: "help2", text: "Alliance help" },
-      { id: "falcon", text: "Check Falcon Quests", note: "Leave them with the red dot so they don't expire, and redeem on a day that scores them (1, 3, 5)" },
+      { id: "sanctuary-idle", text: "Claim Sanctuary idle rewards" },
+      { id: "alliance-research", text: "Donate to Alliance Research" },
+      { id: "falcon", text: "Complete Falcon Quests" },
+      { id: "covert-ops", text: "Dispatch and help covert ops" },
     ],
   },
   {
