@@ -5,7 +5,8 @@ A daily checklist for **Last Asylum: Plague** for free-to-play players who want 
 **Live site:** https://ceno.github.io/asylum-tracker/
 
 - Static site with no build step. Serve the repo root with GitHub Pages (Settings → Pages → Deploy from branch → `main` / root).
-- Ticks are saved in `localStorage` for each game day and clear at the daily reset. You can set the reset time and the weekday Duel Day 1 falls on (⚙ settings).
+- Ticks are saved in `localStorage` for each game day and clear at the daily reset. You can set the reset time and the weekday Duel Day 1 falls on (⚙ settings). The settings also show the time this device started keeping ticks, so you can tell if the phone wiped them.
+- The Home Screen app checks for a new deploy each time you switch back to it and reloads itself, so you don't need to force-quit it.
 - Duel data comes from the [Alliance Duel guide](https://last-asylum-plague.fandom.com/wiki/Alliance_Duell_Guide). Edit it in `data.js`.
 
 Run locally: `python3 -m http.server` and open http://localhost:8000.

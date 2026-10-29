@@ -25,6 +25,7 @@
   }
 
   function save() {
+    state.saved = Date.now();
     try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (_) { /* ignore */ }
   }
 
@@ -65,6 +66,8 @@
   // ---- rendering -------------------------------------------------------------
 
   const state = load();
+  // When this device's data starts. If it jumps to a later launch, the data was wiped.
+  if (!state.created) { state.created = Date.now(); save(); }
   let today, todayDay, selected;
 
   function el(tag, attrs = {}, ...children) {
@@ -220,12 +223,59 @@
     }
   }
 
+  // ---- storage health --------------------------------------------------------
+
+  // Safari grants this only to a Home Screen app's own site. It exempts the data
+  // from WebKit's over-quota and long-inactivity evictions.
+  let persisted = null;
+  async function protectStorage() {
+    try { persisted = (await navigator.storage.persisted()) || (await navigator.storage.persist()); }
+    catch (_) { persisted = false; }
+    renderStorageInfo();
+  }
+
+  function renderStorageInfo() {
+    const standalone = navigator.standalone === true || matchMedia("(display-mode: standalone)").matches;
+    const stamp = (t) => new Date(t).toLocaleString([], { weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
+    const protection = persisted == null ? "" : persisted ? ", storage protected" : ", storage not protected";
+    $("storage-info").replaceChildren(
+      `${standalone ? "Home Screen app" : "Browser tab"}${protection}`, el("br"),
+      `Ticks kept since ${stamp(state.created)}, last saved ${stamp(state.saved)}`,
+    );
+  }
+
+  // ---- updates ---------------------------------------------------------------
+
+  // A Home Screen app resumes the open page instead of reloading it. So each
+  // time it comes back, compare the deployed files with the ones this page
+  // started with and reload into the new deploy if they differ. sw.js makes
+  // every load fetch the latest files, so the first snapshot is what's running.
+  const APP_FILES = ["./", "style.css", "data.js", "app.js"];
+  let loaded = null;
+
+  async function checkForUpdate() {
+    try {
+      if (!navigator.serviceWorker.controller) return;
+      const texts = await Promise.all(APP_FILES.map(async (f) => {
+        const res = await fetch(f, { cache: "no-store" });
+        if (!res.ok) throw new Error(res.status);
+        return res.text();
+      }));
+      const deployed = texts.join("\0");
+      if (loaded === null) loaded = deployed;
+      else if (deployed !== loaded) location.reload();
+    } catch (_) { /* offline, mid-deploy or no service worker: try again next time */ }
+  }
+
+  try { navigator.serviceWorker.register("sw.js").catch(() => {}); } catch (_) { /* unsupported */ }
+
   // ---- settings --------------------------------------------------------------
 
   $("settings-btn").addEventListener("click", () => {
     const s = $("settings");
     s.hidden = !s.hidden;
     $("settings-btn").setAttribute("aria-expanded", String(!s.hidden));
+    if (!s.hidden) renderStorageInfo();
   });
   $("reset-hour").value = state.settings.reset;
   $("start-weekday").value = String(state.settings.start);
@@ -243,6 +293,10 @@
   });
 
   refreshDay();
+  protectStorage();
+  checkForUpdate();
   setInterval(refreshDay, 30000);
-  document.addEventListener("visibilitychange", () => { if (!document.hidden) refreshDay(); });
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) { refreshDay(); checkForUpdate(); }
+  });
 })();

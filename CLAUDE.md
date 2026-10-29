@@ -5,7 +5,8 @@ A mobile-first daily checklist for the mobile game **Last Asylum: Plague**. It's
 ## Files
 
 - `data.js`: all content (`ROUTINE`, `DUEL_DAYS`, `PREP`, `CHEATSHEET`). Most edits belong here. The Duel values come from https://last-asylum-plague.fandom.com/wiki/Alliance_Duell_Guide. WebFetch gets a 402 from Fandom, so read the page through the API instead: `curl -sL "https://last-asylum-plague.fandom.com/api.php?action=parse&page=Alliance_Duell_Guide&prop=wikitext&format=json&formatversion=2"`.
-- `app.js`: rendering, game-day maths and storage. Tick keys look like `routine:<block>:<id>` and `prep:<day>:<n>`, grouped under a `YYYY-MM-DD` game date. Changing an item's `id` drops its saved tick.
+- `app.js`: rendering, game-day maths and storage. Tick keys look like `routine:<block>:<id>` and `prep:<day>:<n>`, grouped under a `YYYY-MM-DD` game date. Changing an item's `id` drops its saved tick. It also asks for persistent storage and shows a storage readout in ⚙. That readout shows whether the page is running as a Home Screen app, whether storage is protected, and the `created` time of the saved data (it jumps forward if the data was wiped). Each time the app comes back into view, it compares the deployed files in `APP_FILES` with the ones it started with and reloads if they differ. Add any new file the page loads to `APP_FILES`.
+- `sw.js`: network-first service worker. Every load revalidates with the server instead of reusing GitHub Pages' 10-minute cache, and the cache is only used offline. Without it, the update check above can't tell what's running.
 - `index.html`, `style.css`: markup and styles. Colours are CSS custom properties on `:root`, with dark-mode overrides.
 
 The storage key is still `asylum-routine:v1` from before the rename. Keep it so saved ticks aren't lost.
@@ -32,4 +33,4 @@ There is a private claude.ai artifact of the page at https://claude.ai/artifact/
 - `file_path`: `index.html`
 - `files`: `{"style.css": "style.css", "data.js": "data.js", "app.js": "app.js"}`
 
-Never publish without `url`. That creates a second artifact instead of updating this one. Ticks saved in the artifact are separate from the live site's.
+Never publish without `url`. That creates a second artifact instead of updating this one. Ticks saved in the artifact are separate from the live site's. `sw.js` is left out on purpose: the preview runs without a service worker, so it never reloads itself.
