@@ -21,7 +21,6 @@
     if (!data || typeof data !== "object") data = {};
     data.settings = Object.assign({ reset: defaultResetTime(), start: 1 }, data.settings);
     data.days = data.days || {};
-    data.survival = data.survival || {}; // Survival Battle themes per Duel day, kept week to week
     return data;
   }
 
@@ -69,7 +68,7 @@
   const state = load();
   // When this device's data starts. If it jumps to a later launch, the data was wiped.
   if (!state.created) { state.created = Date.now(); save(); }
-  let today, todayDay, selected, liveRound;
+  let today, todayDay, selected, round;
 
   function el(tag, attrs = {}, ...children) {
     const n = document.createElement(tag);
@@ -137,76 +136,74 @@
     const next = ((selected + gap - 1) % 7) + 1;
     const nextDate = addDays(date, gap);
 
-    const bullets = (items) => el("ul", { class: "bullets" }, items.map((t) => el("li", {}, t)));
+    const slots = overlaps(selected);
+    const timed = new Set(slots.flatMap((s) => s.items));
+    const anytime = info.objectives.filter((o) => !timed.has(o));
+
+    // Tomorrow's objectives carry their Survival Battle times, so they can be planned for.
+    const tomorrow = overlaps(next);
+    const timesOf = (o) => tomorrow.filter((s) => s.items.includes(o)).map((s) => span(s)).join(", ");
+
     $("duel-body").replaceChildren(...[
       el("h3", { class: "group-head" }, `Objective ${when(date, "on")}`),
-      info.objectives.length ? bullets(info.objectives) : el("p", { class: "sub" }, info.note || ""),
+      info.objectives.length ? null : el("p", { class: "sub" }, info.note || ""),
+      anytime.length && slots.length ? el("p", { class: "minor-head" }, "Anytime") : null,
+      anytime.length ? bullets(anytime) : null,
+      slots.length ? el("p", { class: "minor-head" }, "During Survival Battle") : null,
+      slots.length ? timeline(slots) : null,
       el("h3", { class: "group-head" },
         gap === 1 ? `Save for ${when(nextDate, "")}` : `Save for Day ${next} (${WEEKDAYS[nextDate.getDay()]})`),
       gap === 1 ? null : el("p", { class: "sub" }, "After the rest day"),
-      bullets(window.DUEL_DAYS[next - 1].objectives),
-      ...(selected === 7 ? [] : renderSurvival()),
+      bullets(window.DUEL_DAYS[next - 1].objectives, timesOf),
     ].filter(Boolean));
+  }
+
+  function bullets(items, note = () => "") {
+    return el("ul", { class: "bullets" }, items.map((o) => {
+      const n = note(o);
+      return el("li", {}, text(o), n ? el("span", { class: "when" }, n) : null);
+    }));
+  }
+
+  function timeline(slots) {
+    const now = new Date();
+    return el("ol", { class: "timeline" }, slots.map((s) => {
+      const phase = now >= s.end ? "past" : now >= s.start ? "now" : "";
+      return el("li", { class: phase },
+        el("span", { class: "slot" }, el("strong", {}, hhmm(s.start)), `–${hhmm(s.end)}`),
+        el("div", { class: "what" },
+          s.items.map((o) => el("span", { class: "item" }, text(o))),
+          el("span", { class: "theme" }, phase === "now" ? `Now · ${SB.themes[s.theme]}` : SB.themes[s.theme]),
+        ),
+      );
+    }));
   }
 
   // ---- Survival Battle -------------------------------------------------------
 
   const SB = window.SURVIVAL_BATTLE;
+  const text = (o) => (typeof o === "string" ? o : o.text);
+  const hhmm = (d) => `${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
+  const span = (s) => `${hhmm(s.start)}–${hhmm(s.end)}`;
 
+  // Rounds are counted from the daily reset.
   function roundStart(day, i) {
     const d = dateForDuelDay(day);
     d.setMinutes(resetMinutes() + i * SB.hours * 60);
     return d;
   }
 
-  function currentRound(now) {
-    return Math.floor((now - roundStart(todayDay, 0)) / (SB.hours * 3600000));
+  function currentRound() {
+    return Math.floor((new Date() - roundStart(todayDay, 0)) / (SB.hours * 3600000));
   }
 
-  // A theme picked in the app wins over data.js, and "" means picked as unknown.
-  function themeOf(day, i) {
-    const id = (state.survival[day] || [])[i] ?? (SB.schedule[day] || [])[i];
-    return SB.themes.find((t) => t.id === id);
-  }
-
-  function renderSurvival() {
-    const time = (d) => `${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
-    liveRound = currentRound(new Date());
-    const overlaps = [];
-    let picked = 0;
-    const rows = Array.from({ length: SB.rounds }, (_, i) => {
-      const theme = themeOf(selected, i);
-      const both = theme && theme.duel[selected];
-      const span = `${time(roundStart(selected, i))}–${time(roundStart(selected, i + 1))}`;
-      if (theme) picked++;
-      if (both) overlaps.push(span);
-      const select = el("select", {
-        "aria-label": `Survival Battle theme ${span}`,
-        onchange: (e) => {
-          (state.survival[selected] = state.survival[selected] || [])[i] = e.target.value;
-          save();
-          renderDuel();
-        },
-      }, el("option", { value: "" }, "Theme?"),
-        SB.themes.map((t) => el("option", { value: t.id, selected: theme === t }, t.name)));
-      const live = selected === todayDay && i === liveRound;
-      return el("li", { class: [both ? "both" : "", live ? "live" : ""].join(" ").trim() },
-        el("span", { class: "round-time" }, span),
-        select,
-        both ? el("span", { class: "note" }, `Scores both: ${both}`) : null,
-      );
+  // The rounds of a Duel day whose theme also scores in the Duel, with the objectives they score.
+  function overlaps(day) {
+    const objectives = window.DUEL_DAYS[day - 1].objectives;
+    return (SB.schedule[day] || []).flatMap((theme, i) => {
+      const items = objectives.filter((o) => o.sb === theme);
+      return items.length ? [{ theme, items, start: roundStart(day, i), end: roundStart(day, i + 1) }] : [];
     });
-
-    const summary = overlaps.length
-      ? `Overlap ${overlaps.join(", ")}. Save the matching tasks for then.`
-      : picked
-        ? `No round matches Day ${selected}'s objectives.`
-        : "Pick each round's theme from the in-game calendar to see when it overlaps the Duel.";
-    return [
-      el("h3", { class: "group-head" }, "Survival Battle"),
-      el("p", { class: "sub" }, summary, ` Remembered for every Day ${selected}.`),
-      el("ul", { class: "rounds" }, rows),
-    ];
   }
 
   function renderRoutine() {
@@ -262,6 +259,7 @@
   }
 
   function render() {
+    round = currentRound();
     renderTabs();
     renderDuel();
     renderRoutine();
@@ -282,7 +280,8 @@
       render();
     } else {
       renderStatus();
-      if (currentRound(new Date()) !== liveRound) renderDuel();
+      // Move the "now" marker when a Survival Battle round ends.
+      if (currentRound() !== round) { round = currentRound(); renderDuel(); }
     }
   }
 
