@@ -77,13 +77,16 @@ window.ROUTINE = [
 // those rounds' times instead of under "Anytime".
 window.DUEL_DAYS = [
   { day: 1, title: "Resources & Raven Items", objectives: [
-    "Raven Essence", { text: "Raven Fruit", sb: "raven" }, "Falcon Quests", { text: "Stamina", sb: "raven" },
+    "Raven Essence", "Falcon Quests", { text: "Stamina", sb: "raven" }, { text: "Raven Fruit", sb: "raven" },
+    "Gather Grain, Timber and Herbs",
   ] },
   { day: 2, title: "Territory Development", objectives: [
-    "UR Caravans", "UR Covert Ops", { text: "Construction speedups", sb: "territory" }, "Survivor recruitment",
+    "UR Caravans", "UR Covert Ops", { text: "Construction speedups", sb: "territory" },
+    { text: "Building Might (finish builds)", sb: "territory" }, "Survivor recruitment",
   ] },
   { day: 3, title: "Research & Raven Gear Chests", objectives: [
     "Raven Gear Chests", "Falcon Quests", { text: "Research speedups", sb: "research" }, "Study Scrolls",
+    { text: "Tech Might (finish research)", sb: "research" },
   ] },
   { day: 4, title: "Hero Day", objectives: [
     "Hero Shards", "Skill Books", { text: "Antitoxin", sb: "heroes" }, { text: "Hero recruitment", sb: "heroes" },
@@ -94,7 +97,7 @@ window.DUEL_DAYS = [
     { text: "Research speedups", sb: "research" }, { text: "Construction speedups", sb: "territory" }, "Falcon Quests",
   ] },
   { day: 6, title: "Combat & Final Speedups", objectives: [
-    "UR Caravans", "UR Covert Ops", "Combat in the specific match", "Healing speedups",
+    "UR Caravans", "UR Covert Ops", "Kills in the specific match", "Soldier losses", "Healing speedups",
     { text: "Construction speedups", sb: "territory" }, { text: "Training speedups", sb: "training" },
     { text: "Research speedups", sb: "research" },
   ] },
