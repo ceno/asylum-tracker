@@ -21,6 +21,7 @@
     if (!data || typeof data !== "object") data = {};
     data.settings = Object.assign({ reset: defaultResetTime(), start: 1 }, data.settings);
     data.days = data.days || {};
+    data.survival = data.survival || {}; // Survival Battle themes per Duel day, kept week to week
     return data;
   }
 
@@ -68,7 +69,7 @@
   const state = load();
   // When this device's data starts. If it jumps to a later launch, the data was wiped.
   if (!state.created) { state.created = Date.now(); save(); }
-  let today, todayDay, selected;
+  let today, todayDay, selected, liveRound;
 
   function el(tag, attrs = {}, ...children) {
     const n = document.createElement(tag);
@@ -144,7 +145,68 @@
         gap === 1 ? `Save for ${when(nextDate, "")}` : `Save for Day ${next} (${WEEKDAYS[nextDate.getDay()]})`),
       gap === 1 ? null : el("p", { class: "sub" }, "After the rest day"),
       bullets(window.DUEL_DAYS[next - 1].objectives),
+      ...(selected === 7 ? [] : renderSurvival()),
     ].filter(Boolean));
+  }
+
+  // ---- Survival Battle -------------------------------------------------------
+
+  const SB = window.SURVIVAL_BATTLE;
+
+  function roundStart(day, i) {
+    const d = dateForDuelDay(day);
+    d.setMinutes(resetMinutes() + i * SB.hours * 60);
+    return d;
+  }
+
+  function currentRound(now) {
+    return Math.floor((now - roundStart(todayDay, 0)) / (SB.hours * 3600000));
+  }
+
+  // A theme picked in the app wins over data.js, and "" means picked as unknown.
+  function themeOf(day, i) {
+    const id = (state.survival[day] || [])[i] ?? (SB.schedule[day] || [])[i];
+    return SB.themes.find((t) => t.id === id);
+  }
+
+  function renderSurvival() {
+    const time = (d) => `${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
+    liveRound = currentRound(new Date());
+    const overlaps = [];
+    let picked = 0;
+    const rows = Array.from({ length: SB.rounds }, (_, i) => {
+      const theme = themeOf(selected, i);
+      const both = theme && theme.duel[selected];
+      const span = `${time(roundStart(selected, i))}–${time(roundStart(selected, i + 1))}`;
+      if (theme) picked++;
+      if (both) overlaps.push(span);
+      const select = el("select", {
+        "aria-label": `Survival Battle theme ${span}`,
+        onchange: (e) => {
+          (state.survival[selected] = state.survival[selected] || [])[i] = e.target.value;
+          save();
+          renderDuel();
+        },
+      }, el("option", { value: "" }, "Theme?"),
+        SB.themes.map((t) => el("option", { value: t.id, selected: theme === t }, t.name)));
+      const live = selected === todayDay && i === liveRound;
+      return el("li", { class: [both ? "both" : "", live ? "live" : ""].join(" ").trim() },
+        el("span", { class: "round-time" }, span),
+        select,
+        both ? el("span", { class: "note" }, `Scores both: ${both}`) : null,
+      );
+    });
+
+    const summary = overlaps.length
+      ? `Overlap ${overlaps.join(", ")}. Save the matching tasks for then.`
+      : picked
+        ? `No round matches Day ${selected}'s objectives.`
+        : "Pick each round's theme from the in-game calendar to see when it overlaps the Duel.";
+    return [
+      el("h3", { class: "group-head" }, "Survival Battle"),
+      el("p", { class: "sub" }, summary, ` Remembered for every Day ${selected}.`),
+      el("ul", { class: "rounds" }, rows),
+    ];
   }
 
   function renderRoutine() {
@@ -220,6 +282,7 @@
       render();
     } else {
       renderStatus();
+      if (currentRound(new Date()) !== liveRound) renderDuel();
     }
   }
 

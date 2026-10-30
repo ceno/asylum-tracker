@@ -83,6 +83,24 @@ window.DUEL_DAYS = [
   { day: 7, title: "Rest Day", objectives: [], note: "Nothing scores today. Just do the routine." },
 ];
 
+// Survival Battle: 6 rounds of 4 hours a day, counted from the daily reset, each with one theme.
+// The theme order changes from day to day and isn't published anywhere reliable, so each round's
+// theme is picked in the app from the in-game calendar. `schedule` can hard-code a Duel day's
+// themes once they're known, e.g. 2: ["territory", "training", "research", "raven", "heroes", "territory"].
+// `duel` maps a Duel day to the actions that score in both events when the round runs that day.
+window.SURVIVAL_BATTLE = {
+  rounds: 6,
+  hours: 4,
+  themes: [
+    { id: "territory", name: "Build Territory", duel: { 2: "Construction speedups, finishing builds", 6: "Construction speedups" } },
+    { id: "training", name: "Train Soldiers", duel: { 5: "Training speedups, soldier training", 6: "Training speedups" } },
+    { id: "research", name: "Technology Research", duel: { 3: "Research speedups, finishing research", 6: "Research speedups" } },
+    { id: "raven", name: "Enhance Raven", duel: { 1: "Stamina, Raven Fruit" } },
+    { id: "heroes", name: "Enhance Heroes", duel: { 4: "Hero recruitment, Antitoxin" } },
+  ],
+  schedule: {},
+};
+
 // What to set up the day *before* each Duel day (indexed by the upcoming day)
 window.PREP = {
   1: ["Leave Falcon Quests on the red dot", "Count your Raven Essence and Fruit"],

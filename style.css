@@ -126,3 +126,21 @@ th, td { text-align: left; padding: 6px 4px; border-bottom: 1px solid var(--line
 th { color: var(--muted); font-weight: 600; }
 tr.now td { color: var(--accent); font-weight: 600; }
 td:last-child, th:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+
+.rounds { list-style: none; margin: 8px 0 0; padding: 0; }
+.rounds li {
+  display: grid; grid-template-columns: 6.5rem 1fr; gap: 2px 10px; align-items: center;
+  padding: 6px 8px; border-radius: 8px;
+}
+.rounds li + li { margin-top: 2px; }
+.rounds li.both { background: var(--accent-soft); }
+.rounds .round-time { font-size: .9rem; font-variant-numeric: tabular-nums; }
+.rounds li.live .round-time::after {
+  content: "Now"; display: block; font-size: .7rem; text-transform: uppercase; letter-spacing: .08em;
+  color: var(--accent); font-weight: 600;
+}
+.rounds select {
+  min-width: 0; font: inherit; font-size: .9rem; color: var(--ink); background: var(--bg);
+  border: 1px solid var(--line); border-radius: 8px; padding: 4px 6px;
+}
+.rounds .note { grid-column: 2; color: var(--accent); font-size: .8rem; font-weight: 600; }
