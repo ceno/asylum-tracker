@@ -78,7 +78,7 @@ window.ROUTINE = [
 window.DUEL_DAYS = [
   { day: 1, title: "Resources & Raven Items", objectives: [
     "Raven Essence", "Falcon Quests", { text: "Stamina", sb: "raven" }, { text: "Raven Fruit", sb: "raven" },
-    "Gather Grain, Timber and Herbs",
+    "Gather Grain, Timber and Herbs", { text: "Antitoxin (only to unlock the next chest)", sb: "heroes" },
   ] },
   { day: 2, title: "Territory Development", objectives: [
     "UR Caravans", "UR Covert Ops", { text: "Construction speedups", sb: "territory" },
