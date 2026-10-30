@@ -73,15 +73,56 @@ window.ROUTINE = [
 
 // objectives: the few things that score best that day, shown under "Objective today".
 // "Save for tomorrow" lists the next scoring day's objectives (the rest day is skipped).
+// An objective with `sb` also scores in Survival Battle rounds of that theme, so it's shown at
+// those rounds' times instead of under "Anytime".
 window.DUEL_DAYS = [
-  { day: 1, title: "Resources & Raven Items", objectives: ["Raven Essence", "Raven Fruit", "Falcon Quests", "Stamina"] },
-  { day: 2, title: "Territory Development", objectives: ["UR Caravans", "UR Covert Ops", "Construction speedups", "Survivor recruitment"] },
-  { day: 3, title: "Research & Raven Gear Chests", objectives: ["Raven Gear Chests", "Falcon Quests", "Research speedups", "Study Scrolls"] },
-  { day: 4, title: "Hero Day", objectives: ["Hero Shards", "Skill Books", "Antitoxin", "Hero recruitment"] },
-  { day: 5, title: "Training & Speedups", objectives: ["Falcon Quests", "Training speedups", "Soldier training"] },
-  { day: 6, title: "Combat & Final Speedups", objectives: ["UR Caravans", "UR Covert Ops", "Combat in the specific match", "Healing speedups", "Remaining speedups"] },
+  { day: 1, title: "Resources & Raven Items", objectives: [
+    "Raven Essence", { text: "Raven Fruit", sb: "raven" }, "Falcon Quests", { text: "Stamina", sb: "raven" },
+  ] },
+  { day: 2, title: "Territory Development", objectives: [
+    "UR Caravans", "UR Covert Ops", { text: "Construction speedups", sb: "territory" }, "Survivor recruitment",
+  ] },
+  { day: 3, title: "Research & Raven Gear Chests", objectives: [
+    "Raven Gear Chests", "Falcon Quests", { text: "Research speedups", sb: "research" }, "Study Scrolls",
+  ] },
+  { day: 4, title: "Hero Day", objectives: [
+    "Hero Shards", "Skill Books", { text: "Antitoxin", sb: "heroes" }, { text: "Hero recruitment", sb: "heroes" },
+  ] },
+  { day: 5, title: "Training & Speedups", objectives: [
+    "Falcon Quests", { text: "Training speedups", sb: "training" }, { text: "Soldier training", sb: "training" },
+    { text: "Construction speedups", sb: "territory" }, { text: "Research speedups", sb: "research" },
+  ] },
+  { day: 6, title: "Combat & Final Speedups", objectives: [
+    "UR Caravans", "UR Covert Ops", "Combat in the specific match", "Healing speedups",
+    { text: "Construction speedups", sb: "territory" }, { text: "Training speedups", sb: "training" },
+    { text: "Research speedups", sb: "research" },
+  ] },
   { day: 7, title: "Rest Day", objectives: [], note: "Nothing scores today. Just do the routine." },
 ];
+
+// Survival Battle: 6 rounds of 4 hours a day, counted from the daily reset, each with one theme.
+// The schedule is copied from the in-game calendar, whose Day N is Duel Day N-1 (its Day 1 is the
+// rest day). Themes run in a fixed cycle and each day starts one theme later than the day before,
+// except Duel Day 1, which starts one theme earlier than the rest day.
+window.SURVIVAL_BATTLE = {
+  rounds: 6,
+  hours: 4,
+  themes: {
+    territory: "Build Territory",
+    training: "Train Soldiers",
+    research: "Technology Research",
+    raven: "Enhance Raven",
+    heroes: "Enhance Heroes",
+  },
+  schedule: {
+    1: ["heroes", "territory", "training", "research", "raven", "heroes"],
+    2: ["territory", "training", "research", "raven", "heroes", "territory"],
+    3: ["training", "research", "raven", "heroes", "territory", "training"],
+    4: ["research", "raven", "heroes", "territory", "training", "research"],
+    5: ["raven", "heroes", "territory", "training", "research", "raven"],
+    6: ["heroes", "territory", "training", "research", "raven", "heroes"],
+  },
+};
 
 // What to set up the day *before* each Duel day (indexed by the upcoming day)
 window.PREP = {

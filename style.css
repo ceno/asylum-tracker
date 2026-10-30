@@ -126,3 +126,30 @@ th, td { text-align: left; padding: 6px 4px; border-bottom: 1px solid var(--line
 th { color: var(--muted); font-weight: 600; }
 tr.now td { color: var(--accent); font-weight: 600; }
 td:last-child, th:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+
+.minor-head { margin: 10px 0 0; font-size: .8rem; color: var(--muted); }
+.bullets .when { margin-left: 6px; color: var(--muted); font-size: .8rem; font-weight: 400; font-variant-numeric: tabular-nums; }
+
+/* Objectives that also score in Survival Battle, on a timeline of its rounds. */
+.timeline { list-style: none; margin: 8px 0 0; padding: 0; }
+.timeline > li { display: grid; grid-template-columns: 3.5rem 1fr; column-gap: 12px; }
+.timeline .slot {
+  text-align: right; font-size: .75rem; color: var(--muted); line-height: 1.25;
+  font-variant-numeric: tabular-nums; padding-top: 1px;
+}
+.timeline .slot strong { display: block; font-size: 1rem; color: var(--ink); }
+.timeline .what {
+  position: relative; display: flex; flex-direction: column;
+  border-left: 2px solid var(--line); padding: 0 0 16px 16px;
+}
+.timeline li:last-child .what { border-left-color: transparent; padding-bottom: 0; }
+.timeline .what::before {
+  content: ""; position: absolute; left: -8px; top: 4px; width: 14px; height: 14px; border-radius: 50%;
+  background: var(--surface); border: 2px solid var(--accent); box-sizing: border-box;
+}
+.timeline .item { font-weight: 600; }
+.timeline .theme { font-size: .8rem; color: var(--muted); }
+.timeline li.now .what::before { background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+.timeline li.now .theme { color: var(--accent); font-weight: 600; }
+.timeline li.past { opacity: .45; }
+.timeline li.past .what::before { border-color: var(--muted); }
