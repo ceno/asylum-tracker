@@ -85,20 +85,22 @@ window.DUEL_DAYS = [
 
 // Survival Battle: 6 rounds of 4 hours a day, counted from the daily reset, each with one theme.
 // The theme order changes from day to day and isn't published anywhere reliable, so each round's
-// theme is picked in the app from the in-game calendar. `schedule` can hard-code a Duel day's
-// themes once they're known, e.g. 2: ["territory", "training", "research", "raven", "heroes", "territory"].
+// theme is picked in the app from the in-game calendar. `schedule` hard-codes a Duel day's themes
+// once they're known. The in-game calendar numbers its days differently: its Day 6 fell on Duel Day 5.
 // `duel` maps a Duel day to the actions that score in both events when the round runs that day.
 window.SURVIVAL_BATTLE = {
   rounds: 6,
   hours: 4,
   themes: [
-    { id: "territory", name: "Build Territory", duel: { 2: "Construction speedups, finishing builds", 6: "Construction speedups" } },
+    { id: "territory", name: "Build Territory", duel: { 2: "Construction speedups, finishing builds", 5: "Construction speedups", 6: "Construction speedups" } },
     { id: "training", name: "Train Soldiers", duel: { 5: "Training speedups, soldier training", 6: "Training speedups" } },
-    { id: "research", name: "Technology Research", duel: { 3: "Research speedups, finishing research", 6: "Research speedups" } },
+    { id: "research", name: "Technology Research", duel: { 3: "Research speedups, finishing research", 5: "Research speedups", 6: "Research speedups" } },
     { id: "raven", name: "Enhance Raven", duel: { 1: "Stamina, Raven Fruit" } },
     { id: "heroes", name: "Enhance Heroes", duel: { 4: "Hero recruitment, Antitoxin" } },
   ],
-  schedule: {},
+  schedule: {
+    5: ["raven", "heroes", "territory", "training", "research", "raven"],
+  },
 };
 
 // What to set up the day *before* each Duel day (indexed by the upcoming day)
