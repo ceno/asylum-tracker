@@ -69,6 +69,8 @@
   // When this device's data starts. If it jumps to a later launch, the data was wiped.
   if (!state.created) { state.created = Date.now(); save(); }
   let today, todayDay, selected, round;
+  // Finished routine cards fold to their header. These are the ones opened again by hand.
+  const unfolded = new Set();
 
   function el(tag, attrs = {}, ...children) {
     const n = document.createElement(tag);
@@ -210,16 +212,25 @@
     const key = dateKey(today);
     const list = (block, tasks) =>
       el("ul", { class: "checks" }, tasks.map((t) => checkItem(key, `routine:${block.id}:${t.id}`, t.text, t)));
+    const toggle = (id) => () => {
+      if (!unfolded.delete(id)) unfolded.add(id);
+      updateProgress();
+    };
     const card = (block) =>
       el("section", { class: "card routine", "data-block": block.id },
         el("div", { class: "section-head" },
           el("h2", {}, block.title),
           el("span", { class: "progress" }),
+          el("button", { type: "button", class: "fold-btn", onclick: toggle(block.id) }),
         ),
-        block.time ? el("p", { class: "sub" }, block.time) : null,
-        block.groups
-          ? block.groups.flatMap((g) => [el("h3", { class: "group-head" }, g.title), list(block, g.tasks)])
-          : list(block, block.tasks),
+        el("div", { class: "fold-body" },
+          el("div", {},
+            block.time ? el("p", { class: "sub" }, block.time) : null,
+            block.groups
+              ? block.groups.flatMap((g) => [el("h3", { class: "group-head" }, g.title), list(block, g.tasks)])
+              : list(block, block.tasks),
+          ),
+        ),
       );
     $("routine").replaceChildren(...window.ROUTINE.map(card));
   }
@@ -246,7 +257,17 @@
       const done = [...boxes].filter((b) => b.checked).length;
       const p = card.querySelector(".progress");
       if (p) p.textContent = `${done}/${boxes.length}`;
-      card.classList.toggle("complete", boxes.length > 0 && done === boxes.length);
+      const complete = boxes.length > 0 && done === boxes.length;
+      card.classList.toggle("complete", complete);
+      // Forget a hand-opened card once it's unfinished again, so finishing it folds it.
+      if (!complete) unfolded.delete(card.dataset.block);
+      const folded = complete && !unfolded.has(card.dataset.block);
+      card.classList.toggle("folded", folded);
+      card.querySelector(".fold-body").inert = folded;
+      const btn = card.querySelector(".fold-btn");
+      btn.hidden = !complete;
+      btn.textContent = folded ? "Show" : "Hide";
+      btn.setAttribute("aria-expanded", String(!folded));
     }
   }
 
@@ -274,6 +295,7 @@
     const changed = !today || dateKey(g) !== dateKey(today);
     if (changed) {
       today = g;
+      unfolded.clear();
       todayDay = duelDayOf(today);
       selected = todayDay;
       prune();

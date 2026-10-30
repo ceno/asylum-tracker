@@ -87,6 +87,20 @@ a { color: var(--accent); }
 .progress { font-size: .8rem; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
 .card.complete .section-head h2::after { content: " ✓"; color: var(--check); }
 
+/* A finished routine card folds to its header. The whole header toggles it. */
+.routine .section-head { position: relative; }
+.routine .section-head h2 { margin-right: auto; }
+.fold-btn {
+  background: none; border: none; padding: 0; color: var(--accent); font: inherit; font-size: .8rem; cursor: pointer;
+}
+.fold-btn::after { content: ""; position: absolute; inset: -8px 0; }
+.fold-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.fold-body { display: grid; grid-template-rows: 1fr; transition: grid-template-rows .25s ease; }
+.fold-body > div { min-height: 0; overflow: hidden; }
+/* The pause lets the last tick show before the card folds. */
+.routine.folded .fold-body { grid-template-rows: 0fr; transition-delay: .35s; }
+@media (prefers-reduced-motion: reduce) { .fold-body { transition: none; } }
+
 .checks { list-style: none; margin: 12px 0 0; padding: 0; }
 .checks li + li { border-top: 1px solid var(--line); }
 .group-head { margin: 16px 0 0; font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 600; }
