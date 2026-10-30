@@ -87,9 +87,7 @@ window.DUEL_DAYS = [
 // Themes run in a fixed cycle (territory, training, research, raven, heroes) and each day starts one
 // theme later than the day before, except Duel Day 1, which starts one theme earlier than the rest day.
 // The in-game calendar's Day N is Duel Day N-1 (its Day 1 is the rest day, which starts with territory).
-// Duel Days 5 and 6 are copied from the in-game calendar. Days 1-4 are worked out from that pattern;
-// Days 1-3 match the first rounds in https://lastasylumguides.com/2026/07/11/survival-battle-event/.
-// A theme picked in the app replaces the one here.
+// All days are copied from the in-game calendar. A theme picked in the app replaces the one here.
 // `duel` maps a Duel day to the actions that score in both events when the round runs that day.
 window.SURVIVAL_BATTLE = {
   rounds: 6,
