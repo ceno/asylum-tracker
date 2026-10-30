@@ -101,9 +101,9 @@ window.DUEL_DAYS = [
 ];
 
 // Survival Battle: 6 rounds of 4 hours a day, counted from the daily reset, each with one theme.
-// The schedule is copied from the in-game calendar, whose Day N is Duel Day N (Day 7 is the rest
-// day). Themes run in a fixed cycle and each day starts one theme later than the day before,
-// except Day 2, which starts one theme earlier than Day 1.
+// The schedule is copied from the in-game calendar, whose Day N is Duel Day N-1 (its Day 1 is the
+// rest day). Themes run in a fixed cycle and each day starts one theme later than the day before,
+// except Duel Day 1, which starts one theme earlier than the rest day.
 window.SURVIVAL_BATTLE = {
   rounds: 6,
   hours: 4,
@@ -115,13 +115,12 @@ window.SURVIVAL_BATTLE = {
     heroes: "Enhance Heroes",
   },
   schedule: {
-    1: ["territory", "training", "research", "raven", "heroes", "territory"],
-    2: ["heroes", "territory", "training", "research", "raven", "heroes"],
-    3: ["territory", "training", "research", "raven", "heroes", "territory"],
-    4: ["training", "research", "raven", "heroes", "territory", "training"],
-    5: ["research", "raven", "heroes", "territory", "training", "research"],
-    6: ["raven", "heroes", "territory", "training", "research", "raven"],
-    7: ["heroes", "territory", "training", "research", "raven", "heroes"],
+    1: ["heroes", "territory", "training", "research", "raven", "heroes"],
+    2: ["territory", "training", "research", "raven", "heroes", "territory"],
+    3: ["training", "research", "raven", "heroes", "territory", "training"],
+    4: ["research", "raven", "heroes", "territory", "training", "research"],
+    5: ["raven", "heroes", "territory", "training", "research", "raven"],
+    6: ["heroes", "territory", "training", "research", "raven", "heroes"],
   },
 };
 
