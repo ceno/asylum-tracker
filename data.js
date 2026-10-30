@@ -89,8 +89,9 @@ window.DUEL_DAYS = [
     "Hero Shards", "Skill Books", { text: "Antitoxin", sb: "heroes" }, { text: "Hero recruitment", sb: "heroes" },
   ] },
   { day: 5, title: "Training & Speedups", objectives: [
-    "Falcon Quests", { text: "Training speedups", sb: "training" }, { text: "Soldier training", sb: "training" },
-    { text: "Construction speedups", sb: "territory" }, { text: "Research speedups", sb: "research" },
+    { text: "Soldier training", sb: "training" }, { text: "Training speedups", sb: "training" },
+    { text: "Building Might (finish builds)", sb: "territory" }, { text: "Tech Might (finish research)", sb: "research" },
+    { text: "Research speedups", sb: "research" }, { text: "Construction speedups", sb: "territory" }, "Falcon Quests",
   ] },
   { day: 6, title: "Combat & Final Speedups", objectives: [
     "UR Caravans", "UR Covert Ops", "Combat in the specific match", "Healing speedups",
@@ -130,7 +131,7 @@ window.PREP = {
   2: ["Start long builds that will finish after reset", "Save UR Caravans and Covert Ops"],
   3: ["Start long research that will finish after reset", "Leave Falcon Quests on the red dot"],
   4: ["Keep all Hero Shards, Skill Books and Antitoxin"],
-  5: ["Stock up on low-tier troops to promote", "Leave Falcon Quests on the red dot"],
+  5: ["Start long builds and research that will finish after reset", "Stock up on low-tier troops to promote", "Leave Falcon Quests on the red dot"],
   6: ["Coordinate targets with your alliance", "Keep UR Caravans and Covert Ops for tomorrow"],
   7: [],
 };
