@@ -84,9 +84,11 @@ window.DUEL_DAYS = [
 ];
 
 // Survival Battle: 6 rounds of 4 hours a day, counted from the daily reset, each with one theme.
-// The theme order changes from day to day and isn't published anywhere reliable, so each round's
-// theme is picked in the app from the in-game calendar. `schedule` hard-codes a Duel day's themes
-// once they're known. The in-game calendar numbers its days differently: its Day 6 fell on Duel Day 5.
+// Themes run in a fixed cycle (territory, training, research, raven, heroes) and each day starts one
+// theme later than the day before. The in-game calendar's Day N is Duel Day N-1 (its Day 1 is the rest day).
+// Duel Days 5 and 6 are copied from the in-game calendar. Days 1-4 are worked out from that pattern;
+// Days 1-3 match the first rounds in https://lastasylumguides.com/2026/07/11/survival-battle-event/.
+// A theme picked in the app replaces the one here.
 // `duel` maps a Duel day to the actions that score in both events when the round runs that day.
 window.SURVIVAL_BATTLE = {
   rounds: 6,
@@ -99,7 +101,12 @@ window.SURVIVAL_BATTLE = {
     { id: "heroes", name: "Enhance Heroes", duel: { 4: "Hero recruitment, Antitoxin" } },
   ],
   schedule: {
+    1: ["heroes", "territory", "training", "research", "raven", "heroes"],
+    2: ["territory", "training", "research", "raven", "heroes", "territory"],
+    3: ["training", "research", "raven", "heroes", "territory", "training"],
+    4: ["research", "raven", "heroes", "territory", "training", "research"],
     5: ["raven", "heroes", "territory", "training", "research", "raven"],
+    6: ["heroes", "territory", "training", "research", "raven", "heroes"],
   },
 };
 
