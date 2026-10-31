@@ -66,6 +66,7 @@ window.ROUTINE = [
     title: "Final shift",
     time: "22:30",
     tasks: [
+      { id: "daily-quests", text: "Last claim of daily quests" },
       { id: "chests", text: "Open up chests" },
       { id: "dismantle-gear", text: "Disassemble gear" },
       { id: "ur-gear", text: "Attempt to make UR gear" },
