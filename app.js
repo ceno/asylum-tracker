@@ -63,13 +63,22 @@
     return r;
   }
 
+  // Whether game day `d` is the server's last day of the month. Months turn over on the server's
+  // date, which is the UTC date in the middle of a game day. West of UTC that can be a day after
+  // the local `d`. This holds as long as the reset is within 12 hours of midnight UTC.
+  function isMonthEnd(d) {
+    const mid = new Date(d);
+    mid.setMinutes(resetMinutes() + 12 * 60);
+    return new Date(mid.getTime() + 86400000).getUTCDate() === 1;
+  }
+
   // ---- rendering -------------------------------------------------------------
 
   const state = load();
   // When this device's data starts. If it jumps to a later launch, the data was wiped.
   if (!state.created) { state.created = Date.now(); save(); }
   let today, todayDay, selected, round;
-  // Finished routine cards fold to their header. These are the ones opened again by hand.
+  // Finished routine and month-end cards fold to their header. These are the ones opened again by hand.
   const unfolded = new Set();
 
   function el(tag, attrs = {}, ...children) {
@@ -208,31 +217,49 @@
     });
   }
 
-  function renderRoutine() {
+  // A card of today's ticks that folds to its header once every item is ticked.
+  // Ticks are saved as `<prefix>:<task id>`.
+  function foldCard(block, prefix, { eyebrow, sub, cls = "" } = {}) {
     const key = dateKey(today);
-    const list = (block, tasks) =>
-      el("ul", { class: "checks" }, tasks.map((t) => checkItem(key, `routine:${block.id}:${t.id}`, t.text, t)));
-    const toggle = (id) => () => {
-      if (!unfolded.delete(id)) unfolded.add(id);
+    const list = (tasks) =>
+      el("ul", { class: "checks" }, tasks.map((t) => checkItem(key, `${prefix}:${t.id}`, t.text, t)));
+    const toggle = () => {
+      if (!unfolded.delete(block.id)) unfolded.add(block.id);
       updateProgress();
     };
-    const card = (block) =>
-      el("section", { class: "card routine", "data-block": block.id },
-        el("div", { class: "section-head" },
-          el("h2", {}, block.title),
-          el("span", { class: "progress" }),
-          el("button", { type: "button", class: "fold-btn", onclick: toggle(block.id) }),
+    return el("section", { class: `card foldable ${cls}`.trim(), "data-block": block.id },
+      eyebrow ? el("p", { class: "eyebrow" }, eyebrow) : null,
+      el("div", { class: "section-head" },
+        el("h2", {}, block.title),
+        el("span", { class: "progress" }),
+        el("button", { type: "button", class: "fold-btn", onclick: toggle }),
+      ),
+      el("div", { class: "fold-body" },
+        el("div", {},
+          sub ? el("p", { class: "sub" }, sub) : null,
+          block.groups
+            ? block.groups.flatMap((g) => [el("h3", { class: "group-head" }, g.title), list(g.tasks)])
+            : list(block.tasks),
         ),
-        el("div", { class: "fold-body" },
-          el("div", {},
-            block.time ? el("p", { class: "sub" }, block.time) : null,
-            block.groups
-              ? block.groups.flatMap((g) => [el("h3", { class: "group-head" }, g.title), list(block, g.tasks)])
-              : list(block, block.tasks),
-          ),
-        ),
-      );
-    $("routine").replaceChildren(...window.ROUTINE.map(card));
+      ),
+    );
+  }
+
+  function renderRoutine() {
+    $("routine").replaceChildren(...window.ROUTINE.map((block) =>
+      foldCard(block, `routine:${block.id}`, { sub: block.time })));
+  }
+
+  // On the last game day of the month, a reminder to spend in the monthly shops before they reset.
+  function renderMonthEnd() {
+    const tasks = window.MONTH_END || [];
+    $("month-end").replaceChildren(...(isMonthEnd(today) && tasks.length ? [
+      foldCard({ id: "month-end", title: "Last chance to buy", tasks }, "month-end", {
+        eyebrow: "Last day of the month",
+        sub: `Monthly shops reset at ${hhmm(nextReset(new Date()))}`,
+        cls: "month-end",
+      }),
+    ] : []));
   }
 
   function renderPrep() {
@@ -252,7 +279,7 @@
   }
 
   function updateProgress() {
-    for (const card of document.querySelectorAll(".card.routine")) {
+    for (const card of document.querySelectorAll(".card.foldable")) {
       const boxes = card.querySelectorAll("input[type=checkbox]");
       const done = [...boxes].filter((b) => b.checked).length;
       const p = card.querySelector(".progress");
@@ -282,6 +309,7 @@
   function render() {
     round = currentRound();
     renderTabs();
+    renderMonthEnd();
     renderDuel();
     renderRoutine();
     renderPrep();

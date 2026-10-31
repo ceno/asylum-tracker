@@ -75,6 +75,12 @@ window.ROUTINE = [
   },
 ];
 
+// Shown in a card at the top on the last game day of each month: the last chance before monthly
+// shops reset. Ticks are kept as `month-end:<id>`.
+window.MONTH_END = [
+  { id: "honor-shop", text: "Buy what you want in the Honor Shop" },
+];
+
 // objectives: the few things that score best that day, shown under "Objective today".
 // "Save for tomorrow" lists the next scoring day's objectives (the rest day is skipped).
 // An objective with `sb` also scores in Survival Battle rounds of that theme, so it's shown at
