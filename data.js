@@ -20,6 +20,7 @@ window.ROUTINE = [
           { id: "caravans", text: "Dispatch 2 caravans" },
           { id: "soldiers", text: "Collect and start new soldiers" },
           { id: "covert-ops", text: "Dispatch and help covert ops" },
+          { id: "demon-king", text: "Fight Demon King 3 times" },
           { id: "freebies", text: "Collect various freebies" },
           { id: "builds-research", text: "Start new builds and research for the day" },
         ],
