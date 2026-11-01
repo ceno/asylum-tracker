@@ -215,18 +215,31 @@
     return d;
   }
 
+  // Whether a round overlaps the SB.show hours. A game day that starts after midnight runs into the
+  // next calendar date, so both dates' hours are checked.
+  function shown(day, start, end) {
+    return [0, 1].some((n) => {
+      const from = addDays(dateForDuelDay(day), n), to = new Date(from);
+      from.setHours(SB.show.from);
+      to.setHours(SB.show.to);
+      return start < to && end > from;
+    });
+  }
+
   function currentRound() {
     return Math.floor((new Date() - roundStart(todayDay, 0)) / (SB.hours * 3600000));
   }
 
   // The rounds of a Duel day whose theme also scores in the Duel, with the objectives they score.
   // A day without Duel objectives (the rest day) gets every round, so the whole battle shows.
+  // Only rounds that overlap the hours in SB.show count.
   function overlaps(day) {
     const objectives = window.DUEL_DAYS[day - 1].objectives;
     return (SB.schedule[day] || []).flatMap((theme, i) => {
+      const start = roundStart(day, i), end = roundStart(day, i + 1);
+      if (!shown(day, start, end)) return [];
       const items = objectives.filter((o) => o.sb === theme);
-      return items.length || !objectives.length
-        ? [{ theme, items, start: roundStart(day, i), end: roundStart(day, i + 1) }] : [];
+      return items.length || !objectives.length ? [{ theme, items, start, end }] : [];
     });
   }
 

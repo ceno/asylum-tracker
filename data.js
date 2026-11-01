@@ -125,6 +125,9 @@ window.DUEL_DAYS = [
 window.SURVIVAL_BATTLE = {
   rounds: 6,
   hours: 4,
+  // Only rounds that overlap these local hours are shown. An objective whose rounds are all
+  // outside them goes back under "Anytime", since it still scores in the Duel.
+  show: { from: 8, to: 24 },
   themes: {
     territory: "Build Territory",
     training: "Train Soldiers",
