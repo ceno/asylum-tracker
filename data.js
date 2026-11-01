@@ -23,6 +23,7 @@ window.ROUTINE = [
           { id: "covert-ops", text: "Dispatch and help covert ops" },
           { id: "help-ops", text: "Help alliance ops" },
           { id: "demon-king", text: "Fight Demon King 3 times" },
+          { id: "free-stamina", text: "Consume free stamina" },
           { id: "freebies", text: "Collect various freebies" },
           { id: "builds-research", text: "Start new builds and research for the day" },
         ],
