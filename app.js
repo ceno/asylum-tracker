@@ -63,14 +63,20 @@
     return r;
   }
 
-  // Whether game day `d` is the server's last day of the month. Months turn over on the server's
-  // date, which is the UTC date in the middle of a game day. West of UTC that can be a day after
-  // the local `d`. This holds as long as the reset is within 12 hours of midnight UTC.
-  function isMonthEnd(d) {
+  // The server's date for game day `d`, to read with getUTC*: the middle of the game day in UTC.
+  // Shop weeks and months turn over on the server's date, which west of UTC can be a day after the
+  // local `d`. This holds as long as the reset is within 12 hours of midnight UTC.
+  function serverDate(d) {
     const mid = new Date(d);
     mid.setMinutes(resetMinutes() + 12 * 60);
-    return new Date(mid.getTime() + 86400000).getUTCDate() === 1;
+    return mid;
   }
+
+  // Whether a server date is the last day of a shop's reset period (`resets` in LAST_CHANCE).
+  const LAST_DAY = {
+    week: (s) => s.getUTCDay() === 0, // Sunday
+    month: (s) => new Date(s.getTime() + 86400000).getUTCDate() === 1,
+  };
 
   // ---- rendering -------------------------------------------------------------
 
@@ -78,7 +84,7 @@
   // When this device's data starts. If it jumps to a later launch, the data was wiped.
   if (!state.created) { state.created = Date.now(); save(); }
   let today, todayDay, selected, round;
-  // Finished routine and month-end cards fold to their header. These are the ones opened again by hand.
+  // Finished routine and last-chance cards fold to their header. These are the ones opened again by hand.
   const unfolded = new Set();
 
   function el(tag, attrs = {}, ...children) {
@@ -250,14 +256,17 @@
       foldCard(block, `routine:${block.id}`, { sub: block.time })));
   }
 
-  // On the last game day of the month, a reminder to spend in the monthly shops before they reset.
-  function renderMonthEnd() {
-    const tasks = window.MONTH_END || [];
-    $("month-end").replaceChildren(...(isMonthEnd(today) && tasks.length ? [
-      foldCard({ id: "month-end", title: "Last chance to buy", tasks }, "month-end", {
-        eyebrow: "Last day of the month",
-        sub: `Monthly shops reset at ${hhmm(nextReset(new Date()))}`,
-        cls: "month-end",
+  // On the last game day of a week or month, the shops that reset after it: the last chance to buy.
+  function renderLastChance() {
+    const s = serverDate(today);
+    const tasks = (window.LAST_CHANCE || []).filter((t) => LAST_DAY[t.resets]?.(s));
+    const periods = Object.keys(LAST_DAY).filter((p) => tasks.some((t) => t.resets === p));
+    const shops = periods.map((p) => `${p}ly`).join(" and ");
+    $("last-chance").replaceChildren(...(tasks.length ? [
+      foldCard({ id: "last-chance", title: "Last chance to buy", tasks }, "last-chance", {
+        eyebrow: `Last day of the ${periods.join(" and ")}`,
+        sub: `${shops[0].toUpperCase()}${shops.slice(1)} shops reset at ${hhmm(nextReset(new Date()))}`,
+        cls: "last-chance",
       }),
     ] : []));
   }
@@ -309,7 +318,7 @@
   function render() {
     round = currentRound();
     renderTabs();
-    renderMonthEnd();
+    renderLastChance();
     renderDuel();
     renderRoutine();
     renderPrep();

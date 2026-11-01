@@ -75,10 +75,11 @@ window.ROUTINE = [
   },
 ];
 
-// Shown in a card at the top on the last game day of each month: the last chance before monthly
-// shops reset. Ticks are kept as `month-end:<id>`.
-window.MONTH_END = [
-  { id: "honor-shop", text: "Buy what you want in the Honor Shop" },
+// Shops whose stock resets each week (after Sunday) or each month. On a shop's last day, it's
+// listed in a "Last chance to buy" card at the top. Ticks are kept as `last-chance:<id>`.
+window.LAST_CHANCE = [
+  { id: "honor-shop", text: "Buy what you want in the Honor Shop", resets: "month" },
+  { id: "alliance-shop", text: "Buy what you want in the Alliance Shop", resets: "week" },
 ];
 
 // objectives: the few things that score best that day, shown under "Objective today".

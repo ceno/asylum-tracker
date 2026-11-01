@@ -87,7 +87,7 @@ a { color: var(--accent); }
 .progress { font-size: .8rem; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
 .card.complete .section-head h2::after { content: " ✓"; color: var(--check); }
 
-/* A finished routine or month-end card folds to its header. The whole header toggles it. */
+/* A finished routine or last-chance card folds to its header. The whole header toggles it. */
 .foldable .section-head { position: relative; }
 .foldable .section-head h2 { margin-right: auto; }
 .fold-btn {
@@ -101,10 +101,10 @@ a { color: var(--accent); }
 .foldable.folded .fold-body { grid-template-rows: 0fr; transition-delay: .35s; }
 @media (prefers-reduced-motion: reduce) { .fold-body { transition: none; } }
 
-/* Month-end reminder: stands out until it's ticked, then looks like any finished card. */
-.month-end { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); background: var(--accent-soft); }
-.month-end.complete { border-color: var(--line); box-shadow: none; background: var(--surface); }
-.month-end.complete .eyebrow { color: var(--muted); }
+/* Last-chance shop reminder: stands out until it's ticked, then looks like any finished card. */
+.last-chance { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); background: var(--accent-soft); }
+.last-chance.complete { border-color: var(--line); box-shadow: none; background: var(--surface); }
+.last-chance.complete .eyebrow { color: var(--muted); }
 
 .checks { list-style: none; margin: 12px 0 0; padding: 0; }
 .checks li + li { border-top: 1px solid var(--line); }
