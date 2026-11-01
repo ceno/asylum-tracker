@@ -21,6 +21,7 @@ window.ROUTINE = [
           { id: "alliance-research", text: "Donate to Alliance Research" },
           { id: "caravans", text: "Dispatch 2 caravans" },
           { id: "soldiers", text: "Collect and start new soldiers" },
+          { id: "recruit-survivor", text: "Recruit 1 survivor" },
           { id: "covert-ops", text: "Dispatch and help covert ops" },
           { id: "help-ops", text: "Help alliance ops" },
           { id: "demon-king", text: "Fight Demon King 3 times", notSunday: true },
