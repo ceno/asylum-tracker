@@ -166,7 +166,7 @@
       info.objectives.length ? null : el("p", { class: "sub" }, info.note || ""),
       anytime.length && slots.length ? el("p", { class: "minor-head" }, "Anytime") : null,
       anytime.length ? bullets(anytime) : null,
-      slots.length ? el("p", { class: "minor-head" }, "During Survival Battle") : null,
+      slots.length ? el("p", { class: "minor-head" }, info.objectives.length ? "During Survival Battle" : "Survival Battle") : null,
       slots.length ? timeline(slots) : null,
       el("h3", { class: "group-head" },
         gap === 1 ? `Save for ${when(nextDate, "")}` : `Save for Day ${next} (${WEEKDAYS[nextDate.getDay()]})`),
@@ -188,9 +188,14 @@
       const phase = now >= s.end ? "past" : now >= s.start ? "now" : "";
       return el("li", { class: phase },
         el("span", { class: "slot" }, el("strong", {}, hhmm(s.start)), `–${hhmm(s.end)}`),
+        // A round with no Duel objectives (the rest day) shows its theme as the item.
         el("div", { class: "what" },
-          s.items.map((o) => el("span", { class: "item" }, text(o))),
-          el("span", { class: "theme" }, phase === "now" ? `Now · ${SB.themes[s.theme]}` : SB.themes[s.theme]),
+          s.items.length
+            ? s.items.map((o) => el("span", { class: "item" }, text(o)))
+            : el("span", { class: "item" }, SB.themes[s.theme]),
+          s.items.length
+            ? el("span", { class: "theme" }, phase === "now" ? `Now · ${SB.themes[s.theme]}` : SB.themes[s.theme])
+            : phase === "now" ? el("span", { class: "theme" }, "Now") : null,
         ),
       );
     }));
@@ -215,11 +220,13 @@
   }
 
   // The rounds of a Duel day whose theme also scores in the Duel, with the objectives they score.
+  // A day without Duel objectives (the rest day) gets every round, so the whole battle shows.
   function overlaps(day) {
     const objectives = window.DUEL_DAYS[day - 1].objectives;
     return (SB.schedule[day] || []).flatMap((theme, i) => {
       const items = objectives.filter((o) => o.sb === theme);
-      return items.length ? [{ theme, items, start: roundStart(day, i), end: roundStart(day, i + 1) }] : [];
+      return items.length || !objectives.length
+        ? [{ theme, items, start: roundStart(day, i), end: roundStart(day, i + 1) }] : [];
     });
   }
 

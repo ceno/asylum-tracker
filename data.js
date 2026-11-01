@@ -115,7 +115,7 @@ window.DUEL_DAYS = [
     { text: "Construction speedups", sb: "territory" }, { text: "Training speedups", sb: "training" },
     { text: "Research speedups", sb: "research" },
   ] },
-  { day: 7, title: "Rest Day", objectives: [], note: "Nothing scores today. Just do the routine." },
+  { day: 7, title: "Rest Day", objectives: [], note: "Nothing scores in the Duel today, but Survival Battle still runs." },
 ];
 
 // Survival Battle: 6 rounds of 4 hours a day, counted from the daily reset, each with one theme.
@@ -139,6 +139,7 @@ window.SURVIVAL_BATTLE = {
     4: ["research", "raven", "heroes", "territory", "training", "research"],
     5: ["raven", "heroes", "territory", "training", "research", "raven"],
     6: ["heroes", "territory", "training", "research", "raven", "heroes"],
+    7: ["territory", "training", "research", "raven", "heroes", "territory"],
   },
 };
 
