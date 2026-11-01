@@ -251,9 +251,18 @@
     );
   }
 
+  // Drops the `duel: true` groups and tasks on the rest day, when the Duel doesn't score.
+  function forToday(block) {
+    if (todayDay !== 7) return block;
+    const keep = (tasks) => tasks.filter((t) => !t.duel);
+    return block.groups
+      ? { ...block, groups: block.groups.filter((g) => !g.duel).map((g) => ({ ...g, tasks: keep(g.tasks) })) }
+      : { ...block, tasks: keep(block.tasks) };
+  }
+
   function renderRoutine() {
     $("routine").replaceChildren(...window.ROUTINE.map((block) =>
-      foldCard(block, `routine:${block.id}`, { sub: block.time })));
+      foldCard(forToday(block), `routine:${block.id}`, { sub: block.time })));
   }
 
   // On the last game day of a week or month, the shops that reset after it: the last chance to buy.

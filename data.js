@@ -6,7 +6,8 @@ window.ROUTINE = [
     id: "morning",
     title: "Morning",
     time: "8:15",
-    // groups split a block under sub-headers; ids stay unique across the whole block
+    // groups split a block under sub-headers; ids stay unique across the whole block.
+    // A group or task with `duel: true` is hidden on the Duel rest day, when nothing scores.
     groups: [
       {
         title: "Base",
@@ -28,6 +29,7 @@ window.ROUTINE = [
       },
       {
         title: "Alliance duel",
+        duel: true,
         tasks: [
           { id: "duel-research", text: "Check research for opportunities to maximise points" },
           { id: "duel-plan", text: "Plan out tasks to complete to achieve points" },
@@ -58,7 +60,7 @@ window.ROUTINE = [
       { id: "hero-pass", text: "Complete daily objective for Hero Pass" },
       { id: "plunder", text: "Plunder caravans and ops" },
       { id: "daily-quests", text: "Complete daily quests" },
-      { id: "alliance-duel", text: "Complete Alliance Duel" },
+      { id: "alliance-duel", text: "Complete Alliance Duel", duel: true },
     ],
   },
   {
