@@ -8,6 +8,7 @@ window.ROUTINE = [
     time: "8:15",
     // groups split a block under sub-headers; ids stay unique across the whole block.
     // A group or task with `duel: true` is hidden on the Duel rest day, when nothing scores.
+    // A task with `notSunday: true` is hidden on the server's Sunday.
     groups: [
       {
         title: "Base",
@@ -22,7 +23,7 @@ window.ROUTINE = [
           { id: "soldiers", text: "Collect and start new soldiers" },
           { id: "covert-ops", text: "Dispatch and help covert ops" },
           { id: "help-ops", text: "Help alliance ops" },
-          { id: "demon-king", text: "Fight Demon King 3 times" },
+          { id: "demon-king", text: "Fight Demon King 3 times", notSunday: true },
           { id: "free-stamina", text: "Consume free stamina" },
           { id: "freebies", text: "Collect various freebies" },
           { id: "builds-research", text: "Start new builds and research for the day" },
