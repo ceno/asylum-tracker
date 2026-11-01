@@ -85,6 +85,9 @@ window.ROUTINE = [
 window.LAST_CHANCE = [
   { id: "honor-shop", text: "Buy what you want in the Honor Shop", resets: "month" },
   { id: "alliance-shop", text: "Buy what you want in the Alliance Shop", resets: "week" },
+  { id: "vip-shop", text: "Buy what you want in the VIP Shop", resets: "week" },
+  { id: "expedition-shop", text: "Buy what you want in the Expedition Shop", resets: "week" },
+  { id: "sanctuary-shop", text: "Buy what you want in the Sanctuary Shop", resets: "week" },
 ];
 
 // objectives: the few things that score best that day, shown under "Objective today".
