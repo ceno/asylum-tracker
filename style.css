@@ -77,11 +77,11 @@ h1, .duel-head h2, .foldable h2 {
 .top.is-hidden { transform: translateY(-100%); box-shadow: none; }
 .top-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
+/* The app icon (a small copy of apple-touch-icon.png), rounded like the settings button. */
 .brand-mark {
-  width: 28px; height: 28px; flex: none; display: grid; place-items: center; border-radius: 50%;
-  background: radial-gradient(circle at 40% 35%, #4b6a90, #22344d); box-shadow: 0 0 0 2px #8fa7c2, 0 0 0 4px #1b283a;
+  width: 36px; height: 36px; flex: none; display: block; border-radius: 9px;
+  box-shadow: 0 0 0 1.5px #8fa7c2, 0 0 0 3px #1b283a;
 }
-.brand-mark img { width: 21px; height: 21px; }
 h1 { font-size: 1.3rem; }
 .icon-btn {
   width: 34px; height: 34px; flex: none; display: grid; place-items: center; padding: 0; cursor: pointer;
