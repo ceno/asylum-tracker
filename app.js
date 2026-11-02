@@ -199,35 +199,33 @@
       [i ? " " : null, el("li", {}, pair(text(o), o.icon))]));
   }
 
-  // An item's small icon and its name, set inline so a round's items wrap like a sentence.
-  // A short name stays whole on one line. A long one may wrap, but the icon stays with its first
-  // word and `tail` (the Now tag) with its last.
-  function pair(name, art, tail = null) {
-    const words = name.split(" ");
-    const first = words.shift(), last = words.pop();
-    return el("span", { class: name.length <= 20 ? "pair short" : "pair" },
-      el("span", { class: "nw" }, icon(art, "ico mini"), first, last ? null : tail),
-      last ? ` ${words.map((w) => `${w} `).join("")}` : null,
-      last ? el("span", { class: "nw" }, last, tail) : null);
+  // An item's small icon and its name. A name too long for a line may wrap, but the icon stays
+  // with its first word.
+  function pair(name, art) {
+    const [first, ...rest] = name.split(" ");
+    return el("span", { class: "pair" },
+      el("span", { class: "nw" }, icon(art, "ico mini"), first),
+      rest.length ? ` ${rest.join(" ")}` : null);
   }
 
   // Survival Battle rounds on a timeline: a dot at each round's start, with the objectives it
   // scores. The next round's dot marks where a round ends, so a round's end time gets its own
   // (smaller) dot only when no shown round starts then: after the last round, or before a gap.
+  // The current round's dot is gold.
   function timeline(slots) {
     const now = new Date();
     const rows = [];
     slots.forEach((s, i) => {
       const phase = now >= s.end ? "past" : now >= s.start ? "now" : "";
-      const tag = () => (phase === "now" ? el("span", { class: "now-tag" }, "Now") : null);
       rows.push(el("li", { class: phase },
         el("time", { class: "slot" }, hhmm(s.start)),
         el("div", { class: "what" },
+          phase === "now" ? el("span", { class: "sr-only" }, "Now: ") : null,
           // A round with no Duel objectives (the rest day) shows its theme instead.
           // The spaces between items are where a line may break.
           el("span", { class: "item" }, s.items.length
-            ? s.items.flatMap((o, n) => [n ? " " : null, pair(text(o), o.icon, n === s.items.length - 1 ? tag() : null)])
-            : pair(SB.themes[s.theme], SB.icons[s.theme], tag())))));
+            ? s.items.flatMap((o, n) => [n ? " " : null, pair(text(o), o.icon)])
+            : pair(SB.themes[s.theme], SB.icons[s.theme])))));
       const next = slots[i + 1];
       if (!next || +next.start !== +s.end) {
         // `gap`: no shown round runs between this end and the next round's start.
