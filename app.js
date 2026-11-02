@@ -224,8 +224,9 @@
         el("time", { class: "slot" }, hhmm(s.start)),
         el("div", { class: "what" },
           // A round with no Duel objectives (the rest day) shows its theme instead.
+          // The spaces between items are where a line may break.
           el("span", { class: "item" }, s.items.length
-            ? s.items.map((o, n) => pair(text(o), o.icon, n === s.items.length - 1 ? tag() : null))
+            ? s.items.flatMap((o, n) => [n ? " " : null, pair(text(o), o.icon, n === s.items.length - 1 ? tag() : null)])
             : pair(SB.themes[s.theme], SB.icons[s.theme], tag())))));
       const next = slots[i + 1];
       if (!next || +next.start !== +s.end) {

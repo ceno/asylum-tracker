@@ -112,7 +112,9 @@ h1 { font-size: 1.3rem; }
 /* ---- icons ------------------------------------------------------------------------------- */
 
 /* An item (i-) sits on a tile coloured by its rarity; a building (b-) stands on its own. */
-.ico, .tab-ico, .card-art { flex: none; display: grid; place-items: center; }
+/* A one-cell grid whose cell is the frame's size, so a tall image shrinks to fit instead of
+   spilling out (an auto-sized cell would grow to the image's height). */
+.ico, .tab-ico, .card-art { flex: none; display: grid; grid-template: minmax(0, 1fr) / minmax(0, 1fr); place-items: center; }
 .ico img, .tab-ico img, .card-art img { width: 100%; height: 100%; object-fit: contain; }
 .ico { width: 44px; height: 44px; }
 .ico.blank { visibility: hidden; }
@@ -176,12 +178,10 @@ h1 { font-size: 1.3rem; }
 .duel-body .sub { text-align: center; }
 
 /* Objectives as icon and name pairs, as on the timeline, wrapping like a sentence. A pair moves
-   to the next line whole, and only breaks when it's longer than a line. Each pair is the last in
-   its li, so its gap to the next (.7em, as on the timeline) is the li's margin and a space.
-   The li's top and bottom margins space the rows, so a long name's own lines stay closer. */
+   to the next line whole, and only breaks when it's longer than a line. The li's top and bottom
+   margins space the rows, so a long name's own lines stay closer. */
 .pairs { list-style: none; margin: 3px 0 0; padding: 0 4px; line-height: 24px; }
 .pairs li { display: inline-block; max-width: 100%; margin-block: 3px; }
-.pairs li:not(:last-child) { margin-right: .45em; }
 
 /* Survival Battle: a dot at each round's start (its centre 12px down), joined to the next by a
    line. A smaller dot marks a round's end where no round starts; a dashed line is a gap. */
@@ -204,13 +204,16 @@ h1 { font-size: 1.3rem; }
 .timeline li.now .what::before { background: linear-gradient(#ffe777, #f3a91e); border-color: #9a5a08; box-shadow: 0 0 0 4px rgba(243, 169, 30, .35); }
 .timeline li.past { opacity: .45; }
 .timeline .item, .pairs { font-weight: 800; font-size: .95rem; }
-/* Each item in a round or list: a small icon and its name, flowing like words. */
-.pair { margin-right: .7em; }
-.pair:last-child { margin-right: 0; }
+/* Each item in a round or list: a small icon and its name, flowing like words. The gap between
+   two items is a widened space (about .7em), not a margin, so it drops away at the end of a line
+   and a name that only just fits stays on it. */
+.timeline .item, .pairs { word-spacing: .45em; }
+.pair { word-spacing: normal; }
 .pair .nw, .pair.short { white-space: nowrap; }
-.ico.mini { display: inline-grid; width: 20px; height: 20px; margin-right: 5px; vertical-align: -4px; }
-.ico.mini[data-kind="i"] { padding: 1px; border-radius: 5px; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .45), 0 1px 0 rgba(0, 0, 0, .2); }
-.ico.mini[data-kind="b"] { width: 24px; filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .3)); }
+/* Centred on the text. The negative margins keep it from making its line taller than 24px. */
+.ico.mini { display: inline-grid; width: 24px; height: 24px; margin: -2px 6px -2px 0; vertical-align: middle; }
+.ico.mini[data-kind="i"] { padding: 1px; border-radius: 6px; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .45), 0 1px 0 rgba(0, 0, 0, .2); }
+.ico.mini[data-kind="b"] { width: 29px; filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .3)); }
 .now-tag {
   display: inline-block; margin-left: 6px; padding: 0 7px; border-radius: 999px; vertical-align: 1px;
   font-size: .68rem; font-weight: 900; line-height: 16px; text-transform: uppercase; color: #fff;
