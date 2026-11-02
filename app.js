@@ -175,16 +175,22 @@
     const next = ((selected + gap - 1) % 7) + 1;
     const nextDate = addDays(date, gap);
 
-    const slots = overlaps(selected);
-    const timed = new Set(slots.flatMap((s) => s.items));
+    // A Duel day's timeline shows the rounds that also score in the Duel, or every round with
+    // "Show all" on. The rest day has no Duel objectives, so it always shows every round.
+    const rest = !info.objectives.length;
+    const all = rounds(selected);
+    const showAll = rest || !!state.settings.sbAll;
+    const slots = showAll ? all : all.filter((r) => r.items.length);
+    const timed = new Set(all.flatMap((r) => r.items));
     const anytime = info.objectives.filter((o) => !timed.has(o));
 
     $("duel-body").replaceChildren(...[
-      info.objectives.length ? null : el("p", { class: "sub" }, info.note || ""),
-      anytime.length && slots.length ? el("p", { class: "minor-head" }, "Anytime") : null,
+      rest ? el("p", { class: "sub" }, info.note || "") : null,
+      anytime.length && all.length ? el("p", { class: "minor-head" }, "Anytime") : null,
       anytime.length ? pairs(anytime) : null,
-      slots.length ? el("p", { class: "minor-head" }, info.objectives.length ? "During Survival Battle" : "Survival Battle") : null,
-      slots.length ? timeline(slots) : null,
+      all.length ? sbHead(rest, showAll) : null,
+      slots.length ? timeline(slots, showAll && !rest)
+        : all.length ? el("p", { class: "sub" }, "No Duel objective scores in today's rounds") : null,
       el("h3", { class: "group-head" },
         gap === 1 ? `Save for ${when(nextDate)}` : `Save for Day ${next} (${WEEKDAYS[nextDate.getDay()]})`),
       gap === 1 ? null : el("p", { class: "sub" }, "After the rest day"),
@@ -208,24 +214,48 @@
       rest.length ? ` ${rest.join(" ")}` : null);
   }
 
+  // The Survival Battle heading. On a Duel day it has a "Show all" switch, which adds the rounds
+  // that don't score in the Duel. The switch is kept in the settings, so it stays as it was left.
+  function sbHead(rest, showAll) {
+    return el("div", { class: "sb-head" },
+      el("p", { class: "minor-head" }, rest || showAll ? "Survival Battle" : "During Survival Battle"),
+      rest ? null : el("button", {
+        type: "button", class: "chip", "aria-pressed": String(showAll),
+        onclick: (e) => {
+          const focused = document.activeElement === e.currentTarget;
+          state.settings.sbAll = !showAll;
+          save();
+          renderDuel();
+          if (focused) $("duel-body").querySelector(".chip").focus();
+        },
+      }, "Show all"));
+  }
+
   // Survival Battle rounds on a timeline: a dot at each round's start, with the objectives it
   // scores. The next round's dot marks where a round ends, so a round's end time gets its own
   // (smaller) dot only when no shown round starts then: after the last round, or before a gap.
   // The current round's dot is gold.
-  function timeline(slots) {
+  // With `all` (a Duel day with "Show all" on), every round is headed by its theme. A round that
+  // also scores in the Duel is tagged "Duel" and lists its objectives below; the others are greyed.
+  function timeline(slots, all = false) {
     const now = new Date();
     const rows = [];
+    // The spaces between items are where a line may break.
+    const objectives = (s) => s.items.flatMap((o, n) => [n ? " " : null, pair(text(o), o.icon)]);
+    const theme = (s) => pair(SB.themes[s.theme], SB.icons[s.theme]);
     slots.forEach((s, i) => {
       const phase = now >= s.end ? "past" : now >= s.start ? "now" : "";
-      rows.push(el("li", { class: phase },
+      const duel = s.items.length > 0;
+      rows.push(el("li", { class: [phase, all ? (duel ? "duel" : "other") : ""].join(" ").trim() },
         el("time", { class: "slot" }, hhmm(s.start)),
         el("div", { class: "what" },
           phase === "now" ? el("span", { class: "sr-only" }, "Now: ") : null,
-          // A round with no Duel objectives (the rest day) shows its theme instead.
-          // The spaces between items are where a line may break.
-          el("span", { class: "item" }, s.items.length
-            ? s.items.flatMap((o, n) => [n ? " " : null, pair(text(o), o.icon)])
-            : pair(SB.themes[s.theme], SB.icons[s.theme])))));
+          // Otherwise a round with no Duel objectives (the rest day) shows its theme instead.
+          all ? [
+            el("span", { class: "item theme" }, theme(s)),
+            duel ? el("span", { class: "item" }, objectives(s)) : null,
+          ] : el("span", { class: "item" }, duel ? objectives(s) : theme(s))),
+        all && duel ? el("span", { class: "duel-tag" }, "Duel") : null));
       const next = slots[i + 1];
       if (!next || +next.start !== +s.end) {
         // `gap`: no shown round runs between this end and the next round's start.
@@ -265,16 +295,13 @@
     return Math.floor((new Date() - roundStart(todayDay, 0)) / (SB.hours * 3600000));
   }
 
-  // The rounds of a Duel day whose theme also scores in the Duel, with the objectives they score.
-  // A day without Duel objectives (the rest day) gets every round, so the whole battle shows.
-  // Only rounds that overlap the hours in SB.show count.
-  function overlaps(day) {
+  // The rounds of a Duel day that overlap the hours in SB.show, each with the Duel objectives its
+  // theme also scores that day (none in the other rounds, or on the rest day).
+  function rounds(day) {
     const objectives = window.DUEL_DAYS[day - 1].objectives;
     return (SB.schedule[day] || []).flatMap((theme, i) => {
       const start = roundStart(day, i), end = roundStart(day, i + 1);
-      if (!shown(day, start, end)) return [];
-      const items = objectives.filter((o) => o.sb === theme);
-      return items.length || !objectives.length ? [{ theme, items, start, end }] : [];
+      return shown(day, start, end) ? [{ theme, items: objectives.filter((o) => o.sb === theme), start, end }] : [];
     });
   }
 

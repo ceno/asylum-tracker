@@ -174,7 +174,8 @@ window.SURVIVAL_BATTLE = {
     raven: "Enhance Raven",
     heroes: "Enhance Heroes",
   },
-  // Shown with the theme's name on the rest day, when no Duel objectives score.
+  // Shown with the theme's name on the rest day, when no Duel objectives score, and on every round
+  // with "Show all" on.
   icons: {
     territory: "i-construction-speedup",
     training: "i-training-speedup",
