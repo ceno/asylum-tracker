@@ -1,11 +1,18 @@
 // Alliance Duel data from https://last-asylum-plague.fandom.com/wiki/Alliance_Duell_Guide
 // Cheat-sheet points are base values (before Alliance Duel research bonuses).
+//
+// `icon` and `art` name an image in assets/ (without .webp). Its prefix says what it is:
+//   i-  an item, drawn on a tile coloured by ICON_RARITY
+//   b-  a building, drawn as is
+//   h-  hero art, cropped to the face on the Duel banner
+//   art- a scene, cropped like hero art
 
 window.ROUTINE = [
   {
     id: "morning",
     title: "Morning",
     time: "8:15",
+    art: "b-sanctuary",
     // groups split a block under sub-headers; ids stay unique across the whole block.
     // A group or task with `duel: true` is hidden on the Duel rest day, when nothing scores.
     // A task with `notSunday: true` is hidden on the server's Sunday.
@@ -13,29 +20,29 @@ window.ROUTINE = [
       {
         title: "Base",
         tasks: [
-          { id: "vip-pack", text: "Claim VIP daily free pack" },
-          { id: "vip-points", text: "Claim VIP 200 points" },
-          { id: "sanctuary-idle", text: "Claim Sanctuary idle rewards" },
-          { id: "camp-idle", text: "Claim Explorer's Camp idle rewards" },
-          { id: "falcon", text: "Complete Falcon Quests" },
-          { id: "alliance-research", text: "Donate to Alliance Research" },
-          { id: "caravans", text: "Dispatch 2 caravans" },
-          { id: "soldiers", text: "Collect and start new soldiers" },
-          { id: "recruit-survivor", text: "Recruit 1 survivor" },
-          { id: "covert-ops", text: "Dispatch and help covert ops" },
-          { id: "help-ops", text: "Help alliance ops" },
-          { id: "demon-king", text: "Fight Demon King 3 times", notSunday: true },
-          { id: "free-stamina", text: "Consume free stamina" },
-          { id: "freebies", text: "Collect various freebies" },
-          { id: "builds-research", text: "Start new builds and research for the day" },
+          { id: "vip-pack", text: "Claim VIP daily free pack", icon: "i-deluxe-chest" },
+          { id: "vip-points", text: "Claim VIP 200 points", icon: "i-vip-points" },
+          { id: "sanctuary-idle", text: "Claim Sanctuary idle rewards", icon: "b-sanctuary" },
+          { id: "camp-idle", text: "Claim Explorer's Camp idle rewards", icon: "b-explorers-camp" },
+          { id: "falcon", text: "Complete Falcon Quests", icon: "b-falcon-tower" },
+          { id: "alliance-research", text: "Donate to Alliance Research", icon: "i-help-research" },
+          { id: "caravans", text: "Dispatch 2 caravans", icon: "i-caravan" },
+          { id: "soldiers", text: "Collect and start new soldiers", icon: "i-train-now" },
+          { id: "recruit-survivor", text: "Recruit 1 survivor", icon: "i-survivor-ticket" },
+          { id: "covert-ops", text: "Dispatch and help covert ops", icon: "i-covert" },
+          { id: "help-ops", text: "Help alliance ops", icon: "i-alliance-aid" },
+          { id: "demon-king", text: "Fight Demon King 3 times", icon: "i-eliminate", notSunday: true },
+          { id: "free-stamina", text: "Consume free stamina", icon: "i-stamina" },
+          { id: "freebies", text: "Collect various freebies", icon: "i-resource-supply" },
+          { id: "builds-research", text: "Start new builds and research for the day", icon: "i-build-hammer" },
         ],
       },
       {
         title: "Alliance duel",
         duel: true,
         tasks: [
-          { id: "duel-research", text: "Check research for opportunities to maximise points" },
-          { id: "duel-plan", text: "Plan out tasks to complete to achieve points" },
+          { id: "duel-research", text: "Check research for opportunities to maximise points", icon: "i-instant-research" },
+          { id: "duel-plan", text: "Plan out tasks to complete to achieve points", icon: "i-outstanding" },
         ],
       },
     ],
@@ -44,38 +51,41 @@ window.ROUTINE = [
     id: "midday",
     title: "Midday",
     time: "13:00",
+    art: "b-alliance-hall",
     tasks: [
-      { id: "sanctuary-idle", text: "Claim Sanctuary idle rewards" },
-      { id: "alliance-research", text: "Donate to Alliance Research" },
-      { id: "covert-ops", text: "Dispatch and help covert ops" },
-      { id: "help-ops", text: "Help alliance ops" },
+      { id: "sanctuary-idle", text: "Claim Sanctuary idle rewards", icon: "b-sanctuary" },
+      { id: "alliance-research", text: "Donate to Alliance Research", icon: "i-help-research" },
+      { id: "covert-ops", text: "Dispatch and help covert ops", icon: "i-covert" },
+      { id: "help-ops", text: "Help alliance ops", icon: "i-alliance-aid" },
     ],
   },
   {
     id: "evening",
     title: "Evening",
     time: "20:15",
+    art: "b-falcon-tower",
     tasks: [
-      { id: "sanctuary-idle", text: "Claim Sanctuary idle rewards" },
-      { id: "camp-idle", text: "Claim Explorer's Camp idle rewards" },
-      { id: "alliance-research", text: "Donate to Alliance Research" },
-      { id: "falcon", text: "Complete 2 sets of Falcon Quests back to back" },
-      { id: "hero-pass", text: "Complete daily objective for Hero Pass" },
-      { id: "plunder", text: "Plunder caravans and ops" },
-      { id: "daily-quests", text: "Complete daily quests" },
-      { id: "alliance-duel", text: "Complete Alliance Duel", duel: true },
+      { id: "sanctuary-idle", text: "Claim Sanctuary idle rewards", icon: "b-sanctuary" },
+      { id: "camp-idle", text: "Claim Explorer's Camp idle rewards", icon: "b-explorers-camp" },
+      { id: "alliance-research", text: "Donate to Alliance Research", icon: "i-help-research" },
+      { id: "falcon", text: "Complete 2 sets of Falcon Quests back to back", icon: "b-falcon-tower" },
+      { id: "hero-pass", text: "Complete daily objective for Hero Pass", icon: "i-recruit-ticket" },
+      { id: "plunder", text: "Plunder caravans and ops", icon: "i-territory-raid" },
+      { id: "daily-quests", text: "Complete daily quests", icon: "i-sign-medal" },
+      { id: "alliance-duel", text: "Complete Alliance Duel", icon: "i-rally", duel: true },
     ],
   },
   {
     id: "final-shift",
     title: "Final shift",
     time: "22:30",
+    art: "b-watchtower",
     tasks: [
-      { id: "daily-quests", text: "Last claim of daily quests" },
-      { id: "chests", text: "Open up chests" },
-      { id: "dismantle-gear", text: "Disassemble gear" },
-      { id: "ur-gear", text: "Attempt to make UR gear" },
-      { id: "diamonds", text: "Consume Diamonds" },
+      { id: "daily-quests", text: "Last claim of daily quests", icon: "i-sign-medal" },
+      { id: "chests", text: "Open up chests", icon: "i-gear-chest" },
+      { id: "dismantle-gear", text: "Disassemble gear", icon: "i-refined-iron" },
+      { id: "ur-gear", text: "Attempt to make UR gear", icon: "i-ur-sword" },
+      { id: "diamonds", text: "Consume Diamonds", icon: "i-diamonds" },
     ],
   },
 ];
@@ -83,44 +93,69 @@ window.ROUTINE = [
 // Shops whose stock resets each week (after Sunday) or each month. On a shop's last day, it's
 // listed in a "Last chance to buy" card at the top. Ticks are kept as `last-chance:<id>`.
 window.LAST_CHANCE = [
-  { id: "honor-shop", text: "Buy what you want in the Honor Shop", resets: "month" },
-  { id: "alliance-shop", text: "Buy what you want in the Alliance Shop", resets: "week" },
-  { id: "vip-shop", text: "Buy what you want in the VIP Shop", resets: "week" },
-  { id: "expedition-shop", text: "Buy what you want in the Expedition Shop", resets: "week" },
-  { id: "sanctuary-shop", text: "Buy what you want in the Sanctuary Shop", resets: "week" },
+  { id: "honor-shop", text: "Buy what you want in the Honor Shop", resets: "month", icon: "b-hall-of-honor" },
+  { id: "alliance-shop", text: "Buy what you want in the Alliance Shop", resets: "week", icon: "i-alliance-coins" },
+  { id: "vip-shop", text: "Buy what you want in the VIP Shop", resets: "week", icon: "i-vip-points" },
+  { id: "expedition-shop", text: "Buy what you want in the Expedition Shop", resets: "week", icon: "b-explorers-camp" },
+  { id: "sanctuary-shop", text: "Buy what you want in the Sanctuary Shop", resets: "week", icon: "b-sanctuary" },
 ];
 
-// objectives: the few things that score best that day, shown under "Objective today".
-// "Save for tomorrow" lists the next scoring day's objectives (the rest day is skipped).
+// objectives: the few things that score best that day, shown under "Anytime" or on the
+// Survival Battle timeline. "Save for tomorrow" lists the next scoring day's objectives
+// (the rest day is skipped).
 // An objective with `sb` also scores in Survival Battle rounds of that theme, so it's shown at
 // those rounds' times instead of under "Anytime".
+// `art` is the picture on the day's banner and `icon` the one on its day button.
 window.DUEL_DAYS = [
-  { day: 1, title: "Resources & Raven Items", objectives: [
-    "Raven Essence", "Falcon Quests", { text: "Stamina", sb: "raven" }, { text: "Raven Fruit", sb: "raven" },
-    "Gather Grain, Timber and Herbs", { text: "Antitoxin (only to unlock the next chest)", sb: "heroes" },
+  { day: 1, title: "Enhance Raven", art: "b-falcon-tower-lg", icon: "i-raven-essence", objectives: [
+    { text: "Raven Essence", icon: "i-raven-essence" },
+    { text: "Falcon Quests", icon: "b-falcon-tower" },
+    { text: "Stamina", icon: "i-stamina", sb: "raven" },
+    { text: "Raven Fruit", icon: "i-raven-fruit", sb: "raven" },
+    { text: "Gather Grain, Timber and Herbs", icon: "i-resource-supply" },
+    { text: "Antitoxin (only to unlock the next chest)", icon: "i-antitoxin", sb: "heroes" },
   ] },
-  { day: 2, title: "Territory Development", objectives: [
-    "UR Caravans", "UR Covert Ops", { text: "Construction speedups", sb: "territory" },
-    { text: "Building Might (finish builds)", sb: "territory" }, "Survivor recruitment",
+  { day: 2, title: "Territory Development", art: "h-harper", icon: "i-construction-speedup", objectives: [
+    { text: "UR Caravans", icon: "i-caravan" },
+    { text: "UR Covert Ops", icon: "i-covert" },
+    { text: "Construction speedups", icon: "i-construction-speedup", sb: "territory" },
+    { text: "Building Might (finish builds)", icon: "i-build-hammer", sb: "territory" },
+    { text: "Survivor recruitment", icon: "i-survivor-ticket" },
   ] },
-  { day: 3, title: "Research & Raven Gear Chests", objectives: [
-    "Raven Gear Chests", "Falcon Quests", { text: "Research speedups", sb: "research" }, "Study Scrolls",
-    { text: "Tech Might (finish research)", sb: "research" },
+  { day: 3, title: "Research & Raven Gear Chests", art: "h-grenwald", icon: "i-raven-chest", objectives: [
+    { text: "Raven Gear Chests", icon: "i-raven-chest" },
+    { text: "Falcon Quests", icon: "b-falcon-tower" },
+    { text: "Research speedups", icon: "i-research-speedup", sb: "research" },
+    { text: "Study Scrolls", icon: "i-study-scroll" },
+    { text: "Tech Might (finish research)", icon: "i-instant-research", sb: "research" },
   ] },
-  { day: 4, title: "Hero Day", objectives: [
-    "Hero Shards", "Skill Books", { text: "Antitoxin", sb: "heroes" }, { text: "Hero recruitment", sb: "heroes" },
+  { day: 4, title: "Hero Day", art: "h-marlena", icon: "i-hero-shard", objectives: [
+    { text: "Hero Shards", icon: "i-hero-shard" },
+    { text: "Skill Books", icon: "i-skill-book" },
+    { text: "Antitoxin", icon: "i-antitoxin", sb: "heroes" },
+    { text: "Hero recruitment", icon: "i-recruit-ticket", sb: "heroes" },
   ] },
-  { day: 5, title: "Training & Speedups", objectives: [
-    { text: "Soldier training", sb: "training" }, { text: "Training speedups", sb: "training" },
-    { text: "Building Might (finish builds)", sb: "territory" }, { text: "Tech Might (finish research)", sb: "research" },
-    { text: "Research speedups", sb: "research" }, { text: "Construction speedups", sb: "territory" }, "Falcon Quests",
+  { day: 5, title: "Training & Speedups", art: "h-arthur", icon: "i-training-speedup", objectives: [
+    { text: "Soldier training", icon: "i-train-now", sb: "training" },
+    { text: "Training speedups", icon: "i-training-speedup", sb: "training" },
+    { text: "Building Might (finish builds)", icon: "i-build-hammer", sb: "territory" },
+    { text: "Tech Might (finish research)", icon: "i-instant-research", sb: "research" },
+    { text: "Research speedups", icon: "i-research-speedup", sb: "research" },
+    { text: "Construction speedups", icon: "i-construction-speedup", sb: "territory" },
+    { text: "Falcon Quests", icon: "b-falcon-tower" },
   ] },
-  { day: 6, title: "Combat & Final Speedups", objectives: [
-    "UR Caravans", "UR Covert Ops", "Kills in the specific match", "Soldier losses", "Healing speedups",
-    { text: "Construction speedups", sb: "territory" }, { text: "Training speedups", sb: "training" },
-    { text: "Research speedups", sb: "research" },
+  { day: 6, title: "Combat & Final Speedups", art: "h-daskal", icon: "i-eliminate", objectives: [
+    { text: "UR Caravans", icon: "i-caravan" },
+    { text: "UR Covert Ops", icon: "i-covert" },
+    { text: "Kills in the specific match", icon: "i-eliminate" },
+    { text: "Soldier losses", icon: "i-weakened" },
+    { text: "Healing speedups", icon: "i-healing-speedup" },
+    { text: "Construction speedups", icon: "i-construction-speedup", sb: "territory" },
+    { text: "Training speedups", icon: "i-training-speedup", sb: "training" },
+    { text: "Research speedups", icon: "i-research-speedup", sb: "research" },
   ] },
-  { day: 7, title: "Rest Day", objectives: [], note: "Nothing scores in the Duel today, but Survival Battle still runs." },
+  { day: 7, title: "Rest Day", art: "art-raven", icon: "i-feather", objectives: [],
+    note: "Nothing scores in the Duel today, but Survival Battle still runs." },
 ];
 
 // Survival Battle: 6 rounds of 4 hours a day, counted from the daily reset, each with one theme.
@@ -140,6 +175,14 @@ window.SURVIVAL_BATTLE = {
     raven: "Enhance Raven",
     heroes: "Enhance Heroes",
   },
+  // Shown with the theme's name on the rest day, when no Duel objectives score.
+  icons: {
+    territory: "i-construction-speedup",
+    training: "i-training-speedup",
+    research: "i-research-speedup",
+    raven: "i-raven-essence",
+    heroes: "i-hero-shard",
+  },
   schedule: {
     1: ["heroes", "territory", "training", "research", "raven", "heroes"],
     2: ["territory", "training", "research", "raven", "heroes", "territory"],
@@ -151,30 +194,58 @@ window.SURVIVAL_BATTLE = {
   },
 };
 
-// What to set up the day *before* each Duel day (indexed by the upcoming day)
+// What to set up the day *before* each Duel day (indexed by the upcoming day).
+// Ticks are kept by position as `prep:<day>:<n>`, so add new items at the end.
 window.PREP = {
-  1: ["Leave Falcon Quests on the red dot", "Count your Raven Essence and Fruit"],
-  2: ["Start long builds that will finish after reset", "Save UR Caravans and Covert Ops"],
-  3: ["Start long research that will finish after reset", "Leave Falcon Quests on the red dot"],
-  4: ["Keep all Hero Shards, Skill Books and Antitoxin"],
-  5: ["Start long builds and research that will finish after reset", "Stock up on low-tier troops to promote", "Leave Falcon Quests on the red dot"],
-  6: ["Coordinate targets with your alliance", "Keep UR Caravans and Covert Ops for tomorrow"],
+  1: [
+    { text: "Leave Falcon Quests on the red dot", icon: "b-falcon-tower" },
+    { text: "Count your Raven Essence and Fruit", icon: "i-raven-essence" },
+  ],
+  2: [
+    { text: "Start long builds that will finish after reset", icon: "i-build-hammer" },
+    { text: "Save UR Caravans and Covert Ops", icon: "i-caravan" },
+  ],
+  3: [
+    { text: "Start long research that will finish after reset", icon: "i-instant-research" },
+    { text: "Leave Falcon Quests on the red dot", icon: "b-falcon-tower" },
+  ],
+  4: [
+    { text: "Keep all Hero Shards, Skill Books and Antitoxin", icon: "i-hero-shard" },
+  ],
+  5: [
+    { text: "Start long builds and research that will finish after reset", icon: "i-build-hammer" },
+    { text: "Stock up on low-tier troops to promote", icon: "i-training-speedup" },
+    { text: "Leave Falcon Quests on the red dot", icon: "b-falcon-tower" },
+  ],
+  6: [
+    { text: "Coordinate targets with your alliance", icon: "i-rally" },
+    { text: "Keep UR Caravans and Covert Ops for tomorrow", icon: "i-caravan" },
+  ],
   7: [],
 };
 
+// [item, use on, base points, Duel days it scores on, icon]
 window.CHEATSHEET = [
-  ["Raven Essence", "Day 1", "5,125", [1]],
-  ["Raven Fruit", "Day 1", "6.15", [1]],
-  ["Falcon Quest", "Days 1, 3, 5", "25,500", [1, 3, 5]],
-  ["UR Caravan", "Day 2 or 6", "210,000", [2, 6]],
-  ["UR Covert Op", "Day 2 or 6", "157,500", [2, 6]],
-  ["Raven Gear Chest Lv.1–3", "Day 3", "2,255–20,500", [3]],
-  ["Raven Gear Chest Lv.4+", "Day 3", "61,500+", [3]],
-  ["Study Scroll", "Day 3", "615", [3]],
-  ["SSR / SR / R Shard", "Day 4", "20,500 / 7,175 / 2,050", [4]],
-  ["Skill Book", "Day 4", "20.5", [4]],
-  ["Antitoxin (per 660)", "Day 4", "2.05", [4]],
-  ["Training Boost (1m)", "Day 5", "127.5", [5]],
-  ["Healing Speedup (1m)", "Day 6", "127.5", [6]],
-  ["Construction / Research (1m)", "Day 2 / 3 (or 5, 6)", "127.5", [2, 3, 5, 6]],
+  ["Raven Essence", "Day 1", "5,125", [1], "i-raven-essence"],
+  ["Raven Fruit", "Day 1", "6.15", [1], "i-raven-fruit"],
+  ["Falcon Quest", "Days 1, 3, 5", "25,500", [1, 3, 5], "b-falcon-tower"],
+  ["UR Caravan", "Day 2 or 6", "210,000", [2, 6], "i-caravan"],
+  ["UR Covert Op", "Day 2 or 6", "157,500", [2, 6], "i-covert"],
+  ["Raven Gear Chest Lv.1–3", "Day 3", "2,255–20,500", [3], "i-raven-chest"],
+  ["Raven Gear Chest Lv.4+", "Day 3", "61,500+", [3], "i-raven-chest"],
+  ["Study Scroll", "Day 3", "615", [3], "i-study-scroll"],
+  ["SSR / SR / R Shard", "Day 4", "20,500 / 7,175 / 2,050", [4], "i-hero-shard"],
+  ["Skill Book", "Day 4", "20.5", [4], "i-skill-book"],
+  ["Antitoxin (per 660)", "Day 4", "2.05", [4], "i-antitoxin"],
+  ["Training Boost (1m)", "Day 5", "127.5", [5], "i-training-speedup"],
+  ["Healing Speedup (1m)", "Day 6", "127.5", [6], "i-healing-speedup"],
+  ["Construction / Research (1m)", "Day 2 / 3 (or 5, 6)", "127.5", [2, 3, 5, 6], "i-construction-speedup"],
 ];
+
+// The tile colour behind each item icon (i-), as the game frames items by rarity. Blue unless listed.
+window.ICON_RARITY = {
+  purple: ["i-raven-essence", "i-raven-fruit", "i-raven-chest", "i-feather", "i-hero-shard", "i-skill-book", "i-study-scroll"],
+  orange: ["i-caravan", "i-covert", "i-deluxe-chest", "i-ur-sword", "i-recruit-ticket", "i-vip-points", "i-eliminate", "i-rally"],
+  green: ["i-resource-supply", "i-survivor-ticket", "i-alliance-aid", "i-help-research", "i-sign-medal", "i-refined-iron"],
+  gold: ["i-alliance-coins", "i-gear-chest", "i-outstanding", "i-territory-raid", "i-build-hammer", "i-weakened"],
+};

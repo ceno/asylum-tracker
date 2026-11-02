@@ -2,19 +2,28 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cut">
-  <meta name="theme-color" content="#14110f">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1d2a3d">
   <title>Asylum Tracker</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%238c2f1f'/><path d='M28 52l15 15 30-34' stroke='%23fffaf2' stroke-width='12' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%232c4666'/><path d='M28 52l15 15 30-34' stroke='%23ffd23f' stroke-width='12' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+  <link rel="preload" href="assets/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/lilita-one-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header class="top">
     <div class="top-row">
-      <h1>Asylum Tracker</h1>
-      <button id="settings-btn" class="icon-btn" aria-label="Settings" aria-expanded="false">⚙</button>
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"><img src="assets/i-feather.webp" alt=""></span>
+        <h1>Asylum Tracker</h1>
+      </div>
+      <button id="settings-btn" class="icon-btn" aria-label="Settings" aria-expanded="false">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="4" stroke-dasharray="3.1416 3.1416"/>
+          <circle cx="12" cy="12" r="6.5" fill="none" stroke="currentColor" stroke-width="3"/>
+        </svg>
+      </button>
     </div>
-    <p id="status" class="status"></p>
     <nav id="day-tabs" class="day-tabs" aria-label="Duel day"></nav>
   </header>
 
@@ -38,10 +47,15 @@
   <main>
     <section id="last-chance"></section>
 
-    <section class="card duel">
-      <p class="eyebrow" id="duel-eyebrow"></p>
-      <h2 id="duel-title"></h2>
-      <div id="duel-body"></div>
+    <section class="card duel" id="duel">
+      <div class="duel-banner">
+        <img id="duel-art" class="duel-art" alt="">
+        <div class="duel-head">
+          <h2 id="duel-title"></h2>
+          <p class="duel-meta" id="duel-meta"></p>
+        </div>
+      </div>
+      <div id="duel-body" class="duel-body"></div>
     </section>
 
     <section id="routine"></section>
@@ -54,12 +68,16 @@
 
     <details class="card cheat">
       <summary><h2>Weekly saving cheat sheet</h2></summary>
-      <table>
-        <thead><tr><th>Item</th><th>Use on</th><th>Base pts</th></tr></thead>
-        <tbody id="cheat-body"></tbody>
-      </table>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Item</th><th>Use on</th><th>Base pts</th></tr></thead>
+          <tbody id="cheat-body"></tbody>
+        </table>
+      </div>
       <p class="sub">Base values from the <a href="https://last-asylum-plague.fandom.com/wiki/Alliance_Duell_Guide" target="_blank" rel="noopener">Alliance Duel guide</a>. Alliance Duel research raises them.</p>
     </details>
+
+    <p class="credit">Game art © Last Asylum: Plague</p>
   </main>
 
   <script src="data.js"></script>

@@ -4,6 +4,7 @@
   const STORE_KEY = "asylum-routine:v1"; // pre-rename key, kept so saved ticks survive
   const KEEP_DAYS = 21;
   const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const ROMAN = ["", "I", "II", "III", "IV", "V", "VI"];
   const $ = (id) => document.getElementById(id);
 
   // ---- storage -------------------------------------------------------------
@@ -98,7 +99,16 @@
     return n;
   }
 
-  function checkItem(dayKey, id, text, { note } = {}) {
+  // An image from assets/ in a frame the stylesheet draws: an item (i-) on a tile coloured by
+  // ICON_RARITY, a building (b-) as is. See the top of data.js.
+  function icon(name, cls = "ico") {
+    if (!name) return el("span", { class: `${cls} blank`, "aria-hidden": "true" });
+    const rarity = Object.keys(window.ICON_RARITY).find((r) => window.ICON_RARITY[r].includes(name)) || "blue";
+    return el("span", { class: cls, "data-kind": name.split("-")[0], "data-rarity": rarity, "aria-hidden": "true" },
+      el("img", { src: `assets/${name}.webp`, alt: "", decoding: "async" }));
+  }
+
+  function checkItem(dayKey, id, text, { note, icon: art } = {}) {
     const ticks = state.days[dayKey] || {};
     const input = el("input", { type: "checkbox", "data-key": id });
     input.checked = !!ticks[id];
@@ -111,6 +121,7 @@
     return el("li", {},
       el("label", { class: "check" },
         input,
+        icon(art),
         el("span", { class: "text" }, text),
         note ? el("span", { class: "note" }, note) : null,
       ),
@@ -121,31 +132,42 @@
     return addDays(today, day - todayDay);
   }
 
-  // "today" or "tomorrow" by the real game day, otherwise e.g. "on Thu".
-  function when(d, prep) {
+  // "today" or "tomorrow" by the real game day, otherwise the weekday, e.g. "Thu".
+  function when(d) {
     const diff = Math.round((d - today) / 86400000);
-    return diff === 0 ? "today" : diff === 1 ? "tomorrow" : `${prep} ${WEEKDAYS[d.getDay()]}`.trim();
+    return diff === 0 ? "today" : diff === 1 ? "tomorrow" : WEEKDAYS[d.getDay()];
   }
 
   function renderTabs() {
     const nav = $("day-tabs");
-    nav.replaceChildren(...window.DUEL_DAYS.map(({ day }) => {
+    // Each button: the day's icon with its numeral as a badge, and the weekday below.
+    nav.replaceChildren(...window.DUEL_DAYS.map(({ day, icon: art }) => {
       const d = dateForDuelDay(day);
-      const b = el("button", {
+      return el("button", {
         type: "button",
         class: day === todayDay ? "today" : "",
+        "data-day": day,
         "aria-pressed": String(day === selected),
+        "aria-label": `${day === 7 ? "Rest day" : `Day ${day}`}, ${WEEKDAYS[d.getDay()]}`,
         onclick: () => { selected = day; render(); window.scrollTo({ top: 0, behavior: "smooth" }); },
-      }, day === 7 ? "Rest" : `D${day}`, el("small", {}, WEEKDAYS[d.getDay()]));
-      return b;
+      },
+        icon(art, "tab-ico"),
+        el("span", { class: "num" }, day === 7 ? "Rest" : ROMAN[day]),
+        el("small", {}, WEEKDAYS[d.getDay()]));
     }));
   }
 
   function renderDuel() {
     const info = window.DUEL_DAYS[selected - 1];
     const date = dateForDuelDay(selected);
-    $("duel-eyebrow").textContent = selected === 7 ? "Alliance Duel · off day" : `Alliance Duel · Day ${selected}`;
+    // The banner: the day's name, colour (by data-day) and art, and its reset countdown or date.
+    $("duel").dataset.day = selected;
     $("duel-title").textContent = info.title;
+    $("duel-art").src = `assets/${info.art}.webp`;
+    $("duel-art").dataset.kind = info.art.split("-")[0];
+    $("duel-meta").textContent = selected === todayDay
+      ? `Ends in ${untilReset()}`
+      : `${WEEKDAYS[date.getDay()]} ${date.getDate()} ${date.toLocaleString("en", { month: "short" })}`;
 
     // The next day with objectives, so Day 6 saves for Day 1 instead of the rest day.
     let gap = 1;
@@ -157,48 +179,63 @@
     const timed = new Set(slots.flatMap((s) => s.items));
     const anytime = info.objectives.filter((o) => !timed.has(o));
 
-    // Tomorrow's objectives carry their Survival Battle times, so they can be planned for.
-    const tomorrow = overlaps(next);
-    const timesOf = (o) => tomorrow.filter((s) => s.items.includes(o)).map((s) => span(s)).join(", ");
-
     $("duel-body").replaceChildren(...[
-      el("h3", { class: "group-head" }, `Objective ${when(date, "on")}`),
       info.objectives.length ? null : el("p", { class: "sub" }, info.note || ""),
       anytime.length && slots.length ? el("p", { class: "minor-head" }, "Anytime") : null,
-      anytime.length ? bullets(anytime) : null,
+      anytime.length ? tiles(anytime) : null,
       slots.length ? el("p", { class: "minor-head" }, info.objectives.length ? "During Survival Battle" : "Survival Battle") : null,
       slots.length ? timeline(slots) : null,
       el("h3", { class: "group-head" },
-        gap === 1 ? `Save for ${when(nextDate, "")}` : `Save for Day ${next} (${WEEKDAYS[nextDate.getDay()]})`),
+        gap === 1 ? `Save for ${when(nextDate)}` : `Save for Day ${next} (${WEEKDAYS[nextDate.getDay()]})`),
       gap === 1 ? null : el("p", { class: "sub" }, "After the rest day"),
-      bullets(window.DUEL_DAYS[next - 1].objectives, timesOf),
+      tiles(window.DUEL_DAYS[next - 1].objectives),
     ].filter(Boolean));
   }
 
-  function bullets(items, note = () => "") {
-    return el("ul", { class: "bullets" }, items.map((o) => {
-      const n = note(o);
-      return el("li", {}, text(o), n ? el("span", { class: "when" }, n) : null);
-    }));
+  // Objectives as tiles, three to a row: the item's icon and its name. Names over two lines are
+  // cut short, so the full name is also the tile's title.
+  function tiles(items) {
+    return el("ul", { class: "loot" }, items.map((o) =>
+      el("li", { title: text(o) }, icon(o.icon), el("span", { class: "txt" }, text(o)))));
   }
 
+  // An item's small icon and its name, set inline so a round's items wrap like a sentence.
+  // A short name stays whole on one line. A long one may wrap, but the icon stays with its first
+  // word and `tail` (the Now tag) with its last.
+  function pair(name, art, tail = null) {
+    const words = name.split(" ");
+    const first = words.shift(), last = words.pop();
+    return el("span", { class: name.length <= 20 ? "pair short" : "pair" },
+      el("span", { class: "nw" }, icon(art, "ico mini"), first, last ? null : tail),
+      last ? ` ${words.map((w) => `${w} `).join("")}` : null,
+      last ? el("span", { class: "nw" }, last, tail) : null);
+  }
+
+  // Survival Battle rounds on a timeline: a dot at each round's start, with the objectives it
+  // scores. The next round's dot marks where a round ends, so a round's end time gets its own
+  // (smaller) dot only when no shown round starts then: after the last round, or before a gap.
   function timeline(slots) {
     const now = new Date();
-    return el("ol", { class: "timeline" }, slots.map((s) => {
+    const rows = [];
+    slots.forEach((s, i) => {
       const phase = now >= s.end ? "past" : now >= s.start ? "now" : "";
-      return el("li", { class: phase },
-        el("span", { class: "slot" }, el("strong", {}, hhmm(s.start)), `–${hhmm(s.end)}`),
-        // A round with no Duel objectives (the rest day) shows its theme as the item.
+      const tag = () => (phase === "now" ? el("span", { class: "now-tag" }, "Now") : null);
+      rows.push(el("li", { class: phase },
+        el("time", { class: "slot" }, hhmm(s.start)),
         el("div", { class: "what" },
-          s.items.length
-            ? s.items.map((o) => el("span", { class: "item" }, text(o)))
-            : el("span", { class: "item" }, SB.themes[s.theme]),
-          s.items.length
-            ? el("span", { class: "theme" }, phase === "now" ? `Now · ${SB.themes[s.theme]}` : SB.themes[s.theme])
-            : phase === "now" ? el("span", { class: "theme" }, "Now") : null,
-        ),
-      );
-    }));
+          // A round with no Duel objectives (the rest day) shows its theme instead.
+          el("span", { class: "item" }, s.items.length
+            ? s.items.map((o, n) => pair(text(o), o.icon, n === s.items.length - 1 ? tag() : null))
+            : pair(SB.themes[s.theme], SB.icons[s.theme], tag())))));
+      const next = slots[i + 1];
+      if (!next || +next.start !== +s.end) {
+        // `gap`: no shown round runs between this end and the next round's start.
+        rows.push(el("li", { class: ["end", now >= s.end ? "past" : "", next ? "gap" : ""].join(" ").trim() },
+          el("time", { class: "slot" }, hhmm(s.end)),
+          el("div", { class: "what" }, el("span", { class: "sr-only" }, "Round ends"))));
+      }
+    });
+    return el("ol", { class: "timeline" }, rows);
   }
 
   // ---- Survival Battle -------------------------------------------------------
@@ -206,7 +243,6 @@
   const SB = window.SURVIVAL_BATTLE;
   const text = (o) => (typeof o === "string" ? o : o.text);
   const hhmm = (d) => `${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
-  const span = (s) => `${hhmm(s.start)}–${hhmm(s.end)}`;
 
   // Rounds are counted from the daily reset.
   function roundStart(day, i) {
@@ -243,8 +279,8 @@
     });
   }
 
-  // A card of today's ticks that folds to its header once every item is ticked.
-  // Ticks are saved as `<prefix>:<task id>`.
+  // A card of today's ticks that folds to its header once every item is ticked. The header has the
+  // block's building, its time and a progress bar. Ticks are saved as `<prefix>:<task id>`.
   function foldCard(block, prefix, { eyebrow, sub, cls = "" } = {}) {
     const key = dateKey(today);
     const list = (tasks) =>
@@ -254,12 +290,15 @@
       updateProgress();
     };
     return el("section", { class: `card foldable ${cls}`.trim(), "data-block": block.id },
+      icon(block.art, "card-art"),
       eyebrow ? el("p", { class: "eyebrow" }, eyebrow) : null,
       el("div", { class: "section-head" },
         el("h2", {}, block.title),
+        block.time ? el("span", { class: "time" }, block.time) : null,
         el("span", { class: "progress" }),
         el("button", { type: "button", class: "fold-btn", onclick: toggle }),
       ),
+      el("span", { class: "bar", "aria-hidden": "true" }, el("i")),
       el("div", { class: "fold-body" },
         el("div", {},
           sub ? el("p", { class: "sub" }, sub) : null,
@@ -284,7 +323,7 @@
 
   function renderRoutine() {
     $("routine").replaceChildren(...window.ROUTINE.map((block) =>
-      foldCard(forToday(block), `routine:${block.id}`, { sub: block.time })));
+      foldCard(forToday(block), `routine:${block.id}`)));
   }
 
   // On the last game day of a week or month, the shops that reset after it: the last chance to buy.
@@ -294,7 +333,7 @@
     const periods = Object.keys(LAST_DAY).filter((p) => tasks.some((t) => t.resets === p));
     const shops = periods.map((p) => `${p}ly`).join(" and ");
     $("last-chance").replaceChildren(...(tasks.length ? [
-      foldCard({ id: "last-chance", title: "Last chance to buy", tasks }, "last-chance", {
+      foldCard({ id: "last-chance", title: "Last chance to buy", art: "b-nomad-trader", tasks }, "last-chance", {
         eyebrow: `Last day of the ${periods.join(" and ")}`,
         sub: `${shops[0].toUpperCase()}${shops.slice(1)} shops reset at ${hhmm(nextReset(new Date()))}`,
         cls: "last-chance",
@@ -309,13 +348,13 @@
     const key = dateKey(dateForDuelDay(selected));
     $("prep-card").hidden = items.length === 0;
     $("prep-sub").textContent = `Next: ${next === 7 ? "Rest day" : `Day ${next}`}, ${info.title}`;
-    $("prep-list").replaceChildren(...items.map((t, i) => checkItem(key, `prep:${next}:${i}`, t)));
+    $("prep-list").replaceChildren(...items.map((t, i) => checkItem(key, `prep:${next}:${i}`, t.text, t)));
   }
 
   function renderCheat() {
-    $("cheat-body").replaceChildren(...window.CHEATSHEET.map(([item, when, pts, days]) =>
+    $("cheat-body").replaceChildren(...window.CHEATSHEET.map(([item, when, pts, days, art]) =>
       el("tr", { class: days.includes(selected) ? "now" : "" },
-        el("td", {}, item), el("td", {}, when), el("td", {}, pts))));
+        el("td", {}, el("span", { class: "cheat-item" }, icon(art), item)), el("td", {}, when), el("td", {}, pts))));
   }
 
   function updateProgress() {
@@ -324,6 +363,7 @@
       const done = [...boxes].filter((b) => b.checked).length;
       const p = card.querySelector(".progress");
       if (p) p.textContent = `${done}/${boxes.length}`;
+      card.style.setProperty("--p", boxes.length ? done / boxes.length : 0);
       const complete = boxes.length > 0 && done === boxes.length;
       card.classList.toggle("complete", complete);
       // Forget a hand-opened card once it's unfinished again, so finishing it folds it.
@@ -338,12 +378,15 @@
     }
   }
 
-  function renderStatus() {
+  function untilReset() {
     const now = new Date();
     const mins = Math.max(0, Math.round((nextReset(now) - now) / 60000));
-    const h = Math.floor(mins / 60), m = mins % 60;
-    const label = todayDay === 7 ? "Rest day" : `Duel Day ${todayDay}`;
-    $("status").textContent = `${WEEKDAYS[today.getDay()]} · ${label} · resets in ${h}h ${String(m).padStart(2, "0")}m`;
+    return `${Math.floor(mins / 60)}h ${String(mins % 60).padStart(2, "0")}m`;
+  }
+
+  // The reset countdown on today's Duel banner.
+  function renderStatus() {
+    if (selected === todayDay) $("duel-meta").textContent = `Ends in ${untilReset()}`;
   }
 
   function render() {
@@ -443,6 +486,25 @@
     delete state.days[dateKey(today)];
     save(); render();
   });
+
+  // ---- header: hidden while scrolling down, back on scrolling up -------------
+
+  // Gives the screen to the checklist while reading down it. Any scroll back up, a return to
+  // the top, or keyboard focus inside it brings the header back.
+  const header = document.querySelector(".top");
+  let lastY = scrollY, travel = 0, queued = false;
+  function onScroll() {
+    queued = false;
+    const y = Math.max(0, scrollY), dy = y - lastY;
+    lastY = y;
+    if (Math.sign(dy) !== Math.sign(travel)) travel = 0; // direction changed: start counting again
+    travel += dy;
+    if (y <= header.offsetHeight) header.classList.remove("is-hidden");
+    else if (travel > 24) header.classList.add("is-hidden");
+    else if (travel < -12) header.classList.remove("is-hidden");
+  }
+  addEventListener("scroll", () => { if (!queued) { queued = true; requestAnimationFrame(onScroll); } }, { passive: true });
+  header.addEventListener("focusin", () => header.classList.remove("is-hidden"));
 
   refreshDay();
   protectStorage();

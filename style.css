@@ -1,174 +1,313 @@
+/* Asylum Tracker in the look of the game's own event screens: a navy frame, pale steel panels,
+   item icons on rarity-coloured tiles and gold titles with a dark outline.
+   It's one look, light panels on a dark page, so there is no separate light or dark mode. */
+
+@font-face {
+  font-family: "Lilita One";
+  src: url("assets/fonts/lilita-one-latin.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Nunito";
+  src: url("assets/fonts/nunito-latin.woff2") format("woff2");
+  font-weight: 200 1000;
+  font-display: swap;
+}
+
 :root {
-  --bg: #f4efe6;
-  --surface: #fffaf2;
-  --ink: #221c17;
-  --muted: #6f655b;
-  --line: #e3d9ca;
-  --accent: #8c2f1f;
-  --accent-soft: #f3dfd6;
-  --high: #8c2f1f;
-  --med: #9a6a12;
-  --low: #6f655b;
-  --done: #a49a8f;
-  --check: #3f6b3a;
-  color-scheme: light;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #14110f;
-    --surface: #1e1a17;
-    --ink: #eee5d9;
-    --muted: #a39686;
-    --line: #342d27;
-    --accent: #e0765f;
-    --accent-soft: #3a221c;
-    --high: #e0765f;
-    --med: #d9a441;
-    --low: #a39686;
-    --done: #6b6158;
-    --check: #7fb276;
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #14110f; --surface: #1e1a17; --ink: #eee5d9; --muted: #a39686; --line: #342d27;
-  --accent: #e0765f; --accent-soft: #3a221c; --high: #e0765f; --med: #d9a441; --low: #a39686;
-  --done: #6b6158; --check: #7fb276; color-scheme: dark;
+  --bg: #172030;          /* the page around the panels */
+  --top-bg: #1d2a3d;      /* the header */
+  --panel: #e2eaf3;       /* a light panel */
+  --tile: #d2deea;        /* a row or tile on a panel */
+  --tile-done: #d6ecc9;   /* a ticked row */
+  --ink: #1c2939;         /* text on a panel */
+  --muted: #586a80;
+  --line: #b2c3d5;
+  --rail: #9fb3c9;        /* the Survival Battle timeline */
+  --accent: #2d6aa8;
+  --edge: #142236;        /* the outline of a panel */
+  --head-1: #4d6d93;      /* a panel's header bar, top to bottom */
+  --head-2: #2c4666;
+  --gold: #ffd23f;
+  --gold-ink: #4a2a05;
+  --stroke: #3a2208;      /* the outline round gold titles */
+  --frame-ink: #f1f5fa;   /* text on the page */
+  --frame-muted: #9db0c6;
+  --font-body: "Nunito", ui-rounded, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Lilita One", "Nunito", system-ui, sans-serif;
+  color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
 body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--ink);
-  font: 16px/1.45 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  margin: 0 auto; max-width: 640px;
   padding: 0 16px calc(32px + env(safe-area-inset-bottom));
-  max-width: 640px;
-  margin-inline: auto;
+  background: radial-gradient(120% 60% at 50% 0%, #2a3d58 0%, var(--bg) 70%) fixed, var(--bg);
+  color: var(--frame-ink);
+  font: 16px/1.45 var(--font-body);
 }
-h1, h2 { font-family: ui-serif, Georgia, "Times New Roman", serif; font-weight: 600; margin: 0; }
-h1 { font-size: 1.35rem; letter-spacing: .01em; }
-h2 { font-size: 1.15rem; }
+/* Covers the notch area, so the page doesn't show through when the header slides away. */
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top); z-index: 10; background: var(--top-bg); }
+img { max-width: 100%; display: block; }
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+h1, h2 { font-family: var(--font-display); font-weight: 400; }
 a { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
 
+/* Gold titles with a dark outline, as in the game. */
+h1, .duel-head h2, .foldable h2 {
+  color: var(--gold); letter-spacing: .01em;
+  text-shadow: 2px 0 0 var(--stroke), -2px 0 0 var(--stroke), 0 2px 0 var(--stroke), 0 -2px 0 var(--stroke),
+    1.5px 1.5px 0 var(--stroke), -1.5px 1.5px 0 var(--stroke), 1.5px -1.5px 0 var(--stroke), -1.5px -1.5px 0 var(--stroke),
+    0 3px 2px rgba(0, 0, 0, .45);
+}
+
+/* ---- header ------------------------------------------------------------------------------ */
+
+/* Sticky, but slides away while scrolling down and comes back on scrolling up (see app.js). */
 .top {
   position: sticky; top: 0; z-index: 5;
-  background: var(--bg);
-  padding: calc(12px + env(safe-area-inset-top)) 0 8px;
-  border-bottom: 1px solid var(--line);
+  margin: 0 -16px; padding: calc(8px + env(safe-area-inset-top)) 16px 8px;
+  background: linear-gradient(#24344b, var(--top-bg));
+  border-bottom: 2px solid #0e1622; box-shadow: 0 4px 12px rgba(0, 0, 0, .35);
+  transition: transform .25s ease, box-shadow .25s ease;
 }
-.top-row { display: flex; align-items: center; justify-content: space-between; }
-.status { margin: 2px 0 10px; color: var(--muted); font-size: .9rem; }
+.top.is-hidden { transform: translateY(-100%); box-shadow: none; }
+.top-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.brand-mark {
+  width: 28px; height: 28px; flex: none; display: grid; place-items: center; border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #4b6a90, #22344d); box-shadow: 0 0 0 2px #8fa7c2, 0 0 0 4px #1b283a;
+}
+.brand-mark img { width: 21px; height: 21px; }
+h1 { font-size: 1.3rem; }
 .icon-btn {
-  background: none; border: 1px solid var(--line); color: var(--ink);
-  width: 40px; height: 40px; border-radius: 10px; font-size: 1.1rem; cursor: pointer;
+  width: 34px; height: 34px; flex: none; display: grid; place-items: center; padding: 0; cursor: pointer;
+  border-radius: 9px; border: 2px solid #1e3049; background: linear-gradient(#5e80a8, #3a5679); color: #fff;
 }
+.icon-btn svg { display: block; filter: drop-shadow(0 1px 0 rgba(0, 0, 0, .35)); }
 
-.day-tabs { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+/* Day buttons: the day's icon, its numeral as a badge on the icon (like an item count in the
+   game's bag) and the weekday. The selected day is gold and today has a gold ring. */
+.day-tabs { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 5px; margin-top: 8px; }
 .day-tabs button {
-  border: 1px solid var(--line); background: var(--surface); color: var(--ink);
-  border-radius: 8px; padding: 6px 0; font: inherit; font-size: .85rem; cursor: pointer;
-  display: flex; flex-direction: column; align-items: center; line-height: 1.15;
+  position: relative; display: flex; flex-direction: column; align-items: center; gap: 2px; min-width: 0;
+  padding: 4px 0 3px; cursor: pointer; font: inherit; line-height: 1.1; color: #fff;
+  background: linear-gradient(#6688b0, #3e5b80); border: 2px solid #1f3049; border-radius: 9px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3), 0 2px 0 #0d1520;
 }
-.day-tabs button small { color: var(--muted); font-size: .7rem; }
-.day-tabs button.today { border-color: var(--accent); }
-.day-tabs button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--surface); }
-.day-tabs button[aria-pressed="true"] small { color: inherit; opacity: .85; }
-
-.card {
-  background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
-  padding: 16px; margin-top: 16px;
+.day-tabs .tab-ico { width: 28px; height: 28px; filter: drop-shadow(0 2px 1px rgba(0, 0, 0, .35)); }
+.day-tabs .num {
+  position: absolute; top: 18px; right: 4px; font-family: var(--font-display); font-size: .78rem; line-height: 1; color: #fff;
+  text-shadow: 1.5px 0 0 #142033, -1.5px 0 0 #142033, 0 1.5px 0 #142033, 0 -1.5px 0 #142033, 1px 1px 0 #142033, -1px -1px 0 #142033;
 }
-.eyebrow { margin: 0 0 2px; font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; color: var(--accent); font-weight: 600; }
-.sub { color: var(--muted); font-size: .85rem; margin: 4px 0 0; }
+.day-tabs [data-day="7"] .num { font-size: .6rem; right: 2px; }
+.day-tabs small { font-size: .62rem; font-weight: 700; color: #c8d6e6; }
+.day-tabs button.today { box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3), 0 2px 0 #0d1520, 0 0 0 2px var(--gold); }
+.day-tabs button[aria-pressed="true"] { background: linear-gradient(#ffe777, #f3a91e); border-color: #9a5a08; color: var(--gold-ink); }
+.day-tabs button[aria-pressed="true"] small { color: #6d4208; }
 
-.section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
-.progress { font-size: .8rem; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
-.card.complete .section-head h2::after { content: " ✓"; color: var(--check); }
+/* ---- icons ------------------------------------------------------------------------------- */
 
-/* A finished routine or last-chance card folds to its header. The whole header toggles it. */
-.foldable .section-head { position: relative; }
-.foldable .section-head h2 { margin-right: auto; }
-.fold-btn {
-  background: none; border: none; padding: 0; color: var(--accent); font: inherit; font-size: .8rem; cursor: pointer;
+/* An item (i-) sits on a tile coloured by its rarity; a building (b-) stands on its own. */
+.ico, .tab-ico, .card-art { flex: none; display: grid; place-items: center; }
+.ico img, .tab-ico img, .card-art img { width: 100%; height: 100%; object-fit: contain; }
+.ico { width: 44px; height: 44px; }
+.ico.blank { visibility: hidden; }
+.ico[data-kind="i"] {
+  padding: 3px; border-radius: 9px; background: linear-gradient(160deg, #6cb6f2, #2f6db4);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, .4), 0 2px 0 rgba(0, 0, 0, .22);
 }
+.ico[data-kind="i"][data-rarity="purple"] { background: linear-gradient(160deg, #c08cf0, #6a37ad); }
+.ico[data-kind="i"][data-rarity="orange"] { background: linear-gradient(160deg, #ffc25a, #d4621a); }
+.ico[data-kind="i"][data-rarity="green"] { background: linear-gradient(160deg, #8fd866, #3a8a26); }
+.ico[data-kind="i"][data-rarity="gold"] { background: linear-gradient(160deg, #fbe07c, #c5871a); }
+.ico[data-kind="b"] { width: 48px; filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .3)); }
+
+/* ---- cards ------------------------------------------------------------------------------- */
+
+.card { margin-top: 16px; padding: 12px; border-radius: 14px; background: var(--panel); color: var(--ink); border: 2px solid #0f1724; }
+.eyebrow { margin: 0 0 2px; font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; font-weight: 800; }
+.sub { margin: 4px 0 0; color: var(--muted); font-size: .85rem; }
+.group-head { margin: 16px 0 0; font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; font-weight: 800; color: var(--muted); }
+.minor-head { margin: 10px 0 0; font-size: .8rem; font-weight: 800; color: var(--muted); }
+.credit { margin: 28px 0 0; text-align: center; font-size: .75rem; color: var(--frame-muted); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* ---- Alliance Duel ----------------------------------------------------------------------- */
+
+/* A banner in the day's colour with its art on the right, then a light panel of objectives. */
+.card.duel { padding: 0; background: none; border: 0; }
+.duel[data-day="1"] { --d1: #9a62de; --d2: #3c1d6c; }
+.duel[data-day="2"] { --d1: #5aa743; --d2: #1e4d1b; }
+.duel[data-day="3"] { --d1: #4b90d8; --d2: #1a3d72; }
+.duel[data-day="4"] { --d1: #dc4b60; --d2: #7c1934; }
+.duel[data-day="5"] { --d1: #e5843a; --d2: #7b3510; }
+.duel[data-day="6"] { --d1: #b9333c; --d2: #350b12; }
+.duel[data-day="7"] { --d1: #6a83a0; --d2: #2a3a50; }
+.duel-banner {
+  position: relative; display: flex; align-items: center; min-height: 84px; padding: 10px 14px; overflow: hidden;
+  border-radius: 14px 14px 0 0; border: 2px solid rgba(0, 0, 0, .35); border-bottom: 0;
+  background: linear-gradient(135deg, var(--d1, #dc4b60), var(--d2, #7c1934));
+}
+/* Hero art and scenes are cropped to the face and fade into the banner. */
+.duel-art {
+  position: absolute; right: -8px; top: -4px; width: 46%; height: calc(100% + 30px);
+  object-fit: cover; object-position: 50% 8%;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 35%); mask-image: linear-gradient(to right, transparent 0%, #000 35%);
+}
+/* A building is shown whole, standing on the right. */
+.duel-art[data-kind="b"] {
+  top: 50%; right: 6px; width: 44%; height: calc(100% - 16px); transform: translateY(-50%);
+  object-fit: contain; object-position: right center; -webkit-mask-image: none; mask-image: none;
+  filter: drop-shadow(0 6px 8px rgba(0, 0, 0, .45));
+}
+.duel-head { position: relative; max-width: 62%; }
+.duel-head h2 { font-size: 1.35rem; line-height: 1.1; }
+.duel-meta {
+  display: inline-block; margin: 5px 0 0; padding: 1px 8px; border-radius: 999px;
+  background: rgba(0, 0, 0, .3); color: #fff; font-size: .78rem; font-weight: 800; font-variant-numeric: tabular-nums;
+}
+.duel-meta::before { content: "◷ "; color: var(--gold); }
+.duel-body { padding: 4px 10px 12px; border-radius: 0 0 14px 14px; background: var(--panel); color: var(--ink); border: 2px solid #0f1724; border-top: 0; }
+.duel-body .group-head { margin: 12px 0 0; padding: 5px 10px; border-radius: 6px; text-align: center; background: #c3d2e2; color: #2b4565; font-weight: 900; letter-spacing: .04em; }
+.duel-body .sub { text-align: center; }
+
+/* Objectives as tiles, three to a row. Names stop at two lines. */
+.loot { list-style: none; margin: 6px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.loot li { display: flex; flex-direction: column; align-items: center; gap: 5px; text-align: center; padding: 8px 4px 7px; border-radius: 10px; background: var(--tile); }
+.loot .txt {
+  max-width: 100%; font-weight: 800; font-size: .8rem; line-height: 1.2; overflow-wrap: break-word;
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden;
+}
+
+/* Survival Battle: a dot at each round's start (its centre 12px down), joined to the next by a
+   line. A smaller dot marks a round's end where no round starts; a dashed line is a gap. */
+.timeline { list-style: none; margin: 10px 0 0; padding: 0 0 0 4px; }
+.timeline > li { display: grid; grid-template-columns: 3rem minmax(0, 1fr); column-gap: 10px; }
+.timeline .slot { text-align: right; font-size: .95rem; font-weight: 800; line-height: 24px; font-variant-numeric: tabular-nums; }
+.timeline .what { position: relative; min-width: 0; padding: 0 0 16px 26px; line-height: 24px; }
+.timeline .what::before {
+  content: ""; position: absolute; z-index: 1; left: 0; top: 4px; width: 16px; height: 16px; border-radius: 50%;
+  background: var(--panel); border: 3px solid var(--accent);
+}
+.timeline .what::after { content: ""; position: absolute; left: 7px; top: 12px; bottom: -12px; width: 2px; background: var(--rail); }
+.timeline > li:last-child .what { padding-bottom: 0; }
+.timeline > li:last-child .what::after { display: none; }
+.timeline li.gap .what::after { top: 19px; bottom: -3px; background: repeating-linear-gradient(to bottom, var(--rail) 0 3px, transparent 3px 7px); }
+.timeline li.end .slot { font-size: .8rem; font-weight: 600; color: var(--muted); }
+.timeline li.end .what { padding-bottom: 10px; }
+.timeline li.end.gap .what { padding-bottom: 40px; }
+.timeline li.end .what::before { left: 3px; top: 7px; width: 10px; height: 10px; border-width: 2px; border-color: var(--rail); }
+.timeline li.now .what::before { background: linear-gradient(#ffe777, #f3a91e); border-color: #9a5a08; box-shadow: 0 0 0 4px rgba(243, 169, 30, .35); }
+.timeline li.past { opacity: .45; }
+.timeline .item { font-weight: 800; font-size: .95rem; }
+/* Each item in a round: a small icon and its name, flowing like words. */
+.pair { margin-right: .7em; }
+.pair:last-child { margin-right: 0; }
+.pair .nw, .pair.short { white-space: nowrap; }
+.ico.mini { display: inline-grid; width: 20px; height: 20px; margin-right: 5px; vertical-align: -4px; }
+.ico.mini[data-kind="i"] { padding: 1px; border-radius: 5px; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .45), 0 1px 0 rgba(0, 0, 0, .2); }
+.ico.mini[data-kind="b"] { width: 24px; filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .3)); }
+.now-tag {
+  display: inline-block; margin-left: 6px; padding: 0 7px; border-radius: 999px; vertical-align: 1px;
+  font-size: .68rem; font-weight: 900; line-height: 16px; text-transform: uppercase; color: #fff;
+  background: linear-gradient(#6fcf45, #34901f); box-shadow: 0 1px 0 rgba(0, 0, 0, .2);
+}
+
+/* ---- routine and last-chance cards ------------------------------------------------------- */
+
+/* A header bar with the block's building, its time and progress, a green progress bar, then
+   rows. A finished card folds to its header and bar; the whole header toggles it. */
+.card.foldable { position: relative; padding: 0; margin-top: 22px; background: none; border: 0; }
+.card-art { position: absolute; left: 6px; top: -14px; z-index: 1; width: 62px; height: 58px; filter: drop-shadow(0 3px 3px rgba(0, 0, 0, .45)); }
+.foldable .eyebrow,
+.foldable .section-head { padding-left: 76px; padding-right: 12px; background: linear-gradient(var(--head-1), var(--head-2)); border: 2px solid var(--edge); border-bottom: 0; }
+.foldable .eyebrow { margin: 0; padding-top: 8px; border-radius: 14px 14px 0 0; color: #fff3c4; }
+.section-head { position: relative; display: flex; align-items: center; gap: 8px; }
+.foldable .section-head { min-height: 50px; padding-block: 8px; border-radius: 14px 14px 0 0; }
+.foldable .eyebrow + .section-head { border-radius: 0; border-top: 0; padding-top: 0; }
+.foldable h2 { font-size: 1.3rem; margin-right: auto; min-width: 0; }
+.time { padding: 1px 8px; border-radius: 999px; background: rgba(0, 0, 0, .28); color: #fff; font-size: .8rem; font-weight: 800; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.progress { color: #fff; font-size: .8rem; font-weight: 900; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.fold-btn { background: none; border: none; padding: 0; color: var(--gold); font: inherit; font-size: .8rem; font-weight: 800; cursor: pointer; }
 .fold-btn::after { content: ""; position: absolute; inset: -8px 0; }
-.fold-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.fold-body { display: grid; grid-template-rows: 1fr; transition: grid-template-rows .25s ease; }
+.bar { display: block; height: 8px; overflow: hidden; background: #0f1d30; border-inline: 2px solid var(--edge); }
+.bar i { display: block; height: 100%; width: calc(var(--p, 0) * 100%); background: linear-gradient(#8ee05a, #3d9b1c); transition: width .3s ease; }
+.foldable.folded .bar { height: 10px; border-bottom: 2px solid var(--edge); border-radius: 0 0 10px 10px; }
+.fold-body { display: grid; grid-template-rows: 1fr; overflow: hidden; transition: grid-template-rows .25s ease; }
 .fold-body > div { min-height: 0; overflow: hidden; }
+.foldable .fold-body > div { padding: 2px 8px 8px; background: var(--panel); color: var(--ink); border: 2px solid var(--edge); border-top: 0; border-radius: 0 0 14px 14px; }
+.foldable .sub { padding: 6px 4px 0; font-weight: 700; }
+.foldable .group-head { padding: 0 4px; }
 /* The pause lets the last tick show before the card folds. */
 .foldable.folded .fold-body { grid-template-rows: 0fr; transition-delay: .35s; }
-@media (prefers-reduced-motion: reduce) { .fold-body { transition: none; } }
 
-/* Last-chance shop reminder: stands out until it's ticked, then looks like any finished card. */
-.last-chance { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); background: var(--accent-soft); }
-.last-chance.complete { border-color: var(--line); box-shadow: none; background: var(--surface); }
-.last-chance.complete .eyebrow { color: var(--muted); }
+/* Last chance: the game's orange shop banner, until every shop is ticked. */
+.last-chance .eyebrow,
+.last-chance .section-head { background: linear-gradient(#ffb547, #d8641a); border-color: #6b2c05; }
+.last-chance .eyebrow { color: #fff; text-shadow: 0 1px 0 rgba(0, 0, 0, .3); }
+.last-chance .bar,
+.last-chance .fold-body > div { border-color: #6b2c05; }
+.last-chance .fold-body > div { background: #fff4dc; }
+.last-chance .checks li { background: #ffe7b8; }
+.last-chance.complete .eyebrow,
+.last-chance.complete .section-head { background: linear-gradient(var(--head-1), var(--head-2)); border-color: var(--edge); }
+.last-chance.complete .bar,
+.last-chance.complete .fold-body > div { border-color: var(--edge); }
 
-.checks { list-style: none; margin: 12px 0 0; padding: 0; }
-.checks li + li { border-top: 1px solid var(--line); }
-.group-head { margin: 16px 0 0; font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 600; }
-.group-head + .checks { margin-top: 4px; }
-.bullets { margin: 6px 0 0; padding-left: 1.25rem; }
-.bullets li { padding: 2px 0; font-weight: 500; }
-.bullets li::marker { color: var(--accent); }
-.group-head + .sub { margin-top: 2px; }
+/* Checklist rows: icon, text, then a circle that fills with a green check when ticked. */
+.checks { list-style: none; margin: 4px 0 0; padding: 0; }
+.checks li { margin-top: 6px; border-radius: 9px; background: var(--tile); }
+.checks li:has(input:checked) { background: var(--tile-done); }
 .check {
-  display: grid; grid-template-columns: 24px 1fr; gap: 4px 12px; align-items: start;
-  padding: 10px 0; cursor: pointer;
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "ico text box";
+  align-items: center; column-gap: 10px; padding: 5px 8px; cursor: pointer;
 }
+.check:has(.note) { grid-template-areas: "ico text box" "ico note box"; }
+.check .ico { grid-area: ico; }
+.check .text { grid-area: text; font-weight: 800; font-size: .95rem; line-height: 1.25; }
+.check .note { grid-area: note; color: var(--muted); font-size: .85rem; }
 .check input {
-  appearance: none; margin: 1px 0 0; width: 22px; height: 22px; border-radius: 6px;
-  border: 2px solid var(--muted); display: grid; place-content: center; cursor: pointer;
+  grid-area: box; appearance: none; -webkit-appearance: none; margin: 0 2px 0 0; width: 28px; height: 28px; cursor: pointer;
+  border-radius: 50%; background: #f5f8fb; border: 2px solid #8ea3ba; box-shadow: inset 0 2px 3px rgba(28, 41, 57, .18);
 }
-.check input:checked { background: var(--check); border-color: var(--check); }
-.check input:checked::after { content: ""; width: 6px; height: 11px; border: solid var(--surface); border-width: 0 2.5px 2.5px 0; transform: translateY(-1px) rotate(45deg); }
+.check input:checked {
+  border-color: #2a6e14; box-shadow: 0 2px 0 rgba(0, 0, 0, .2);
+  background: center / 15px no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 10'%3E%3Cpath d='M1 5l3.5 3.5L11 1.5' fill='none' stroke='white' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"),
+    linear-gradient(#8ee05a, #3d9b1c);
+  animation: pop .3s ease;
+}
 .check input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.check .text { font-weight: 500; }
-.check .note { grid-column: 2; color: var(--muted); font-size: .85rem; }
-.check:has(input:checked) .text { color: var(--done); text-decoration: line-through; }
-.check:has(input:checked) .note { opacity: .6; }
+.check:has(input:checked) .text { color: #4d6a4a; }
+.check:has(input:checked) .ico { opacity: .75; }
+@keyframes pop { 0% { transform: scale(.4); } 70% { transform: scale(1.2); } 100% { transform: none; } }
 
-.settings label { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 12px; }
-.settings input, .settings select {
-  font: inherit; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px;
-}
-.link-btn { margin-top: 14px; background: none; border: none; padding: 0; color: var(--accent); font: inherit; text-decoration: underline; cursor: pointer; }
+/* ---- prep, cheat sheet, settings --------------------------------------------------------- */
 
+#prep-card h2, .cheat h2, .settings h2 { font-size: 1.25rem; color: #2b4565; }
 .cheat summary { cursor: pointer; list-style: none; }
 .cheat summary::-webkit-details-marker { display: none; }
 .cheat summary h2::after { content: " ▾"; color: var(--muted); font-size: .9rem; }
 .cheat[open] summary h2::after { content: " ▴"; }
+.table-wrap { overflow-x: auto; }
 table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: .85rem; }
-th, td { text-align: left; padding: 6px 4px; border-bottom: 1px solid var(--line); vertical-align: top; }
-th { color: var(--muted); font-weight: 600; }
-tr.now td { color: var(--accent); font-weight: 600; }
+th, td { text-align: left; padding: 6px 4px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+th { color: var(--muted); font-weight: 700; }
 td:last-child, th:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+tr.now td { background: var(--tile); font-weight: 800; color: #1f4f8a; }
+.cheat-item { display: flex; align-items: center; gap: 8px; }
+.cheat-item .ico { width: 28px; height: 28px; padding: 2px; border-radius: 6px; }
+.cheat-item .ico[data-kind="b"] { width: 32px; padding: 0; }
 
-.minor-head { margin: 10px 0 0; font-size: .8rem; color: var(--muted); }
-.bullets .when { margin-left: 6px; color: var(--muted); font-size: .8rem; font-weight: 400; font-variant-numeric: tabular-nums; }
+/* A light panel on the dark page, so its form controls are drawn light: white boxes, dark text. */
+.settings { color-scheme: light; }
+.settings label { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 12px; font-weight: 700; }
+.settings input, .settings select { font: inherit; font-weight: 700; color: var(--ink); background: #fff; border: 2px solid var(--rail); border-radius: 8px; padding: 6px 8px; }
+.link-btn { margin-top: 14px; background: none; border: none; padding: 0; color: var(--accent); font: inherit; text-decoration: underline; cursor: pointer; }
 
-/* Objectives that also score in Survival Battle, on a timeline of its rounds. */
-.timeline { list-style: none; margin: 8px 0 0; padding: 0; }
-.timeline > li { display: grid; grid-template-columns: 3.5rem 1fr; column-gap: 12px; }
-.timeline .slot {
-  text-align: right; font-size: .75rem; color: var(--muted); line-height: 1.25;
-  font-variant-numeric: tabular-nums; padding-top: 1px;
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
 }
-.timeline .slot strong { display: block; font-size: 1rem; color: var(--ink); }
-.timeline .what {
-  position: relative; display: flex; flex-direction: column;
-  border-left: 2px solid var(--line); padding: 0 0 16px 16px;
-}
-.timeline li:last-child .what { border-left-color: transparent; padding-bottom: 0; }
-.timeline .what::before {
-  content: ""; position: absolute; left: -8px; top: 4px; width: 14px; height: 14px; border-radius: 50%;
-  background: var(--surface); border: 2px solid var(--accent); box-sizing: border-box;
-}
-.timeline .item { font-weight: 600; }
-.timeline .theme { font-size: .8rem; color: var(--muted); }
-.timeline li.now .what::before { background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
-.timeline li.now .theme { color: var(--accent); font-weight: 600; }
-.timeline li.past { opacity: .45; }
-.timeline li.past .what::before { border-color: var(--muted); }
