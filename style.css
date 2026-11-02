@@ -288,22 +288,9 @@ h1 { font-size: 1.3rem; }
 .check:has(input:checked) .ico { opacity: .75; }
 @keyframes pop { 0% { transform: scale(.4); } 70% { transform: scale(1.2); } 100% { transform: none; } }
 
-/* ---- prep, cheat sheet, settings --------------------------------------------------------- */
+/* ---- prep, settings ---------------------------------------------------------------------- */
 
-#prep-card h2, .cheat h2, .settings h2 { font-size: 1.25rem; color: #2b4565; }
-.cheat summary { cursor: pointer; list-style: none; }
-.cheat summary::-webkit-details-marker { display: none; }
-.cheat summary h2::after { content: " ▾"; color: var(--muted); font-size: .9rem; }
-.cheat[open] summary h2::after { content: " ▴"; }
-.table-wrap { overflow-x: auto; }
-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: .85rem; }
-th, td { text-align: left; padding: 6px 4px; border-bottom: 1px solid var(--line); vertical-align: middle; }
-th { color: var(--muted); font-weight: 700; }
-td:last-child, th:last-child { text-align: right; font-variant-numeric: tabular-nums; }
-tr.now td { background: var(--tile); font-weight: 800; color: #1f4f8a; }
-.cheat-item { display: flex; align-items: center; gap: 8px; }
-.cheat-item .ico { width: 28px; height: 28px; padding: 2px; border-radius: 6px; }
-.cheat-item .ico[data-kind="b"] { width: 32px; padding: 0; }
+#prep-card h2, .settings h2 { font-size: 1.25rem; color: #2b4565; }
 
 /* A light panel on the dark page, so its form controls are drawn light: white boxes, dark text. */
 .settings { color-scheme: light; }

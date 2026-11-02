@@ -350,12 +350,6 @@
     $("prep-list").replaceChildren(...items.map((t, i) => checkItem(key, `prep:${next}:${i}`, t.text, t)));
   }
 
-  function renderCheat() {
-    $("cheat-body").replaceChildren(...window.CHEATSHEET.map(([item, when, pts, days, art]) =>
-      el("tr", { class: days.includes(selected) ? "now" : "" },
-        el("td", {}, el("span", { class: "cheat-item" }, icon(art), item)), el("td", {}, when), el("td", {}, pts))));
-  }
-
   function updateProgress() {
     for (const card of document.querySelectorAll(".card.foldable")) {
       const boxes = card.querySelectorAll("input[type=checkbox]");
@@ -395,7 +389,6 @@
     renderDuel();
     renderRoutine();
     renderPrep();
-    renderCheat();
     renderStatus();
     updateProgress();
   }

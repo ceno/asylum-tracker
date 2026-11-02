@@ -1,5 +1,4 @@
 // Alliance Duel data from https://last-asylum-plague.fandom.com/wiki/Alliance_Duell_Guide
-// Cheat-sheet points are base values (before Alliance Duel research bonuses).
 //
 // `icon` and `art` name an image in assets/ (without .webp). Its prefix says what it is:
 //   i-  an item, drawn on a tile coloured by ICON_RARITY
@@ -223,24 +222,6 @@ window.PREP = {
   ],
   7: [],
 };
-
-// [item, use on, base points, Duel days it scores on, icon]
-window.CHEATSHEET = [
-  ["Raven Essence", "Day 1", "5,125", [1], "i-raven-essence"],
-  ["Raven Fruit", "Day 1", "6.15", [1], "i-raven-fruit"],
-  ["Falcon Quest", "Days 1, 3, 5", "25,500", [1, 3, 5], "b-falcon-tower"],
-  ["UR Caravan", "Day 2 or 6", "210,000", [2, 6], "i-caravan"],
-  ["UR Covert Op", "Day 2 or 6", "157,500", [2, 6], "i-covert"],
-  ["Raven Gear Chest Lv.1–3", "Day 3", "2,255–20,500", [3], "i-raven-chest"],
-  ["Raven Gear Chest Lv.4+", "Day 3", "61,500+", [3], "i-raven-chest"],
-  ["Study Scroll", "Day 3", "615", [3], "i-study-scroll"],
-  ["SSR / SR / R Shard", "Day 4", "20,500 / 7,175 / 2,050", [4], "i-hero-shard"],
-  ["Skill Book", "Day 4", "20.5", [4], "i-skill-book"],
-  ["Antitoxin (per 660)", "Day 4", "2.05", [4], "i-antitoxin"],
-  ["Training Boost (1m)", "Day 5", "127.5", [5], "i-training-speedup"],
-  ["Healing Speedup (1m)", "Day 6", "127.5", [6], "i-healing-speedup"],
-  ["Construction / Research (1m)", "Day 2 / 3 (or 5, 6)", "127.5", [2, 3, 5, 6], "i-construction-speedup"],
-];
 
 // The tile colour behind each item icon (i-), as the game frames items by rarity. Blue unless listed.
 window.ICON_RARITY = {
