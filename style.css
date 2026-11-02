@@ -188,9 +188,11 @@ h1 { font-size: 1.3rem; }
 .timeline .slot { text-align: right; font-size: .95rem; font-weight: 800; line-height: 24px; font-variant-numeric: tabular-nums; }
 .timeline .what { position: relative; min-width: 0; padding: 0 0 16px 26px; line-height: 24px; }
 .timeline .what::before {
-  content: ""; position: absolute; z-index: 1; left: 0; top: 4px; width: 16px; height: 16px; border-radius: 50%;
+  content: ""; position: absolute; z-index: 1; left: -3px; top: 1px; width: 22px; height: 22px; border-radius: 50%;
   background: var(--panel); border: 3px solid var(--accent);
 }
+/* Dots and rail are centred on x = 8px. Pseudo-elements don't match `*`, so they get border-box here. */
+.timeline .what::before, .timeline .what::after { box-sizing: border-box; }
 .timeline .what::after { content: ""; position: absolute; left: 7px; top: 12px; bottom: -12px; width: 2px; background: var(--rail); }
 .timeline > li:last-child .what { padding-bottom: 0; }
 .timeline > li:last-child .what::after { display: none; }
@@ -198,7 +200,7 @@ h1 { font-size: 1.3rem; }
 .timeline li.end .slot { font-size: .8rem; font-weight: 600; color: var(--muted); }
 .timeline li.end .what { padding-bottom: 10px; }
 .timeline li.end.gap .what { padding-bottom: 40px; }
-.timeline li.end .what::before { left: 3px; top: 7px; width: 10px; height: 10px; border-width: 2px; border-color: var(--rail); }
+.timeline li.end .what::before { left: 1px; top: 5px; width: 14px; height: 14px; border-width: 2px; border-color: var(--rail); }
 .timeline li.now .what::before { background: linear-gradient(#ffe777, #f3a91e); border-color: #9a5a08; box-shadow: 0 0 0 4px rgba(243, 169, 30, .35); }
 .timeline li.past { opacity: .45; }
 /* The pairs' own 3px margins above and below are taken back here, so a round's first line still
