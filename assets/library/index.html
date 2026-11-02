@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Asylum Tracker art library</title>
+<style>
+  :root { color-scheme: dark; --bg: #172030; --panel: #22324a; --ink: #f1f5fa; --muted: #9db0c6; }
+  body { margin: 0 auto; max-width: 1100px; padding: 16px; background: var(--bg); color: var(--ink); font: 14px/1.4 system-ui, sans-serif; }
+  h1 { margin: 0 0 4px; font-size: 1.4rem; }
+  h2 { margin: 28px 0 2px; font-size: 1.05rem; }
+  p { margin: 0; color: var(--muted); }
+  nav { display: flex; flex-wrap: wrap; gap: 6px 12px; margin-top: 12px; }
+  nav a { color: var(--muted); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: 8px; margin-top: 10px; }
+  .grid.wide { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+  figure { margin: 0; padding: 6px; border-radius: 8px; background: var(--panel); }
+  img { display: block; width: 100%; height: 92px; object-fit: contain; }
+  .wide img { height: 110px; }
+  figcaption { margin-top: 4px; font: 11px/1.3 ui-monospace, monospace; color: var(--muted); overflow-wrap: anywhere; user-select: all; }
+</style>
+</head>
+<body>
+<h1>Art library</h1>
+<p>514 images from the game, at full size. Paths are relative to <code>assets/</code>. See README.md for where they came from and how to use one on the page.</p>
+<nav><a href="#buildings">buildings</a><a href="#classes">classes</a><a href="#currencies">currencies</a><a href="#events">events</a><a href="#factions">factions</a><a href="#heroes-art">heroes/art</a><a href="#heroes-cards">heroes/cards</a><a href="#heroes-icons">heroes/icons</a><a href="#heroes-portraits">heroes/portraits</a><a href="#items-boost">items/boost</a><a href="#items-chest">items/chest</a><a href="#items-consumable">items/consumable</a><a href="#items-event">items/event</a><a href="#items-gear">items/gear</a><a href="#items-material">items/material</a><a href="#items-misc">items/misc</a><a href="#items-raven">items/raven</a><a href="#items-resource">items/resource</a><a href="#items-skin-decor">items/skin-decor</a><a href="#items-speedup">items/speedup</a><a href="#lord">lord</a><a href="#lord-skills">lord-skills</a><a href="#monsters">monsters</a><a href="#scenes">scenes</a></nav>
+<h2 id="buildings">buildings <small>(46)</small></h2><p>Base buildings, named as in the game</p>
+<div class="grid wide">
+<figure><img src="buildings/2nd-workbench.webp" alt="" loading="lazy"><figcaption>library/buildings/2nd-workbench</figcaption></figure>
+<figure><img src="buildings/alliance-hall.webp" alt="" loading="lazy"><figcaption>library/buildings/alliance-hall</figcaption></figure>
+<figure><img src="buildings/alliance-stable.webp" alt="" loading="lazy"><figcaption>library/buildings/alliance-stable</figcaption></figure>
+<figure><img src="buildings/antitoxin-workshop.webp" alt="" loading="lazy"><figcaption>library/buildings/antitoxin-workshop</figcaption></figure>
+<figure><img src="buildings/arena.webp" alt="" loading="lazy"><figcaption>library/buildings/arena</figcaption></figure>
+<figure><img src="buildings/barracks.webp" alt="" loading="lazy"><figcaption>library/buildings/barracks</figcaption></figure>
+<figure><img src="buildings/black-ops.webp" alt="" loading="lazy"><figcaption>library/buildings/black-ops</figcaption></figure>
+<figure><img src="buildings/builders-hut.webp" alt="" loading="lazy"><figcaption>library/buildings/builders-hut</figcaption></figure>
+<figure><img src="buildings/curio-hall.webp" alt="" loading="lazy"><figcaption>library/buildings/curio-hall</figcaption></figure>
+<figure><img src="buildings/epigraph-workshop.webp" alt="" loading="lazy"><figcaption>library/buildings/epigraph-workshop</figcaption></figure>
+<figure><img src="buildings/explorers-camp.webp" alt="" loading="lazy"><figcaption>library/buildings/explorers-camp</figcaption></figure>
+<figure><img src="buildings/falcon-tower.webp" alt="" loading="lazy"><figcaption>library/buildings/falcon-tower</figcaption></figure>
+<figure><img src="buildings/farm.webp" alt="" loading="lazy"><figcaption>library/buildings/farm</figcaption></figure>
+<figure><img src="buildings/gear-workshop.webp" alt="" loading="lazy"><figcaption>library/buildings/gear-workshop</figcaption></figure>
+<figure><img src="buildings/granary.webp" alt="" loading="lazy"><figcaption>library/buildings/granary</figcaption></figure>
+<figure><img src="buildings/hall-of-honor.webp" alt="" loading="lazy"><figcaption>library/buildings/hall-of-honor</figcaption></figure>
+<figure><img src="buildings/herb-garden.webp" alt="" loading="lazy"><figcaption>library/buildings/herb-garden</figcaption></figure>
+<figure><img src="buildings/herb-storage.webp" alt="" loading="lazy"><figcaption>library/buildings/herb-storage</figcaption></figure>
+<figure><img src="buildings/infirmary.webp" alt="" loading="lazy"><figcaption>library/buildings/infirmary</figcaption></figure>
+<figure><img src="buildings/lord-statue.webp" alt="" loading="lazy"><figcaption>library/buildings/lord-statue</figcaption></figure>
+<figure><img src="buildings/lumber-depot.webp" alt="" loading="lazy"><figcaption>library/buildings/lumber-depot</figcaption></figure>
+<figure><img src="buildings/lumberyard.webp" alt="" loading="lazy"><figcaption>library/buildings/lumberyard</figcaption></figure>
+<figure><img src="buildings/monument.webp" alt="" loading="lazy"><figcaption>library/buildings/monument</figcaption></figure>
+<figure><img src="buildings/nomad-trader.webp" alt="" loading="lazy"><figcaption>library/buildings/nomad-trader</figcaption></figure>
+<figure><img src="buildings/private-stable.webp" alt="" loading="lazy"><figcaption>library/buildings/private-stable</figcaption></figure>
+<figure><img src="buildings/ranger-statue.webp" alt="" loading="lazy"><figcaption>library/buildings/ranger-statue</figcaption></figure>
+<figure><img src="buildings/raven-nest.webp" alt="" loading="lazy"><figcaption>library/buildings/raven-nest</figcaption></figure>
+<figure><img src="buildings/raven-workshop.webp" alt="" loading="lazy"><figcaption>library/buildings/raven-workshop</figcaption></figure>
+<figure><img src="buildings/research-lab.webp" alt="" loading="lazy"><figcaption>library/buildings/research-lab</figcaption></figure>
+<figure><img src="buildings/residence.webp" alt="" loading="lazy"><figcaption>library/buildings/residence</figcaption></figure>
+<figure><img src="buildings/sanctuary.webp" alt="" loading="lazy"><figcaption>library/buildings/sanctuary</figcaption></figure>
+<figure><img src="buildings/scout-squad.webp" alt="" loading="lazy"><figcaption>library/buildings/scout-squad</figcaption></figure>
+<figure><img src="buildings/smelting-workshop.webp" alt="" loading="lazy"><figcaption>library/buildings/smelting-workshop</figcaption></figure>
+<figure><img src="buildings/soldiers-rest.webp" alt="" loading="lazy"><figcaption>library/buildings/soldiers-rest</figcaption></figure>
+<figure><img src="buildings/squad-1.webp" alt="" loading="lazy"><figcaption>library/buildings/squad-1</figcaption></figure>
+<figure><img src="buildings/squad-2.webp" alt="" loading="lazy"><figcaption>library/buildings/squad-2</figcaption></figure>
+<figure><img src="buildings/squad-3.webp" alt="" loading="lazy"><figcaption>library/buildings/squad-3</figcaption></figure>
+<figure><img src="buildings/squad-4.webp" alt="" loading="lazy"><figcaption>library/buildings/squad-4</figcaption></figure>
+<figure><img src="buildings/tavern.webp" alt="" loading="lazy"><figcaption>library/buildings/tavern</figcaption></figure>
+<figure><img src="buildings/temple.webp" alt="" loading="lazy"><figcaption>library/buildings/temple</figcaption></figure>
+<figure><img src="buildings/training-grounds.webp" alt="" loading="lazy"><figcaption>library/buildings/training-grounds</figcaption></figure>
+<figure><img src="buildings/walls.webp" alt="" loading="lazy"><figcaption>library/buildings/walls</figcaption></figure>
+<figure><img src="buildings/warlock-statue.webp" alt="" loading="lazy"><figcaption>library/buildings/warlock-statue</figcaption></figure>
+<figure><img src="buildings/warrior-statue.webp" alt="" loading="lazy"><figcaption>library/buildings/warrior-statue</figcaption></figure>
+<figure><img src="buildings/watchtower.webp" alt="" loading="lazy"><figcaption>library/buildings/watchtower</figcaption></figure>
+<figure><img src="buildings/weaving-workshop.webp" alt="" loading="lazy"><figcaption>library/buildings/weaving-workshop</figcaption></figure>
+</div>
+<h2 id="classes">classes <small>(3)</small></h2><p>Hero classes</p>
+<div class="grid">
+<figure><img src="classes/carry.webp" alt="" loading="lazy"><figcaption>library/classes/carry</figcaption></figure>
+<figure><img src="classes/support.webp" alt="" loading="lazy"><figcaption>library/classes/support</figcaption></figure>
+<figure><img src="classes/tank.webp" alt="" loading="lazy"><figcaption>library/classes/tank</figcaption></figure>
+</div>
+<h2 id="currencies">currencies <small>(1)</small></h2><p>Currencies</p>
+<div class="grid">
+<figure><img src="currencies/banknote.webp" alt="" loading="lazy"><figcaption>library/currencies/banknote</figcaption></figure>
+</div>
+<h2 id="events">events <small>(34)</small></h2><p>Event banners (2:1)</p>
+<div class="grid wide">
+<figure><img src="events/ancient-recipe.webp" alt="" loading="lazy"><figcaption>library/events/ancient-recipe</figcaption></figure>
+<figure><img src="events/artisans-request.webp" alt="" loading="lazy"><figcaption>library/events/artisans-request</figcaption></figure>
+<figure><img src="events/blades-out.webp" alt="" loading="lazy"><figcaption>library/events/blades-out</figcaption></figure>
+<figure><img src="events/canyon-conquest.webp" alt="" loading="lazy"><figcaption>library/events/canyon-conquest</figcaption></figure>
+<figure><img src="events/crystal-cluster-valley.webp" alt="" loading="lazy"><figcaption>library/events/crystal-cluster-valley</figcaption></figure>
+<figure><img src="events/demon-king-ranger-blight.webp" alt="" loading="lazy"><figcaption>library/events/demon-king-ranger-blight</figcaption></figure>
+<figure><img src="events/demon-king-warlock-blight.webp" alt="" loading="lazy"><figcaption>library/events/demon-king-warlock-blight</figcaption></figure>
+<figure><img src="events/demon-king-warrior-blight.webp" alt="" loading="lazy"><figcaption>library/events/demon-king-warrior-blight</figcaption></figure>
+<figure><img src="events/dwarven-mine.webp" alt="" loading="lazy"><figcaption>library/events/dwarven-mine</figcaption></figure>
+<figure><img src="events/dwarven-pickaxe.webp" alt="" loading="lazy"><figcaption>library/events/dwarven-pickaxe</figcaption></figure>
+<figure><img src="events/elixir-scramble.webp" alt="" loading="lazy"><figcaption>library/events/elixir-scramble</figcaption></figure>
+<figure><img src="events/epigraph-pass.webp" alt="" loading="lazy"><figcaption>library/events/epigraph-pass</figcaption></figure>
+<figure><img src="events/exclusive-weapon.webp" alt="" loading="lazy"><figcaption>library/events/exclusive-weapon</figcaption></figure>
+<figure><img src="events/falcon-tower-pass.webp" alt="" loading="lazy"><figcaption>library/events/falcon-tower-pass</figcaption></figure>
+<figure><img src="events/gear-pass.webp" alt="" loading="lazy"><figcaption>library/events/gear-pass</figcaption></figure>
+<figure><img src="events/gear-upgrade.webp" alt="" loading="lazy"><figcaption>library/events/gear-upgrade</figcaption></figure>
+<figure><img src="events/halloween-bazaar.webp" alt="" loading="lazy"><figcaption>library/events/halloween-bazaar</figcaption></figure>
+<figure><img src="events/halloween-cookie.webp" alt="" loading="lazy"><figcaption>library/events/halloween-cookie</figcaption></figure>
+<figure><img src="events/heroes-assemble.webp" alt="" loading="lazy"><figcaption>library/events/heroes-assemble</figcaption></figure>
+<figure><img src="events/hunt-battle.webp" alt="" loading="lazy"><figcaption>library/events/hunt-battle</figcaption></figure>
+<figure><img src="events/login-rewards.webp" alt="" loading="lazy"><figcaption>library/events/login-rewards</figcaption></figure>
+<figure><img src="events/pandemic-experience.webp" alt="" loading="lazy"><figcaption>library/events/pandemic-experience</figcaption></figure>
+<figure><img src="events/quiz-of-wisdom.webp" alt="" loading="lazy"><figcaption>library/events/quiz-of-wisdom</figcaption></figure>
+<figure><img src="events/ravens-might.webp" alt="" loading="lazy"><figcaption>library/events/ravens-might</figcaption></figure>
+<figure><img src="events/recluse-merchant.webp" alt="" loading="lazy"><figcaption>library/events/recluse-merchant</figcaption></figure>
+<figure><img src="events/recluses-enigma.webp" alt="" loading="lazy"><figcaption>library/events/recluses-enigma</figcaption></figure>
+<figure><img src="events/shadow-blight.webp" alt="" loading="lazy"><figcaption>library/events/shadow-blight</figcaption></figure>
+<figure><img src="events/strange-bazaar.webp" alt="" loading="lazy"><figcaption>library/events/strange-bazaar</figcaption></figure>
+<figure><img src="events/surprise-encounter.webp" alt="" loading="lazy"><figcaption>library/events/surprise-encounter</figcaption></figure>
+<figure><img src="events/tempered-arms.webp" alt="" loading="lazy"><figcaption>library/events/tempered-arms</figcaption></figure>
+<figure><img src="events/thief-hunt.webp" alt="" loading="lazy"><figcaption>library/events/thief-hunt</figcaption></figure>
+<figure><img src="events/trick-or-treat.webp" alt="" loading="lazy"><figcaption>library/events/trick-or-treat</figcaption></figure>
+<figure><img src="events/wandering-phantom.webp" alt="" loading="lazy"><figcaption>library/events/wandering-phantom</figcaption></figure>
+<figure><img src="events/weekly-special.webp" alt="" loading="lazy"><figcaption>library/events/weekly-special</figcaption></figure>
+</div>
+<h2 id="factions">factions <small>(3)</small></h2><p>Hero factions</p>
+<div class="grid">
+<figure><img src="factions/ranger.webp" alt="" loading="lazy"><figcaption>library/factions/ranger</figcaption></figure>
+<figure><img src="factions/warlock.webp" alt="" loading="lazy"><figcaption>library/factions/warlock</figcaption></figure>
+<figure><img src="factions/warrior.webp" alt="" loading="lazy"><figcaption>library/factions/warrior</figcaption></figure>
+</div>
+<h2 id="heroes-art">heroes/art <small>(32)</small></h2><p>Full hero art (portrait)</p>
+<div class="grid wide">
+<figure><img src="heroes/art/annie.webp" alt="" loading="lazy"><figcaption>library/heroes/art/annie</figcaption></figure>
+<figure><img src="heroes/art/arthur.webp" alt="" loading="lazy"><figcaption>library/heroes/art/arthur</figcaption></figure>
+<figure><img src="heroes/art/ash.webp" alt="" loading="lazy"><figcaption>library/heroes/art/ash</figcaption></figure>
+<figure><img src="heroes/art/bell.webp" alt="" loading="lazy"><figcaption>library/heroes/art/bell</figcaption></figure>
+<figure><img src="heroes/art/bella.webp" alt="" loading="lazy"><figcaption>library/heroes/art/bella</figcaption></figure>
+<figure><img src="heroes/art/bestar.webp" alt="" loading="lazy"><figcaption>library/heroes/art/bestar</figcaption></figure>
+<figure><img src="heroes/art/billy.webp" alt="" loading="lazy"><figcaption>library/heroes/art/billy</figcaption></figure>
+<figure><img src="heroes/art/celia.webp" alt="" loading="lazy"><figcaption>library/heroes/art/celia</figcaption></figure>
+<figure><img src="heroes/art/claire-advanced.webp" alt="" loading="lazy"><figcaption>library/heroes/art/claire-advanced</figcaption></figure>
+<figure><img src="heroes/art/claire.webp" alt="" loading="lazy"><figcaption>library/heroes/art/claire</figcaption></figure>
+<figure><img src="heroes/art/cynthia.webp" alt="" loading="lazy"><figcaption>library/heroes/art/cynthia</figcaption></figure>
+<figure><img src="heroes/art/daskal.webp" alt="" loading="lazy"><figcaption>library/heroes/art/daskal</figcaption></figure>
+<figure><img src="heroes/art/durant.webp" alt="" loading="lazy"><figcaption>library/heroes/art/durant</figcaption></figure>
+<figure><img src="heroes/art/grenwald.webp" alt="" loading="lazy"><figcaption>library/heroes/art/grenwald</figcaption></figure>
+<figure><img src="heroes/art/griffith.webp" alt="" loading="lazy"><figcaption>library/heroes/art/griffith</figcaption></figure>
+<figure><img src="heroes/art/harper.webp" alt="" loading="lazy"><figcaption>library/heroes/art/harper</figcaption></figure>
+<figure><img src="heroes/art/hastar.webp" alt="" loading="lazy"><figcaption>library/heroes/art/hastar</figcaption></figure>
+<figure><img src="heroes/art/joker.webp" alt="" loading="lazy"><figcaption>library/heroes/art/joker</figcaption></figure>
+<figure><img src="heroes/art/kafa.webp" alt="" loading="lazy"><figcaption>library/heroes/art/kafa</figcaption></figure>
+<figure><img src="heroes/art/kesso.webp" alt="" loading="lazy"><figcaption>library/heroes/art/kesso</figcaption></figure>
+<figure><img src="heroes/art/louis.webp" alt="" loading="lazy"><figcaption>library/heroes/art/louis</figcaption></figure>
+<figure><img src="heroes/art/lucius.webp" alt="" loading="lazy"><figcaption>library/heroes/art/lucius</figcaption></figure>
+<figure><img src="heroes/art/marlena.webp" alt="" loading="lazy"><figcaption>library/heroes/art/marlena</figcaption></figure>
+<figure><img src="heroes/art/nicole.webp" alt="" loading="lazy"><figcaption>library/heroes/art/nicole</figcaption></figure>
+<figure><img src="heroes/art/red-lady.webp" alt="" loading="lazy"><figcaption>library/heroes/art/red-lady</figcaption></figure>
+<figure><img src="heroes/art/robin.webp" alt="" loading="lazy"><figcaption>library/heroes/art/robin</figcaption></figure>
+<figure><img src="heroes/art/shadow.webp" alt="" loading="lazy"><figcaption>library/heroes/art/shadow</figcaption></figure>
+<figure><img src="heroes/art/sivir.webp" alt="" loading="lazy"><figcaption>library/heroes/art/sivir</figcaption></figure>
+<figure><img src="heroes/art/stellar.webp" alt="" loading="lazy"><figcaption>library/heroes/art/stellar</figcaption></figure>
+<figure><img src="heroes/art/ulfrid.webp" alt="" loading="lazy"><figcaption>library/heroes/art/ulfrid</figcaption></figure>
+<figure><img src="heroes/art/william.webp" alt="" loading="lazy"><figcaption>library/heroes/art/william</figcaption></figure>
+<figure><img src="heroes/art/zoya.webp" alt="" loading="lazy"><figcaption>library/heroes/art/zoya</figcaption></figure>
+</div>
+<h2 id="heroes-cards">heroes/cards <small>(36)</small></h2><p>Hero card portraits (square)</p>
+<div class="grid">
+<figure><img src="heroes/cards/annie.webp" alt="" loading="lazy"><figcaption>library/heroes/cards/annie</figcaption></figure>
+<figure><img src="heroes/cards/arthur.webp" alt="" loading="lazy"><figcaption>library/heroes/cards/arthur</figcaption></figure>
+<figure><img src="heroes/cards/ash.webp" alt="" loading="lazy"><figcaption>library/heroes/cards/ash</figcaption></figure>
+<figure><img src="heroes/cards/bell.webp" alt="" loading="lazy"><figcaption>library/heroes/cards/bell</figcaption></figure>
+<figure><img src="heroes/cards/bella.webp" alt="" loading="lazy"><figcaption>library/heroes/cards/bella</figcaption></figure>
+<figure><img src="heroes/cards/bestar.webp" alt="" loading="lazy"><figcaption>library/heroes/cards/bestar</figcaption></figure>
+<figure><img src="heroes/cards/billy.webp" alt="" loading="lazy"><figcaption>library/heroes/cards/billy</figcaption></figure>
+<figure><img src="heroes/cards/celia.webp" alt="" loading="lazy"><figcaption>library/heroes/cards/celia</figcaption></figure>
+<figure><img src="heroes/cards/claire.webp" alt="" loading="lazy"><figcaption>library/heroes/cards/claire</figcaption></figure>
+<figure><img src="heroes/cards/cynthia.webp" alt="" loading="lazy"><figcaption>library/heroes/cards/cynthia</figcaption></figure>
+<figure><img src="heroes/cards/daskal.webp" alt="" loading="lazy"><figcaption>library/heroes/cards/daskal</figcaption></figure>
+<figure><img src="heroes/cards/durant.webp" alt="" loading="lazy"><figcaption>library/heroes/cards/durant</figcaption></figure>
+<figure><img src="heroes/cards/grenwald.webp" alt="" loading="lazy"><figcaption>library/heroes/cards/grenwald</figcaption></figure>
+<figure><img src="heroes/cards/griffith.webp" alt="" loading="lazy"><figcaption>library/heroes/cards/griffith</figcaption></figure>
+<figure><img src="heroes/cards/harper.webp" alt="" loading="lazy"><figcaption>library/heroes/cards/harper</figcaption></figure>
+<figure><img src="heroes/cards/hastar.webp" alt="" loading="lazy"><figcaption>library/heroes/cards/hastar</figcaption></figure>
+<figure><img src="heroes/cards/joker.webp" alt="" loading="lazy"><figcaption>library/heroes/cards/joker</figcaption></figure>
+<figure><img src="heroes/cards/kafa.webp" alt="" loading="lazy"><figcaption>library/heroes/cards/kafa</figcaption></figure>
+<figure><img src="heroes/cards/kesso.webp" alt="" loading="lazy"><figcaption>library/heroes/cards/kesso</figcaption></figure>
+<figure><img src="heroes/cards/louis.webp" alt="" loading="lazy"><figcaption>library/heroes/cards/louis</figcaption></figure>
+<figure><img src="heroes/cards/lucius.webp" alt="" loading="lazy"><figcaption>library/heroes/cards/lucius</figcaption></figure>
+<figure><img src="heroes/cards/marlena.webp" alt="" loading="lazy"><figcaption>library/heroes/cards/marlena</figcaption></figure>
+<figure><img src="heroes/cards/nicole.webp" alt="" loading="lazy"><figcaption>library/heroes/cards/nicole</figcaption></figure>
+<figure><img src="heroes/cards/pic-card4-00099.webp" alt="" loading="lazy"><figcaption>library/heroes/cards/pic-card4-00099</figcaption></figure>
+<figure><img src="heroes/cards/pic-card4-04-sj.webp" alt="" loading="lazy"><figcaption>library/heroes/cards/pic-card4-04-sj</figcaption></figure>
+<figure><img src="heroes/cards/pic-card4-10-jx.webp" alt="" loading="lazy"><figcaption>library/heroes/cards/pic-card4-10-jx</figcaption></figure>
+<figure><img src="heroes/cards/pic-card4-20-jx.webp" alt="" loading="lazy"><figcaption>library/heroes/cards/pic-card4-20-jx</figcaption></figure>
+<figure><img src="heroes/cards/pic-card4-21-jx.webp" alt="" loading="lazy"><figcaption>library/heroes/cards/pic-card4-21-jx</figcaption></figure>
+<figure><img src="heroes/cards/red-lady.webp" alt="" loading="lazy"><figcaption>library/heroes/cards/red-lady</figcaption></figure>
+<figure><img src="heroes/cards/robin.webp" alt="" loading="lazy"><figcaption>library/heroes/cards/robin</figcaption></figure>
+<figure><img src="heroes/cards/shadow.webp" alt="" loading="lazy"><figcaption>library/heroes/cards/shadow</figcaption></figure>
+<figure><img src="heroes/cards/sivir.webp" alt="" loading="lazy"><figcaption>library/heroes/cards/sivir</figcaption></figure>
+<figure><img src="heroes/cards/stellar.webp" alt="" loading="lazy"><figcaption>library/heroes/cards/stellar</figcaption></figure>
+<figure><img src="heroes/cards/ulfrid.webp" alt="" loading="lazy"><figcaption>library/heroes/cards/ulfrid</figcaption></figure>
+<figure><img src="heroes/cards/william.webp" alt="" loading="lazy"><figcaption>library/heroes/cards/william</figcaption></figure>
+<figure><img src="heroes/cards/zoya.webp" alt="" loading="lazy"><figcaption>library/heroes/cards/zoya</figcaption></figure>
+</div>
+<h2 id="heroes-icons">heroes/icons <small>(32)</small></h2><p>Hero icons</p>
+<div class="grid">
+<figure><img src="heroes/icons/annie.webp" alt="" loading="lazy"><figcaption>library/heroes/icons/annie</figcaption></figure>
+<figure><img src="heroes/icons/arthur.webp" alt="" loading="lazy"><figcaption>library/heroes/icons/arthur</figcaption></figure>
+<figure><img src="heroes/icons/ash.webp" alt="" loading="lazy"><figcaption>library/heroes/icons/ash</figcaption></figure>
+<figure><img src="heroes/icons/bell.webp" alt="" loading="lazy"><figcaption>library/heroes/icons/bell</figcaption></figure>
+<figure><img src="heroes/icons/bella.webp" alt="" loading="lazy"><figcaption>library/heroes/icons/bella</figcaption></figure>
+<figure><img src="heroes/icons/bestar.webp" alt="" loading="lazy"><figcaption>library/heroes/icons/bestar</figcaption></figure>
+<figure><img src="heroes/icons/billy.webp" alt="" loading="lazy"><figcaption>library/heroes/icons/billy</figcaption></figure>
+<figure><img src="heroes/icons/celia.webp" alt="" loading="lazy"><figcaption>library/heroes/icons/celia</figcaption></figure>
+<figure><img src="heroes/icons/claire-advanced.webp" alt="" loading="lazy"><figcaption>library/heroes/icons/claire-advanced</figcaption></figure>
+<figure><img src="heroes/icons/claire.webp" alt="" loading="lazy"><figcaption>library/heroes/icons/claire</figcaption></figure>
+<figure><img src="heroes/icons/cynthia.webp" alt="" loading="lazy"><figcaption>library/heroes/icons/cynthia</figcaption></figure>
+<figure><img src="heroes/icons/daskal.webp" alt="" loading="lazy"><figcaption>library/heroes/icons/daskal</figcaption></figure>
+<figure><img src="heroes/icons/durant.webp" alt="" loading="lazy"><figcaption>library/heroes/icons/durant</figcaption></figure>
+<figure><img src="heroes/icons/grenwald.webp" alt="" loading="lazy"><figcaption>library/heroes/icons/grenwald</figcaption></figure>
+<figure><img src="heroes/icons/griffith.webp" alt="" loading="lazy"><figcaption>library/heroes/icons/griffith</figcaption></figure>
+<figure><img src="heroes/icons/harper.webp" alt="" loading="lazy"><figcaption>library/heroes/icons/harper</figcaption></figure>
+<figure><img src="heroes/icons/hastar.webp" alt="" loading="lazy"><figcaption>library/heroes/icons/hastar</figcaption></figure>
+<figure><img src="heroes/icons/joker.webp" alt="" loading="lazy"><figcaption>library/heroes/icons/joker</figcaption></figure>
+<figure><img src="heroes/icons/kafa.webp" alt="" loading="lazy"><figcaption>library/heroes/icons/kafa</figcaption></figure>
+<figure><img src="heroes/icons/kesso.webp" alt="" loading="lazy"><figcaption>library/heroes/icons/kesso</figcaption></figure>
+<figure><img src="heroes/icons/louis.webp" alt="" loading="lazy"><figcaption>library/heroes/icons/louis</figcaption></figure>
+<figure><img src="heroes/icons/lucius.webp" alt="" loading="lazy"><figcaption>library/heroes/icons/lucius</figcaption></figure>
+<figure><img src="heroes/icons/marlena.webp" alt="" loading="lazy"><figcaption>library/heroes/icons/marlena</figcaption></figure>
+<figure><img src="heroes/icons/nicole.webp" alt="" loading="lazy"><figcaption>library/heroes/icons/nicole</figcaption></figure>
+<figure><img src="heroes/icons/red-lady.webp" alt="" loading="lazy"><figcaption>library/heroes/icons/red-lady</figcaption></figure>
+<figure><img src="heroes/icons/robin.webp" alt="" loading="lazy"><figcaption>library/heroes/icons/robin</figcaption></figure>
+<figure><img src="heroes/icons/shadow.webp" alt="" loading="lazy"><figcaption>library/heroes/icons/shadow</figcaption></figure>
+<figure><img src="heroes/icons/sivir.webp" alt="" loading="lazy"><figcaption>library/heroes/icons/sivir</figcaption></figure>
+<figure><img src="heroes/icons/stellar.webp" alt="" loading="lazy"><figcaption>library/heroes/icons/stellar</figcaption></figure>
+<figure><img src="heroes/icons/ulfrid.webp" alt="" loading="lazy"><figcaption>library/heroes/icons/ulfrid</figcaption></figure>
+<figure><img src="heroes/icons/william.webp" alt="" loading="lazy"><figcaption>library/heroes/icons/william</figcaption></figure>
+<figure><img src="heroes/icons/zoya.webp" alt="" loading="lazy"><figcaption>library/heroes/icons/zoya</figcaption></figure>
+</div>
+<h2 id="heroes-portraits">heroes/portraits <small>(31)</small></h2><p>Hero portraits on a rounded tile, by rarity</p>
+<div class="grid">
+<figure><img src="heroes/portraits/sr-durant.webp" alt="" loading="lazy"><figcaption>library/heroes/portraits/sr-durant</figcaption></figure>
+<figure><img src="heroes/portraits/sr-kafa.webp" alt="" loading="lazy"><figcaption>library/heroes/portraits/sr-kafa</figcaption></figure>
+<figure><img src="heroes/portraits/sr-robin.webp" alt="" loading="lazy"><figcaption>library/heroes/portraits/sr-robin</figcaption></figure>
+<figure><img src="heroes/portraits/sr-william.webp" alt="" loading="lazy"><figcaption>library/heroes/portraits/sr-william</figcaption></figure>
+<figure><img src="heroes/portraits/ssr-ash.webp" alt="" loading="lazy"><figcaption>library/heroes/portraits/ssr-ash</figcaption></figure>
+<figure><img src="heroes/portraits/ssr-bella.webp" alt="" loading="lazy"><figcaption>library/heroes/portraits/ssr-bella</figcaption></figure>
+<figure><img src="heroes/portraits/ssr-bestar.webp" alt="" loading="lazy"><figcaption>library/heroes/portraits/ssr-bestar</figcaption></figure>
+<figure><img src="heroes/portraits/ssr-celia.webp" alt="" loading="lazy"><figcaption>library/heroes/portraits/ssr-celia</figcaption></figure>
+<figure><img src="heroes/portraits/ssr-claire.webp" alt="" loading="lazy"><figcaption>library/heroes/portraits/ssr-claire</figcaption></figure>
+<figure><img src="heroes/portraits/ssr-grenwald.webp" alt="" loading="lazy"><figcaption>library/heroes/portraits/ssr-grenwald</figcaption></figure>
+<figure><img src="heroes/portraits/ssr-griffith.webp" alt="" loading="lazy"><figcaption>library/heroes/portraits/ssr-griffith</figcaption></figure>
+<figure><img src="heroes/portraits/ssr-hastar.webp" alt="" loading="lazy"><figcaption>library/heroes/portraits/ssr-hastar</figcaption></figure>
+<figure><img src="heroes/portraits/ssr-kesso.webp" alt="" loading="lazy"><figcaption>library/heroes/portraits/ssr-kesso</figcaption></figure>
+<figure><img src="heroes/portraits/ssr-lucius.webp" alt="" loading="lazy"><figcaption>library/heroes/portraits/ssr-lucius</figcaption></figure>
+<figure><img src="heroes/portraits/ssr-sivir.webp" alt="" loading="lazy"><figcaption>library/heroes/portraits/ssr-sivir</figcaption></figure>
+<figure><img src="heroes/portraits/ssr-stellar.webp" alt="" loading="lazy"><figcaption>library/heroes/portraits/ssr-stellar</figcaption></figure>
+<figure><img src="heroes/portraits/ur-annie.webp" alt="" loading="lazy"><figcaption>library/heroes/portraits/ur-annie</figcaption></figure>
+<figure><img src="heroes/portraits/ur-arthur.webp" alt="" loading="lazy"><figcaption>library/heroes/portraits/ur-arthur</figcaption></figure>
+<figure><img src="heroes/portraits/ur-bell.webp" alt="" loading="lazy"><figcaption>library/heroes/portraits/ur-bell</figcaption></figure>
+<figure><img src="heroes/portraits/ur-billy.webp" alt="" loading="lazy"><figcaption>library/heroes/portraits/ur-billy</figcaption></figure>
+<figure><img src="heroes/portraits/ur-cynthia.webp" alt="" loading="lazy"><figcaption>library/heroes/portraits/ur-cynthia</figcaption></figure>
+<figure><img src="heroes/portraits/ur-daskal.webp" alt="" loading="lazy"><figcaption>library/heroes/portraits/ur-daskal</figcaption></figure>
+<figure><img src="heroes/portraits/ur-harper.webp" alt="" loading="lazy"><figcaption>library/heroes/portraits/ur-harper</figcaption></figure>
+<figure><img src="heroes/portraits/ur-joker.webp" alt="" loading="lazy"><figcaption>library/heroes/portraits/ur-joker</figcaption></figure>
+<figure><img src="heroes/portraits/ur-louis.webp" alt="" loading="lazy"><figcaption>library/heroes/portraits/ur-louis</figcaption></figure>
+<figure><img src="heroes/portraits/ur-marlena.webp" alt="" loading="lazy"><figcaption>library/heroes/portraits/ur-marlena</figcaption></figure>
+<figure><img src="heroes/portraits/ur-nicole.webp" alt="" loading="lazy"><figcaption>library/heroes/portraits/ur-nicole</figcaption></figure>
+<figure><img src="heroes/portraits/ur-redlady.webp" alt="" loading="lazy"><figcaption>library/heroes/portraits/ur-redlady</figcaption></figure>
+<figure><img src="heroes/portraits/ur-shadow.webp" alt="" loading="lazy"><figcaption>library/heroes/portraits/ur-shadow</figcaption></figure>
+<figure><img src="heroes/portraits/ur-ulfrid.webp" alt="" loading="lazy"><figcaption>library/heroes/portraits/ur-ulfrid</figcaption></figure>
+<figure><img src="heroes/portraits/ur-zoya.webp" alt="" loading="lazy"><figcaption>library/heroes/portraits/ur-zoya</figcaption></figure>
+</div>
+<h2 id="items-boost">items/boost <small>(5)</small></h2><p>Boosts</p>
+<div class="grid">
+<figure><img src="items/boost/construction-speed.webp" alt="" loading="lazy"><figcaption>library/items/boost/construction-speed</figcaption></figure>
+<figure><img src="items/boost/era-res-boost.webp" alt="" loading="lazy"><figcaption>library/items/boost/era-res-boost</figcaption></figure>
+<figure><img src="items/boost/gathering-speedup.webp" alt="" loading="lazy"><figcaption>library/items/boost/gathering-speedup</figcaption></figure>
+<figure><img src="items/boost/march-queue-dmg-reduction-up.webp" alt="" loading="lazy"><figcaption>library/items/boost/march-queue-dmg-reduction-up</figcaption></figure>
+<figure><img src="items/boost/mega-march-queue.webp" alt="" loading="lazy"><figcaption>library/items/boost/mega-march-queue</figcaption></figure>
+</div>
+<h2 id="items-chest">items/chest <small>(38)</small></h2><p>Chests</p>
+<div class="grid">
+<figure><img src="items/chest/awaken-shard-choice-chest.webp" alt="" loading="lazy"><figcaption>library/items/chest/awaken-shard-choice-chest</figcaption></figure>
+<figure><img src="items/chest/battlebreaker-loot.webp" alt="" loading="lazy"><figcaption>library/items/chest/battlebreaker-loot</figcaption></figure>
+<figure><img src="items/chest/berserker-loot.webp" alt="" loading="lazy"><figcaption>library/items/chest/berserker-loot</figcaption></figure>
+<figure><img src="items/chest/city-seizure-chest.webp" alt="" loading="lazy"><figcaption>library/items/chest/city-seizure-chest</figcaption></figure>
+<figure><img src="items/chest/curio-chest-sr.webp" alt="" loading="lazy"><figcaption>library/items/chest/curio-chest-sr</figcaption></figure>
+<figure><img src="items/chest/curio-chest-ssr.webp" alt="" loading="lazy"><figcaption>library/items/chest/curio-chest-ssr</figcaption></figure>
+<figure><img src="items/chest/curio-chest-ur.webp" alt="" loading="lazy"><figcaption>library/items/chest/curio-chest-ur</figcaption></figure>
+<figure><img src="items/chest/curio-choice-chest-ur.webp" alt="" loading="lazy"><figcaption>library/items/chest/curio-choice-chest-ur</figcaption></figure>
+<figure><img src="items/chest/deluxe-choice-chest.webp" alt="" loading="lazy"><figcaption>library/items/chest/deluxe-choice-chest</figcaption></figure>
+<figure><img src="items/chest/excl-weapon-shard-choice-chest.webp" alt="" loading="lazy"><figcaption>library/items/chest/excl-weapon-shard-choice-chest</figcaption></figure>
+<figure><img src="items/chest/gear-choice-supply.webp" alt="" loading="lazy"><figcaption>library/items/chest/gear-choice-supply</figcaption></figure>
+<figure><img src="items/chest/gear-supply-r.webp" alt="" loading="lazy"><figcaption>library/items/chest/gear-supply-r</figcaption></figure>
+<figure><img src="items/chest/holy-sword-loot.webp" alt="" loading="lazy"><figcaption>library/items/chest/holy-sword-loot</figcaption></figure>
+<figure><img src="items/chest/iron-guard-loot.webp" alt="" loading="lazy"><figcaption>library/items/chest/iron-guard-loot</figcaption></figure>
+<figure><img src="items/chest/lv1-raven-gear-chest.webp" alt="" loading="lazy"><figcaption>library/items/chest/lv1-raven-gear-chest</figcaption></figure>
+<figure><img src="items/chest/lv2-raven-gear-chest.webp" alt="" loading="lazy"><figcaption>library/items/chest/lv2-raven-gear-chest</figcaption></figure>
+<figure><img src="items/chest/lv2-raven-gear-choice-chest.webp" alt="" loading="lazy"><figcaption>library/items/chest/lv2-raven-gear-choice-chest</figcaption></figure>
+<figure><img src="items/chest/lv3-raven-gear-chest.webp" alt="" loading="lazy"><figcaption>library/items/chest/lv3-raven-gear-chest</figcaption></figure>
+<figure><img src="items/chest/lv3-raven-gear-choice-chest.webp" alt="" loading="lazy"><figcaption>library/items/chest/lv3-raven-gear-choice-chest</figcaption></figure>
+<figure><img src="items/chest/lv4-raven-gear-chest.webp" alt="" loading="lazy"><figcaption>library/items/chest/lv4-raven-gear-chest</figcaption></figure>
+<figure><img src="items/chest/lv4-raven-gear-choice-chest.webp" alt="" loading="lazy"><figcaption>library/items/chest/lv4-raven-gear-choice-chest</figcaption></figure>
+<figure><img src="items/chest/lv5-raven-gear-chest.webp" alt="" loading="lazy"><figcaption>library/items/chest/lv5-raven-gear-chest</figcaption></figure>
+<figure><img src="items/chest/lv5-raven-gear-choice-chest.webp" alt="" loading="lazy"><figcaption>library/items/chest/lv5-raven-gear-choice-chest</figcaption></figure>
+<figure><img src="items/chest/magic-hat-lucky-box.webp" alt="" loading="lazy"><figcaption>library/items/chest/magic-hat-lucky-box</figcaption></figure>
+<figure><img src="items/chest/r-epigraph-chest.webp" alt="" loading="lazy"><figcaption>library/items/chest/r-epigraph-chest</figcaption></figure>
+<figure><img src="items/chest/random-gear-chest.webp" alt="" loading="lazy"><figcaption>library/items/chest/random-gear-chest</figcaption></figure>
+<figure><img src="items/chest/random-gearstone-supply.webp" alt="" loading="lazy"><figcaption>library/items/chest/random-gearstone-supply</figcaption></figure>
+<figure><img src="items/chest/rock-loot.webp" alt="" loading="lazy"><figcaption>library/items/chest/rock-loot</figcaption></figure>
+<figure><img src="items/chest/speedup-supply.webp" alt="" loading="lazy"><figcaption>library/items/chest/speedup-supply</figcaption></figure>
+<figure><img src="items/chest/sr-epigraph-chest.webp" alt="" loading="lazy"><figcaption>library/items/chest/sr-epigraph-chest</figcaption></figure>
+<figure><img src="items/chest/ssr-epigraph-chest.webp" alt="" loading="lazy"><figcaption>library/items/chest/ssr-epigraph-chest</figcaption></figure>
+<figure><img src="items/chest/ssr-explorer-chest.webp" alt="" loading="lazy"><figcaption>library/items/chest/ssr-explorer-chest</figcaption></figure>
+<figure><img src="items/chest/universal-curio-random-chest.webp" alt="" loading="lazy"><figcaption>library/items/chest/universal-curio-random-chest</figcaption></figure>
+<figure><img src="items/chest/ur-adventure-chest.webp" alt="" loading="lazy"><figcaption>library/items/chest/ur-adventure-chest</figcaption></figure>
+<figure><img src="items/chest/ur-epigraph-chest.webp" alt="" loading="lazy"><figcaption>library/items/chest/ur-epigraph-chest</figcaption></figure>
+<figure><img src="items/chest/ur-epigraph-choice-chest.webp" alt="" loading="lazy"><figcaption>library/items/chest/ur-epigraph-choice-chest</figcaption></figure>
+<figure><img src="items/chest/ur-hero-and-awaken-choice-chest.webp" alt="" loading="lazy"><figcaption>library/items/chest/ur-hero-and-awaken-choice-chest</figcaption></figure>
+<figure><img src="items/chest/ur-hero-choice-chest.webp" alt="" loading="lazy"><figcaption>library/items/chest/ur-hero-choice-chest</figcaption></figure>
+</div>
+<h2 id="items-consumable">items/consumable <small>(12)</small></h2><p>Consumables</p>
+<div class="grid">
+<figure><img src="items/consumable/alliance-relocate.webp" alt="" loading="lazy"><figcaption>library/items/consumable/alliance-relocate</figcaption></figure>
+<figure><img src="items/consumable/diamond-golden-egg.webp" alt="" loading="lazy"><figcaption>library/items/consumable/diamond-golden-egg</figcaption></figure>
+<figure><img src="items/consumable/direct-relocate.webp" alt="" loading="lazy"><figcaption>library/items/consumable/direct-relocate</figcaption></figure>
+<figure><img src="items/consumable/march-speedup.webp" alt="" loading="lazy"><figcaption>library/items/consumable/march-speedup</figcaption></figure>
+<figure><img src="items/consumable/random-relocate.webp" alt="" loading="lazy"><figcaption>library/items/consumable/random-relocate</figcaption></figure>
+<figure><img src="items/consumable/recruit-ticket.webp" alt="" loading="lazy"><figcaption>library/items/consumable/recruit-ticket</figcaption></figure>
+<figure><img src="items/consumable/shield.webp" alt="" loading="lazy"><figcaption>library/items/consumable/shield</figcaption></figure>
+<figure><img src="items/consumable/specialty-exp.webp" alt="" loading="lazy"><figcaption>library/items/consumable/specialty-exp</figcaption></figure>
+<figure><img src="items/consumable/survivor-recruit-ticket.webp" alt="" loading="lazy"><figcaption>library/items/consumable/survivor-recruit-ticket</figcaption></figure>
+<figure><img src="items/consumable/survivor-token.webp" alt="" loading="lazy"><figcaption>library/items/consumable/survivor-token</figcaption></figure>
+<figure><img src="items/consumable/top-up-exp.webp" alt="" loading="lazy"><figcaption>library/items/consumable/top-up-exp</figcaption></figure>
+<figure><img src="items/consumable/vip-actication-time.webp" alt="" loading="lazy"><figcaption>library/items/consumable/vip-actication-time</figcaption></figure>
+</div>
+<h2 id="items-event">items/event <small>(11)</small></h2><p>Event items</p>
+<div class="grid">
+<figure><img src="items/event/blessing-coin.webp" alt="" loading="lazy"><figcaption>library/items/event/blessing-coin</figcaption></figure>
+<figure><img src="items/event/dwarven-pickaxe.webp" alt="" loading="lazy"><figcaption>library/items/event/dwarven-pickaxe</figcaption></figure>
+<figure><img src="items/event/magic-hat.webp" alt="" loading="lazy"><figcaption>library/items/event/magic-hat</figcaption></figure>
+<figure><img src="items/event/moon-coin.webp" alt="" loading="lazy"><figcaption>library/items/event/moon-coin</figcaption></figure>
+<figure><img src="items/event/pirate-anchor.webp" alt="" loading="lazy"><figcaption>library/items/event/pirate-anchor</figcaption></figure>
+<figure><img src="items/event/pirate-gold.webp" alt="" loading="lazy"><figcaption>library/items/event/pirate-gold</figcaption></figure>
+<figure><img src="items/event/recluse-coin.webp" alt="" loading="lazy"><figcaption>library/items/event/recluse-coin</figcaption></figure>
+<figure><img src="items/event/star-moon-sigil.webp" alt="" loading="lazy"><figcaption>library/items/event/star-moon-sigil</figcaption></figure>
+<figure><img src="items/event/stone-blade.webp" alt="" loading="lazy"><figcaption>library/items/event/stone-blade</figcaption></figure>
+<figure><img src="items/event/strange-coin.webp" alt="" loading="lazy"><figcaption>library/items/event/strange-coin</figcaption></figure>
+<figure><img src="items/event/surprise-emblem.webp" alt="" loading="lazy"><figcaption>library/items/event/surprise-emblem</figcaption></figure>
+</div>
+<h2 id="items-gear">items/gear <small>(16)</small></h2><p>Gear</p>
+<div class="grid">
+<figure><img src="items/gear/r-armor.webp" alt="" loading="lazy"><figcaption>library/items/gear/r-armor</figcaption></figure>
+<figure><img src="items/gear/r-boots.webp" alt="" loading="lazy"><figcaption>library/items/gear/r-boots</figcaption></figure>
+<figure><img src="items/gear/r-gauntlets.webp" alt="" loading="lazy"><figcaption>library/items/gear/r-gauntlets</figcaption></figure>
+<figure><img src="items/gear/r-sword.webp" alt="" loading="lazy"><figcaption>library/items/gear/r-sword</figcaption></figure>
+<figure><img src="items/gear/sr-armor.webp" alt="" loading="lazy"><figcaption>library/items/gear/sr-armor</figcaption></figure>
+<figure><img src="items/gear/sr-boots.webp" alt="" loading="lazy"><figcaption>library/items/gear/sr-boots</figcaption></figure>
+<figure><img src="items/gear/sr-gauntlets.webp" alt="" loading="lazy"><figcaption>library/items/gear/sr-gauntlets</figcaption></figure>
+<figure><img src="items/gear/sr-sword.webp" alt="" loading="lazy"><figcaption>library/items/gear/sr-sword</figcaption></figure>
+<figure><img src="items/gear/ssr-armor.webp" alt="" loading="lazy"><figcaption>library/items/gear/ssr-armor</figcaption></figure>
+<figure><img src="items/gear/ssr-boots.webp" alt="" loading="lazy"><figcaption>library/items/gear/ssr-boots</figcaption></figure>
+<figure><img src="items/gear/ssr-gauntlets.webp" alt="" loading="lazy"><figcaption>library/items/gear/ssr-gauntlets</figcaption></figure>
+<figure><img src="items/gear/ssr-sword.webp" alt="" loading="lazy"><figcaption>library/items/gear/ssr-sword</figcaption></figure>
+<figure><img src="items/gear/ur-armor.webp" alt="" loading="lazy"><figcaption>library/items/gear/ur-armor</figcaption></figure>
+<figure><img src="items/gear/ur-boots.webp" alt="" loading="lazy"><figcaption>library/items/gear/ur-boots</figcaption></figure>
+<figure><img src="items/gear/ur-gauntlets.webp" alt="" loading="lazy"><figcaption>library/items/gear/ur-gauntlets</figcaption></figure>
+<figure><img src="items/gear/ur-sword.webp" alt="" loading="lazy"><figcaption>library/items/gear/ur-sword</figcaption></figure>
+</div>
+<h2 id="items-material">items/material <small>(17)</small></h2><p>Materials and shards</p>
+<div class="grid">
+<figure><img src="items/material/brass.webp" alt="" loading="lazy"><figcaption>library/items/material/brass</figcaption></figure>
+<figure><img src="items/material/cloth.webp" alt="" loading="lazy"><figcaption>library/items/material/cloth</figcaption></figure>
+<figure><img src="items/material/exclusive-weapon-omni-shard.webp" alt="" loading="lazy"><figcaption>library/items/material/exclusive-weapon-omni-shard</figcaption></figure>
+<figure><img src="items/material/exclusive-weapon-shard.webp" alt="" loading="lazy"><figcaption>library/items/material/exclusive-weapon-shard</figcaption></figure>
+<figure><img src="items/material/gear-blueprint-mr.webp" alt="" loading="lazy"><figcaption>library/items/material/gear-blueprint-mr</figcaption></figure>
+<figure><img src="items/material/gear-blueprint-ur.webp" alt="" loading="lazy"><figcaption>library/items/material/gear-blueprint-ur</figcaption></figure>
+<figure><img src="items/material/gearstone.webp" alt="" loading="lazy"><figcaption>library/items/material/gearstone</figcaption></figure>
+<figure><img src="items/material/hero-awaken-omni-shard.webp" alt="" loading="lazy"><figcaption>library/items/material/hero-awaken-omni-shard</figcaption></figure>
+<figure><img src="items/material/hero-awaken-shard.webp" alt="" loading="lazy"><figcaption>library/items/material/hero-awaken-shard</figcaption></figure>
+<figure><img src="items/material/leather.webp" alt="" loading="lazy"><figcaption>library/items/material/leather</figcaption></figure>
+<figure><img src="items/material/refined-iron.webp" alt="" loading="lazy"><figcaption>library/items/material/refined-iron</figcaption></figure>
+<figure><img src="items/material/skill-badge.webp" alt="" loading="lazy"><figcaption>library/items/material/skill-badge</figcaption></figure>
+<figure><img src="items/material/sr-hero-omni-shard.webp" alt="" loading="lazy"><figcaption>library/items/material/sr-hero-omni-shard</figcaption></figure>
+<figure><img src="items/material/ssr-hero-omni-shard.webp" alt="" loading="lazy"><figcaption>library/items/material/ssr-hero-omni-shard</figcaption></figure>
+<figure><img src="items/material/study-scroll.webp" alt="" loading="lazy"><figcaption>library/items/material/study-scroll</figcaption></figure>
+<figure><img src="items/material/tempered-steel.webp" alt="" loading="lazy"><figcaption>library/items/material/tempered-steel</figcaption></figure>
+<figure><img src="items/material/ur-hero-omni-shard.webp" alt="" loading="lazy"><figcaption>library/items/material/ur-hero-omni-shard</figcaption></figure>
+</div>
+<h2 id="items-misc">items/misc <small>(1)</small></h2><p>Other items</p>
+<div class="grid">
+<figure><img src="items/misc/sign-medal.webp" alt="" loading="lazy"><figcaption>library/items/misc/sign-medal</figcaption></figure>
+</div>
+<h2 id="items-raven">items/raven <small>(23)</small></h2><p>Raven items</p>
+<div class="grid">
+<figure><img src="items/raven/attackers-claw.webp" alt="" loading="lazy"><figcaption>library/items/raven/attackers-claw</figcaption></figure>
+<figure><img src="items/raven/eye-of-perception.webp" alt="" loading="lazy"><figcaption>library/items/raven/eye-of-perception</figcaption></figure>
+<figure><img src="items/raven/feather-of-the-night.webp" alt="" loading="lazy"><figcaption>library/items/raven/feather-of-the-night</figcaption></figure>
+<figure><img src="items/raven/frenzied-flock-iv-ranger.webp" alt="" loading="lazy"><figcaption>library/items/raven/frenzied-flock-iv-ranger</figcaption></figure>
+<figure><img src="items/raven/frenzied-flock-iv-warlock.webp" alt="" loading="lazy"><figcaption>library/items/raven/frenzied-flock-iv-warlock</figcaption></figure>
+<figure><img src="items/raven/frenzied-flock-iv-warrior.webp" alt="" loading="lazy"><figcaption>library/items/raven/frenzied-flock-iv-warrior</figcaption></figure>
+<figure><img src="items/raven/guard-of-nature-iv-ranger.webp" alt="" loading="lazy"><figcaption>library/items/raven/guard-of-nature-iv-ranger</figcaption></figure>
+<figure><img src="items/raven/guard-of-nature-iv-warlock.webp" alt="" loading="lazy"><figcaption>library/items/raven/guard-of-nature-iv-warlock</figcaption></figure>
+<figure><img src="items/raven/guard-of-nature-iv-warrior.webp" alt="" loading="lazy"><figcaption>library/items/raven/guard-of-nature-iv-warrior</figcaption></figure>
+<figure><img src="items/raven/heart-of-wisdom.webp" alt="" loading="lazy"><figcaption>library/items/raven/heart-of-wisdom</figcaption></figure>
+<figure><img src="items/raven/protective-charm-iv-ranger.webp" alt="" loading="lazy"><figcaption>library/items/raven/protective-charm-iv-ranger</figcaption></figure>
+<figure><img src="items/raven/protective-charm-iv-warlock.webp" alt="" loading="lazy"><figcaption>library/items/raven/protective-charm-iv-warlock</figcaption></figure>
+<figure><img src="items/raven/protective-charm-iv-warrior.webp" alt="" loading="lazy"><figcaption>library/items/raven/protective-charm-iv-warrior</figcaption></figure>
+<figure><img src="items/raven/raven-essence.webp" alt="" loading="lazy"><figcaption>library/items/raven/raven-essence</figcaption></figure>
+<figure><img src="items/raven/raven-evolve-guide.webp" alt="" loading="lazy"><figcaption>library/items/raven/raven-evolve-guide</figcaption></figure>
+<figure><img src="items/raven/raven-fruit.webp" alt="" loading="lazy"><figcaption>library/items/raven/raven-fruit</figcaption></figure>
+<figure><img src="items/raven/reversal-power-iv-ranger.webp" alt="" loading="lazy"><figcaption>library/items/raven/reversal-power-iv-ranger</figcaption></figure>
+<figure><img src="items/raven/reversal-power-iv-warlock.webp" alt="" loading="lazy"><figcaption>library/items/raven/reversal-power-iv-warlock</figcaption></figure>
+<figure><img src="items/raven/reversal-power-iv-warrior.webp" alt="" loading="lazy"><figcaption>library/items/raven/reversal-power-iv-warrior</figcaption></figure>
+<figure><img src="items/raven/sharp-beak.webp" alt="" loading="lazy"><figcaption>library/items/raven/sharp-beak</figcaption></figure>
+<figure><img src="items/raven/ssr-epigraph-shard.webp" alt="" loading="lazy"><figcaption>library/items/raven/ssr-epigraph-shard</figcaption></figure>
+<figure><img src="items/raven/tail-of-wind.webp" alt="" loading="lazy"><figcaption>library/items/raven/tail-of-wind</figcaption></figure>
+<figure><img src="items/raven/ur-epigraph-shard.webp" alt="" loading="lazy"><figcaption>library/items/raven/ur-epigraph-shard</figcaption></figure>
+</div>
+<h2 id="items-resource">items/resource <small>(14)</small></h2><p>Resources</p>
+<div class="grid">
+<figure><img src="items/resource/alliance-coins.webp" alt="" loading="lazy"><figcaption>library/items/resource/alliance-coins</figcaption></figure>
+<figure><img src="items/resource/antitoxin-level-supply.webp" alt="" loading="lazy"><figcaption>library/items/resource/antitoxin-level-supply</figcaption></figure>
+<figure><img src="items/resource/antitoxin.webp" alt="" loading="lazy"><figcaption>library/items/resource/antitoxin</figcaption></figure>
+<figure><img src="items/resource/copper-coin.webp" alt="" loading="lazy"><figcaption>library/items/resource/copper-coin</figcaption></figure>
+<figure><img src="items/resource/diamonds.webp" alt="" loading="lazy"><figcaption>library/items/resource/diamonds</figcaption></figure>
+<figure><img src="items/resource/grain-level-supply.webp" alt="" loading="lazy"><figcaption>library/items/resource/grain-level-supply</figcaption></figure>
+<figure><img src="items/resource/grain.webp" alt="" loading="lazy"><figcaption>library/items/resource/grain</figcaption></figure>
+<figure><img src="items/resource/herb-level-supply.webp" alt="" loading="lazy"><figcaption>library/items/resource/herb-level-supply</figcaption></figure>
+<figure><img src="items/resource/herbs.webp" alt="" loading="lazy"><figcaption>library/items/resource/herbs</figcaption></figure>
+<figure><img src="items/resource/resource-supply.webp" alt="" loading="lazy"><figcaption>library/items/resource/resource-supply</figcaption></figure>
+<figure><img src="items/resource/stamina.webp" alt="" loading="lazy"><figcaption>library/items/resource/stamina</figcaption></figure>
+<figure><img src="items/resource/timber-level-supply.webp" alt="" loading="lazy"><figcaption>library/items/resource/timber-level-supply</figcaption></figure>
+<figure><img src="items/resource/timber.webp" alt="" loading="lazy"><figcaption>library/items/resource/timber</figcaption></figure>
+<figure><img src="items/resource/vip-points.webp" alt="" loading="lazy"><figcaption>library/items/resource/vip-points</figcaption></figure>
+</div>
+<h2 id="items-skin-decor">items/skin-decor <small>(55)</small></h2><p>Skin decorations</p>
+<div class="grid">
+<figure><img src="items/skin-decor/beacon-of-the-era.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/beacon-of-the-era</figcaption></figure>
+<figure><img src="items/skin-decor/beast-teeth.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/beast-teeth</figcaption></figure>
+<figure><img src="items/skin-decor/black-raven-fortress.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/black-raven-fortress</figcaption></figure>
+<figure><img src="items/skin-decor/blue-nutcracker.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/blue-nutcracker</figcaption></figure>
+<figure><img src="items/skin-decor/builders-hammer.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/builders-hammer</figcaption></figure>
+<figure><img src="items/skin-decor/castle-of-revival.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/castle-of-revival</figcaption></figure>
+<figure><img src="items/skin-decor/demon-knight-permanent.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/demon-knight-permanent</figcaption></figure>
+<figure><img src="items/skin-decor/demons-eye.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/demons-eye</figcaption></figure>
+<figure><img src="items/skin-decor/dragon-blood.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/dragon-blood</figcaption></figure>
+<figure><img src="items/skin-decor/eagle-castle.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/eagle-castle</figcaption></figure>
+<figure><img src="items/skin-decor/easter-egg-warrior.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/easter-egg-warrior</figcaption></figure>
+<figure><img src="items/skin-decor/fantasy-city.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/fantasy-city</figcaption></figure>
+<figure><img src="items/skin-decor/fish-amulet.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/fish-amulet</figcaption></figure>
+<figure><img src="items/skin-decor/golden-feather.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/golden-feather</figcaption></figure>
+<figure><img src="items/skin-decor/green-nutcracker.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/green-nutcracker</figcaption></figure>
+<figure><img src="items/skin-decor/greenery.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/greenery</figcaption></figure>
+<figure><img src="items/skin-decor/haunting-shadows-permanent.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/haunting-shadows-permanent</figcaption></figure>
+<figure><img src="items/skin-decor/heavy-knight.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/heavy-knight</figcaption></figure>
+<figure><img src="items/skin-decor/jade-rabbits-embrace.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/jade-rabbits-embrace</figcaption></figure>
+<figure><img src="items/skin-decor/land-of-purgatory.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/land-of-purgatory</figcaption></figure>
+<figure><img src="items/skin-decor/lost-scroll.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/lost-scroll</figcaption></figure>
+<figure><img src="items/skin-decor/lunar-palace.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/lunar-palace</figcaption></figure>
+<figure><img src="items/skin-decor/lunar-shadow.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/lunar-shadow</figcaption></figure>
+<figure><img src="items/skin-decor/mad-hat.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/mad-hat</figcaption></figure>
+<figure><img src="items/skin-decor/monthly-pass-frame.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/monthly-pass-frame</figcaption></figure>
+<figure><img src="items/skin-decor/mystic-cabin.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/mystic-cabin</figcaption></figure>
+<figure><img src="items/skin-decor/panacea.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/panacea</figcaption></figure>
+<figure><img src="items/skin-decor/pearl-of-the-deep.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/pearl-of-the-deep</figcaption></figure>
+<figure><img src="items/skin-decor/phantom.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/phantom</figcaption></figure>
+<figure><img src="items/skin-decor/pocket-watch.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/pocket-watch</figcaption></figure>
+<figure><img src="items/skin-decor/prophecy-card.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/prophecy-card</figcaption></figure>
+<figure><img src="items/skin-decor/pumpkin-ghost.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/pumpkin-ghost</figcaption></figure>
+<figure><img src="items/skin-decor/rabbits-tea-party.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/rabbits-tea-party</figcaption></figure>
+<figure><img src="items/skin-decor/ranger-epaulet.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/ranger-epaulet</figcaption></figure>
+<figure><img src="items/skin-decor/ranger-seal.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/ranger-seal</figcaption></figure>
+<figure><img src="items/skin-decor/ranger-stone.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/ranger-stone</figcaption></figure>
+<figure><img src="items/skin-decor/red-amber-amulet.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/red-amber-amulet</figcaption></figure>
+<figure><img src="items/skin-decor/red-nutcracker.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/red-nutcracker</figcaption></figure>
+<figure><img src="items/skin-decor/research-tome.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/research-tome</figcaption></figure>
+<figure><img src="items/skin-decor/sacred-chalice.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/sacred-chalice</figcaption></figure>
+<figure><img src="items/skin-decor/ship-in-a-bottle.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/ship-in-a-bottle</figcaption></figure>
+<figure><img src="items/skin-decor/slow-pocket-watch.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/slow-pocket-watch</figcaption></figure>
+<figure><img src="items/skin-decor/sphinx.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/sphinx</figcaption></figure>
+<figure><img src="items/skin-decor/star-dice.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/star-dice</figcaption></figure>
+<figure><img src="items/skin-decor/tulip.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/tulip</figcaption></figure>
+<figure><img src="items/skin-decor/twin-dragon-brooch.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/twin-dragon-brooch</figcaption></figure>
+<figure><img src="items/skin-decor/unity-mooncake.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/unity-mooncake</figcaption></figure>
+<figure><img src="items/skin-decor/universal-curio-shard.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/universal-curio-shard</figcaption></figure>
+<figure><img src="items/skin-decor/warlock-epaulet.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/warlock-epaulet</figcaption></figure>
+<figure><img src="items/skin-decor/warlock-seal.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/warlock-seal</figcaption></figure>
+<figure><img src="items/skin-decor/warlock-stone.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/warlock-stone</figcaption></figure>
+<figure><img src="items/skin-decor/warrior-epaulet.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/warrior-epaulet</figcaption></figure>
+<figure><img src="items/skin-decor/warrior-seal.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/warrior-seal</figcaption></figure>
+<figure><img src="items/skin-decor/warrior-stone.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/warrior-stone</figcaption></figure>
+<figure><img src="items/skin-decor/yellow-nutcracker.webp" alt="" loading="lazy"><figcaption>library/items/skin-decor/yellow-nutcracker</figcaption></figure>
+</div>
+<h2 id="items-speedup">items/speedup <small>(5)</small></h2><p>Speedups</p>
+<div class="grid">
+<figure><img src="items/speedup/construction-speedup.webp" alt="" loading="lazy"><figcaption>library/items/speedup/construction-speedup</figcaption></figure>
+<figure><img src="items/speedup/healing-speedup.webp" alt="" loading="lazy"><figcaption>library/items/speedup/healing-speedup</figcaption></figure>
+<figure><img src="items/speedup/research-speedup.webp" alt="" loading="lazy"><figcaption>library/items/speedup/research-speedup</figcaption></figure>
+<figure><img src="items/speedup/speedup.webp" alt="" loading="lazy"><figcaption>library/items/speedup/speedup</figcaption></figure>
+<figure><img src="items/speedup/training-speedup.webp" alt="" loading="lazy"><figcaption>library/items/speedup/training-speedup</figcaption></figure>
+</div>
+<h2 id="lord">lord <small>(3)</small></h2><p>Lord portraits (the plague doctor)</p>
+<div class="grid">
+<figure><img src="lord/lord-portrait-1.webp" alt="" loading="lazy"><figcaption>library/lord/lord-portrait-1</figcaption></figure>
+<figure><img src="lord/lord-portrait-2.webp" alt="" loading="lazy"><figcaption>library/lord/lord-portrait-2</figcaption></figure>
+<figure><img src="lord/lord-portrait-3.webp" alt="" loading="lazy"><figcaption>library/lord/lord-portrait-3</figcaption></figure>
+</div>
+<h2 id="lord-skills">lord-skills <small>(44)</small></h2><p>Lord skills</p>
+<div class="grid">
+<figure><img src="lord-skills/alliance-aid.webp" alt="" loading="lazy"><figcaption>library/lord-skills/alliance-aid</figcaption></figure>
+<figure><img src="lord-skills/art-of-architecture.webp" alt="" loading="lazy"><figcaption>library/lord-skills/art-of-architecture</figcaption></figure>
+<figure><img src="lord-skills/barracks-expansion.webp" alt="" loading="lazy"><figcaption>library/lord-skills/barracks-expansion</figcaption></figure>
+<figure><img src="lord-skills/bond-shield.webp" alt="" loading="lazy"><figcaption>library/lord-skills/bond-shield</figcaption></figure>
+<figure><img src="lord-skills/boost-morale.webp" alt="" loading="lazy"><figcaption>library/lord-skills/boost-morale</figcaption></figure>
+<figure><img src="lord-skills/chargin-war-flag.webp" alt="" loading="lazy"><figcaption>library/lord-skills/chargin-war-flag</figcaption></figure>
+<figure><img src="lord-skills/combat-exp.webp" alt="" loading="lazy"><figcaption>library/lord-skills/combat-exp</figcaption></figure>
+<figure><img src="lord-skills/concealed-identity.webp" alt="" loading="lazy"><figcaption>library/lord-skills/concealed-identity</figcaption></figure>
+<figure><img src="lord-skills/concentrated-fire.webp" alt="" loading="lazy"><figcaption>library/lord-skills/concentrated-fire</figcaption></figure>
+<figure><img src="lord-skills/eliminate-threats.webp" alt="" loading="lazy"><figcaption>library/lord-skills/eliminate-threats</figcaption></figure>
+<figure><img src="lord-skills/emergency-treatment.webp" alt="" loading="lazy"><figcaption>library/lord-skills/emergency-treatment</figcaption></figure>
+<figure><img src="lord-skills/free-build.webp" alt="" loading="lazy"><figcaption>library/lord-skills/free-build</figcaption></figure>
+<figure><img src="lord-skills/free-research.webp" alt="" loading="lazy"><figcaption>library/lord-skills/free-research</figcaption></figure>
+<figure><img src="lord-skills/frenzy.webp" alt="" loading="lazy"><figcaption>library/lord-skills/frenzy</figcaption></figure>
+<figure><img src="lord-skills/full-power-buff.webp" alt="" loading="lazy"><figcaption>library/lord-skills/full-power-buff</figcaption></figure>
+<figure><img src="lord-skills/hdden-peril.webp" alt="" loading="lazy"><figcaption>library/lord-skills/hdden-peril</figcaption></figure>
+<figure><img src="lord-skills/healing-force.webp" alt="" loading="lazy"><figcaption>library/lord-skills/healing-force</figcaption></figure>
+<figure><img src="lord-skills/help-building.webp" alt="" loading="lazy"><figcaption>library/lord-skills/help-building</figcaption></figure>
+<figure><img src="lord-skills/help-research.webp" alt="" loading="lazy"><figcaption>library/lord-skills/help-research</figcaption></figure>
+<figure><img src="lord-skills/hold-the-line.webp" alt="" loading="lazy"><figcaption>library/lord-skills/hold-the-line</figcaption></figure>
+<figure><img src="lord-skills/infirmary-expansion.webp" alt="" loading="lazy"><figcaption>library/lord-skills/infirmary-expansion</figcaption></figure>
+<figure><img src="lord-skills/instant-build.webp" alt="" loading="lazy"><figcaption>library/lord-skills/instant-build</figcaption></figure>
+<figure><img src="lord-skills/instant-produce.webp" alt="" loading="lazy"><figcaption>library/lord-skills/instant-produce</figcaption></figure>
+<figure><img src="lord-skills/instant-research.webp" alt="" loading="lazy"><figcaption>library/lord-skills/instant-research</figcaption></figure>
+<figure><img src="lord-skills/intensive-training.webp" alt="" loading="lazy"><figcaption>library/lord-skills/intensive-training</figcaption></figure>
+<figure><img src="lord-skills/material-recycle.webp" alt="" loading="lazy"><figcaption>library/lord-skills/material-recycle</figcaption></figure>
+<figure><img src="lord-skills/outstanding-contribution.webp" alt="" loading="lazy"><figcaption>library/lord-skills/outstanding-contribution</figcaption></figure>
+<figure><img src="lord-skills/rally-guardian.webp" alt="" loading="lazy"><figcaption>library/lord-skills/rally-guardian</figcaption></figure>
+<figure><img src="lord-skills/random-visitor.webp" alt="" loading="lazy"><figcaption>library/lord-skills/random-visitor</figcaption></figure>
+<figure><img src="lord-skills/raven-supply.webp" alt="" loading="lazy"><figcaption>library/lord-skills/raven-supply</figcaption></figure>
+<figure><img src="lord-skills/reinforcement-enhance.webp" alt="" loading="lazy"><figcaption>library/lord-skills/reinforcement-enhance</figcaption></figure>
+<figure><img src="lord-skills/reinforcement-speedup.webp" alt="" loading="lazy"><figcaption>library/lord-skills/reinforcement-speedup</figcaption></figure>
+<figure><img src="lord-skills/return-now.webp" alt="" loading="lazy"><figcaption>library/lord-skills/return-now</figcaption></figure>
+<figure><img src="lord-skills/siege-frenzy.webp" alt="" loading="lazy"><figcaption>library/lord-skills/siege-frenzy</figcaption></figure>
+<figure><img src="lord-skills/siege-war-flag.webp" alt="" loading="lazy"><figcaption>library/lord-skills/siege-war-flag</figcaption></figure>
+<figure><img src="lord-skills/solid-defense.webp" alt="" loading="lazy"><figcaption>library/lord-skills/solid-defense</figcaption></figure>
+<figure><img src="lord-skills/swift-stride.webp" alt="" loading="lazy"><figcaption>library/lord-skills/swift-stride</figcaption></figure>
+<figure><img src="lord-skills/tam-raid.webp" alt="" loading="lazy"><figcaption>library/lord-skills/tam-raid</figcaption></figure>
+<figure><img src="lord-skills/territory-raid.webp" alt="" loading="lazy"><figcaption>library/lord-skills/territory-raid</figcaption></figure>
+<figure><img src="lord-skills/train-now.webp" alt="" loading="lazy"><figcaption>library/lord-skills/train-now</figcaption></figure>
+<figure><img src="lord-skills/vitaility-vigor.webp" alt="" loading="lazy"><figcaption>library/lord-skills/vitaility-vigor</figcaption></figure>
+<figure><img src="lord-skills/war-supply.webp" alt="" loading="lazy"><figcaption>library/lord-skills/war-supply</figcaption></figure>
+<figure><img src="lord-skills/wasteland-march.webp" alt="" loading="lazy"><figcaption>library/lord-skills/wasteland-march</figcaption></figure>
+<figure><img src="lord-skills/weakened.webp" alt="" loading="lazy"><figcaption>library/lord-skills/weakened</figcaption></figure>
+</div>
+<h2 id="monsters">monsters <small>(51)</small></h2><p>Monsters and bosses</p>
+<div class="grid">
+<figure><img src="monsters/boss-01.webp" alt="" loading="lazy"><figcaption>library/monsters/boss-01</figcaption></figure>
+<figure><img src="monsters/boss-02.webp" alt="" loading="lazy"><figcaption>library/monsters/boss-02</figcaption></figure>
+<figure><img src="monsters/boss-03.webp" alt="" loading="lazy"><figcaption>library/monsters/boss-03</figcaption></figure>
+<figure><img src="monsters/boss-04.webp" alt="" loading="lazy"><figcaption>library/monsters/boss-04</figcaption></figure>
+<figure><img src="monsters/boss-05.webp" alt="" loading="lazy"><figcaption>library/monsters/boss-05</figcaption></figure>
+<figure><img src="monsters/boss-06.webp" alt="" loading="lazy"><figcaption>library/monsters/boss-06</figcaption></figure>
+<figure><img src="monsters/boss-07.webp" alt="" loading="lazy"><figcaption>library/monsters/boss-07</figcaption></figure>
+<figure><img src="monsters/boss-10.webp" alt="" loading="lazy"><figcaption>library/monsters/boss-10</figcaption></figure>
+<figure><img src="monsters/boss-12.webp" alt="" loading="lazy"><figcaption>library/monsters/boss-12</figcaption></figure>
+<figure><img src="monsters/boss-13.webp" alt="" loading="lazy"><figcaption>library/monsters/boss-13</figcaption></figure>
+<figure><img src="monsters/boss-15.webp" alt="" loading="lazy"><figcaption>library/monsters/boss-15</figcaption></figure>
+<figure><img src="monsters/boss-16.webp" alt="" loading="lazy"><figcaption>library/monsters/boss-16</figcaption></figure>
+<figure><img src="monsters/boss-17.webp" alt="" loading="lazy"><figcaption>library/monsters/boss-17</figcaption></figure>
+<figure><img src="monsters/boss-18.webp" alt="" loading="lazy"><figcaption>library/monsters/boss-18</figcaption></figure>
+<figure><img src="monsters/boss-19.webp" alt="" loading="lazy"><figcaption>library/monsters/boss-19</figcaption></figure>
+<figure><img src="monsters/boss-30.webp" alt="" loading="lazy"><figcaption>library/monsters/boss-30</figcaption></figure>
+<figure><img src="monsters/boss-31.webp" alt="" loading="lazy"><figcaption>library/monsters/boss-31</figcaption></figure>
+<figure><img src="monsters/boss-37.webp" alt="" loading="lazy"><figcaption>library/monsters/boss-37</figcaption></figure>
+<figure><img src="monsters/boss-45.webp" alt="" loading="lazy"><figcaption>library/monsters/boss-45</figcaption></figure>
+<figure><img src="monsters/boss-48.webp" alt="" loading="lazy"><figcaption>library/monsters/boss-48</figcaption></figure>
+<figure><img src="monsters/boss-51.webp" alt="" loading="lazy"><figcaption>library/monsters/boss-51</figcaption></figure>
+<figure><img src="monsters/boss-58.webp" alt="" loading="lazy"><figcaption>library/monsters/boss-58</figcaption></figure>
+<figure><img src="monsters/boss-59.webp" alt="" loading="lazy"><figcaption>library/monsters/boss-59</figcaption></figure>
+<figure><img src="monsters/boss-60.webp" alt="" loading="lazy"><figcaption>library/monsters/boss-60</figcaption></figure>
+<figure><img src="monsters/boss-61.webp" alt="" loading="lazy"><figcaption>library/monsters/boss-61</figcaption></figure>
+<figure><img src="monsters/boss-62.webp" alt="" loading="lazy"><figcaption>library/monsters/boss-62</figcaption></figure>
+<figure><img src="monsters/boss-63.webp" alt="" loading="lazy"><figcaption>library/monsters/boss-63</figcaption></figure>
+<figure><img src="monsters/icon-lzzc-33.webp" alt="" loading="lazy"><figcaption>library/monsters/icon-lzzc-33</figcaption></figure>
+<figure><img src="monsters/xiaoguai-01.webp" alt="" loading="lazy"><figcaption>library/monsters/xiaoguai-01</figcaption></figure>
+<figure><img src="monsters/xiaoguai-03.webp" alt="" loading="lazy"><figcaption>library/monsters/xiaoguai-03</figcaption></figure>
+<figure><img src="monsters/xiaoguai-04.webp" alt="" loading="lazy"><figcaption>library/monsters/xiaoguai-04</figcaption></figure>
+<figure><img src="monsters/xiaoguai-06.webp" alt="" loading="lazy"><figcaption>library/monsters/xiaoguai-06</figcaption></figure>
+<figure><img src="monsters/xiaoguai-08.webp" alt="" loading="lazy"><figcaption>library/monsters/xiaoguai-08</figcaption></figure>
+<figure><img src="monsters/xiaoguai-09.webp" alt="" loading="lazy"><figcaption>library/monsters/xiaoguai-09</figcaption></figure>
+<figure><img src="monsters/xiaoguai-12.webp" alt="" loading="lazy"><figcaption>library/monsters/xiaoguai-12</figcaption></figure>
+<figure><img src="monsters/xiaoguai-13.webp" alt="" loading="lazy"><figcaption>library/monsters/xiaoguai-13</figcaption></figure>
+<figure><img src="monsters/xiaoguai-14.webp" alt="" loading="lazy"><figcaption>library/monsters/xiaoguai-14</figcaption></figure>
+<figure><img src="monsters/xiaoguai-15.webp" alt="" loading="lazy"><figcaption>library/monsters/xiaoguai-15</figcaption></figure>
+<figure><img src="monsters/xiaoguai-22.webp" alt="" loading="lazy"><figcaption>library/monsters/xiaoguai-22</figcaption></figure>
+<figure><img src="monsters/xiaoguai-23.webp" alt="" loading="lazy"><figcaption>library/monsters/xiaoguai-23</figcaption></figure>
+<figure><img src="monsters/xiaoguai-24.webp" alt="" loading="lazy"><figcaption>library/monsters/xiaoguai-24</figcaption></figure>
+<figure><img src="monsters/xiaoguai-25.webp" alt="" loading="lazy"><figcaption>library/monsters/xiaoguai-25</figcaption></figure>
+<figure><img src="monsters/xiaoguai-26.webp" alt="" loading="lazy"><figcaption>library/monsters/xiaoguai-26</figcaption></figure>
+<figure><img src="monsters/xiaoguai-27.webp" alt="" loading="lazy"><figcaption>library/monsters/xiaoguai-27</figcaption></figure>
+<figure><img src="monsters/xiaoguai-28.webp" alt="" loading="lazy"><figcaption>library/monsters/xiaoguai-28</figcaption></figure>
+<figure><img src="monsters/xiaoguai-29.webp" alt="" loading="lazy"><figcaption>library/monsters/xiaoguai-29</figcaption></figure>
+<figure><img src="monsters/xiaoguai-30.webp" alt="" loading="lazy"><figcaption>library/monsters/xiaoguai-30</figcaption></figure>
+<figure><img src="monsters/xiaoguai-31.webp" alt="" loading="lazy"><figcaption>library/monsters/xiaoguai-31</figcaption></figure>
+<figure><img src="monsters/xiaoguai-32.webp" alt="" loading="lazy"><figcaption>library/monsters/xiaoguai-32</figcaption></figure>
+<figure><img src="monsters/xunluobing-01.webp" alt="" loading="lazy"><figcaption>library/monsters/xunluobing-01</figcaption></figure>
+<figure><img src="monsters/xunluobing-02.webp" alt="" loading="lazy"><figcaption>library/monsters/xunluobing-02</figcaption></figure>
+</div>
+<h2 id="scenes">scenes <small>(1)</small></h2><p>Scenes</p>
+<div class="grid wide">
+<figure><img src="scenes/raven-candle.webp" alt="" loading="lazy"><figcaption>library/scenes/raven-candle</figcaption></figure>
+</div>
+</body>
+</html>
