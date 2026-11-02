@@ -112,7 +112,7 @@ window.DUEL_DAYS = [
     { text: "Stamina", icon: "i-stamina", sb: "raven" },
     { text: "Raven Fruit", icon: "i-raven-fruit", sb: "raven" },
     { text: "Gather Grain, Timber and Herbs", icon: "i-resource-supply" },
-    { text: "Antitoxin (only to unlock the next chest)", icon: "i-antitoxin", sb: "heroes" },
+    { text: "Antitoxin", icon: "i-antitoxin", sb: "heroes" },
   ] },
   { day: 2, title: "Territory Development", art: "h-harper", icon: "i-construction-speedup", objectives: [
     { text: "UR Caravans", icon: "i-caravan" },
