@@ -182,21 +182,21 @@
     $("duel-body").replaceChildren(...[
       info.objectives.length ? null : el("p", { class: "sub" }, info.note || ""),
       anytime.length && slots.length ? el("p", { class: "minor-head" }, "Anytime") : null,
-      anytime.length ? tiles(anytime) : null,
+      anytime.length ? pairs(anytime) : null,
       slots.length ? el("p", { class: "minor-head" }, info.objectives.length ? "During Survival Battle" : "Survival Battle") : null,
       slots.length ? timeline(slots) : null,
       el("h3", { class: "group-head" },
         gap === 1 ? `Save for ${when(nextDate)}` : `Save for Day ${next} (${WEEKDAYS[nextDate.getDay()]})`),
       gap === 1 ? null : el("p", { class: "sub" }, "After the rest day"),
-      tiles(window.DUEL_DAYS[next - 1].objectives),
+      pairs(window.DUEL_DAYS[next - 1].objectives),
     ].filter(Boolean));
   }
 
-  // Objectives as tiles, three to a row: the item's icon and its name. Names over two lines are
-  // cut short, so the full name is also the tile's title.
-  function tiles(items) {
-    return el("ul", { class: "loot" }, items.map((o) =>
-      el("li", { title: text(o) }, icon(o.icon), el("span", { class: "txt" }, text(o)))));
+  // Objectives as icon and name pairs, as on the timeline, flowing on from each other like words.
+  // The spaces between them are where a line may break.
+  function pairs(items) {
+    return el("ul", { class: "pairs" }, items.flatMap((o, i) =>
+      [i ? " " : null, el("li", {}, pair(text(o), o.icon))]));
   }
 
   // An item's small icon and its name, set inline so a round's items wrap like a sentence.

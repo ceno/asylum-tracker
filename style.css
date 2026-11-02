@@ -175,13 +175,13 @@ h1 { font-size: 1.3rem; }
 .duel-body .group-head { margin: 12px 0 0; padding: 5px 10px; border-radius: 6px; text-align: center; background: #c3d2e2; color: #2b4565; font-weight: 900; letter-spacing: .04em; }
 .duel-body .sub { text-align: center; }
 
-/* Objectives as tiles, three to a row. Names stop at two lines. */
-.loot { list-style: none; margin: 6px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
-.loot li { display: flex; flex-direction: column; align-items: center; gap: 5px; text-align: center; padding: 8px 4px 7px; border-radius: 10px; background: var(--tile); }
-.loot .txt {
-  max-width: 100%; font-weight: 800; font-size: .8rem; line-height: 1.2; overflow-wrap: break-word;
-  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden;
-}
+/* Objectives as icon and name pairs, as on the timeline, wrapping like a sentence. A pair moves
+   to the next line whole, and only breaks when it's longer than a line. Each pair is the last in
+   its li, so its gap to the next (.7em, as on the timeline) is the li's margin and a space.
+   The li's top and bottom margins space the rows, so a long name's own lines stay closer. */
+.pairs { list-style: none; margin: 3px 0 0; padding: 0 4px; line-height: 24px; }
+.pairs li { display: inline-block; max-width: 100%; margin-block: 3px; }
+.pairs li:not(:last-child) { margin-right: .45em; }
 
 /* Survival Battle: a dot at each round's start (its centre 12px down), joined to the next by a
    line. A smaller dot marks a round's end where no round starts; a dashed line is a gap. */
@@ -203,8 +203,8 @@ h1 { font-size: 1.3rem; }
 .timeline li.end .what::before { left: 3px; top: 7px; width: 10px; height: 10px; border-width: 2px; border-color: var(--rail); }
 .timeline li.now .what::before { background: linear-gradient(#ffe777, #f3a91e); border-color: #9a5a08; box-shadow: 0 0 0 4px rgba(243, 169, 30, .35); }
 .timeline li.past { opacity: .45; }
-.timeline .item { font-weight: 800; font-size: .95rem; }
-/* Each item in a round: a small icon and its name, flowing like words. */
+.timeline .item, .pairs { font-weight: 800; font-size: .95rem; }
+/* Each item in a round or list: a small icon and its name, flowing like words. */
 .pair { margin-right: .7em; }
 .pair:last-child { margin-right: 0; }
 .pair .nw, .pair.short { white-space: nowrap; }
