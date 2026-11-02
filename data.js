@@ -25,10 +25,10 @@ window.ROUTINE = [
           { id: "camp-idle", text: "Claim Explorer's Camp idle rewards", icon: "b-explorers-camp" },
           { id: "falcon", text: "Complete Falcon Quests", icon: "b-falcon-tower" },
           { id: "alliance-research", text: "Donate to Alliance Research", icon: "i-help-research" },
-          { id: "caravans", text: "Dispatch 2 caravans", icon: "i-caravan" },
+          { id: "caravans", text: "Dispatch 2 caravans", icon: "i-trade-agreement" },
           { id: "soldiers", text: "Collect and start new soldiers", icon: "i-train-now" },
           { id: "recruit-survivor", text: "Recruit 1 survivor", icon: "i-survivor-ticket" },
-          { id: "covert-ops", text: "Dispatch and help covert ops", icon: "i-covert" },
+          { id: "covert-ops", text: "Dispatch and help covert ops", icon: "i-covert-order" },
           { id: "help-ops", text: "Help alliance ops", icon: "i-alliance-aid" },
           { id: "demon-king", text: "Fight Demon King 3 times", icon: "i-eliminate", notSunday: true },
           { id: "free-stamina", text: "Consume free stamina", icon: "i-stamina" },
@@ -54,7 +54,7 @@ window.ROUTINE = [
     tasks: [
       { id: "sanctuary-idle", text: "Claim Sanctuary idle rewards", icon: "b-sanctuary" },
       { id: "alliance-research", text: "Donate to Alliance Research", icon: "i-help-research" },
-      { id: "covert-ops", text: "Dispatch and help covert ops", icon: "i-covert" },
+      { id: "covert-ops", text: "Dispatch and help covert ops", icon: "i-covert-order" },
       { id: "help-ops", text: "Help alliance ops", icon: "i-alliance-aid" },
     ],
   },
@@ -115,8 +115,8 @@ window.DUEL_DAYS = [
     { text: "Antitoxin", icon: "i-antitoxin", sb: "heroes" },
   ] },
   { day: 2, title: "Territory Development", art: "h-harper", icon: "i-construction-speedup", objectives: [
-    { text: "UR Caravans", icon: "i-caravan" },
-    { text: "UR Covert Ops", icon: "i-covert" },
+    { text: "UR Caravans", icon: "i-trade-agreement" },
+    { text: "UR Covert Ops", icon: "i-covert-order" },
     { text: "Construction speedups", icon: "i-construction-speedup", sb: "territory" },
     { text: "Building Might (finish builds)", icon: "i-build-hammer", sb: "territory" },
     { text: "Survivor recruitment", icon: "i-survivor-ticket" },
@@ -144,8 +144,8 @@ window.DUEL_DAYS = [
     { text: "Falcon Quests", icon: "b-falcon-tower" },
   ] },
   { day: 6, title: "Combat & Final Speedups", art: "h-daskal", icon: "i-eliminate", objectives: [
-    { text: "UR Caravans", icon: "i-caravan" },
-    { text: "UR Covert Ops", icon: "i-covert" },
+    { text: "UR Caravans", icon: "i-trade-agreement" },
+    { text: "UR Covert Ops", icon: "i-covert-order" },
     { text: "Kills in the specific match", icon: "i-eliminate" },
     { text: "Soldier losses", icon: "i-weakened" },
     { text: "Healing speedups", icon: "i-healing-speedup" },
@@ -202,7 +202,7 @@ window.PREP = {
   ],
   2: [
     { text: "Start long builds that will finish after reset", icon: "i-build-hammer" },
-    { text: "Save UR Caravans and Covert Ops", icon: "i-caravan" },
+    { text: "Save UR Caravans and Covert Ops", icon: "i-trade-agreement" },
   ],
   3: [
     { text: "Start long research that will finish after reset", icon: "i-instant-research" },
@@ -218,7 +218,7 @@ window.PREP = {
   ],
   6: [
     { text: "Coordinate targets with your alliance", icon: "i-rally" },
-    { text: "Keep UR Caravans and Covert Ops for tomorrow", icon: "i-caravan" },
+    { text: "Keep UR Caravans and Covert Ops for tomorrow", icon: "i-trade-agreement" },
   ],
   7: [],
 };
@@ -226,7 +226,7 @@ window.PREP = {
 // The tile colour behind each item icon (i-), as the game frames items by rarity. Blue unless listed.
 window.ICON_RARITY = {
   purple: ["i-raven-essence", "i-raven-fruit", "i-raven-chest", "i-feather", "i-hero-shard", "i-skill-book", "i-study-scroll"],
-  orange: ["i-caravan", "i-covert", "i-deluxe-chest", "i-ur-sword", "i-recruit-ticket", "i-vip-points", "i-eliminate", "i-rally"],
+  orange: ["i-trade-agreement", "i-covert-order", "i-deluxe-chest", "i-ur-sword", "i-recruit-ticket", "i-vip-points", "i-eliminate", "i-rally"],
   green: ["i-resource-supply", "i-survivor-ticket", "i-alliance-aid", "i-help-research", "i-sign-medal", "i-refined-iron"],
   gold: ["i-alliance-coins", "i-gear-chest", "i-outstanding", "i-territory-raid", "i-build-hammer", "i-weakened"],
 };
