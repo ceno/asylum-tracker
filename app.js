@@ -205,14 +205,13 @@
       [i ? " " : null, el("li", {}, pair(text(o), o.icon))]));
   }
 
-  // An item's small icon and its name, and its points if given. A name too long for a line may
-  // wrap, but the icon stays with its first word and the points with its last.
-  function pair(name, art, { points, cls } = {}) {
+  // An item's small icon and its name. A name too long for a line may wrap, but the icon stays
+  // with its first word.
+  function pair(name, art, cls) {
     const [first, ...rest] = name.split(" ");
     return el("span", { class: cls ? `pair ${cls}` : "pair" },
       el("span", { class: "nw" }, icon(art, "ico mini"), first),
-      rest.length ? ` ${rest.join(" ")}` : null,
-      points ? [" ", el("span", { class: "pts" }, points)] : null);
+      rest.length ? ` ${rest.join(" ")}` : null);
   }
 
   // The Survival Battle heading. On a Duel day it has a "Show all" switch, which adds the rounds
@@ -237,7 +236,7 @@
   // (smaller) dot only when no shown round starts then: after the last round, or before a gap.
   // The current round's dot is gold.
   // With `full` (the rest day, or "Show all" on), every round is headed by its theme and lists all
-  // the tasks that score in it, with their points. On a Duel day (`duelDay`), a round that also
+  // the tasks that score in it. On a Duel day (`duelDay`), a round that also
   // scores in the Duel is tagged "Duel", and the tasks and rounds that don't are greyed.
   function timeline(slots, full, duelDay) {
     const now = new Date();
@@ -245,7 +244,7 @@
     // The spaces between items are where a line may break.
     const objectives = (s) => s.items.flatMap((o, n) => [n ? " " : null, pair(text(o), o.icon)]);
     const tasks = (s) => s.tasks.flatMap((t, n) => [n ? " " : null,
-      pair(t.text, t.icon, { points: t.points, cls: duelDay && !t.duel ? "off" : "" })]);
+      pair(t.text, t.icon, duelDay && !t.duel ? "off" : "")]);
     const tagged = full && duelDay;
     slots.forEach((s, i) => {
       const phase = now >= s.end ? "past" : now >= s.start ? "now" : "";

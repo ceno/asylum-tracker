@@ -206,13 +206,12 @@ h1 { font-size: 1.3rem; }
 .timeline li.end .what { padding-bottom: 10px; }
 .timeline li.end.gap .what { padding-bottom: 40px; }
 .timeline li.end .what::before { left: 1px; top: 5px; width: 14px; height: 14px; border-width: 2px; border-color: var(--rail); }
-/* On the rest day and with "Show all" on, every round is headed by its theme and lists its tasks
-   with their points. On a Duel day, a round that scores in the Duel too has a tag in the day's
-   colour under its time, level with its tasks' first line (30px down, like the next line of
-   pairs). The tasks and rounds that don't score in the Duel are greyed. */
+/* On the rest day and with "Show all" on, every round is headed by its theme and lists its tasks.
+   On a Duel day, a round that scores in the Duel too has a tag in the day's colour under its
+   time, level with its tasks' first line (30px down, like the next line of pairs). The tasks and
+   rounds that don't score in the Duel are greyed. */
 .timeline .theme { font-family: var(--font-display); font-weight: 400; letter-spacing: .02em; }
 .timeline .theme + .item { margin-top: 3px; }
-.pts { white-space: nowrap; font-size: .78rem; font-weight: 700; color: var(--muted); }
 .timeline .pair.off { color: var(--muted); font-weight: 700; }
 .timeline .pair.off .ico { filter: saturate(.35); }
 .timeline li.duel { grid-template-rows: auto 1fr; }
