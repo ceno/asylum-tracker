@@ -103,7 +103,8 @@ window.LAST_CHANCE = [
 // Survival Battle timeline. "Save for tomorrow" lists the next scoring day's objectives
 // (the rest day is skipped).
 // An objective with `sb` also scores in Survival Battle rounds of that theme, so it's shown at
-// those rounds' times instead of under "Anytime".
+// those rounds' times instead of under "Anytime". Its `text` is the same as the theme's task in
+// SURVIVAL_BATTLE.tasks.
 // `art` is the picture on the day's banner and `icon` the one on its day button.
 window.DUEL_DAYS = [
   { day: 1, title: "Enhance Raven", art: "b-falcon-tower-lg", icon: "i-raven-essence", objectives: [
@@ -174,14 +175,32 @@ window.SURVIVAL_BATTLE = {
     raven: "Enhance Raven",
     heroes: "Enhance Heroes",
   },
-  // Shown with the theme's name on the rest day, when no Duel objectives score, and on every round
-  // with "Show all" on.
-  icons: {
-    territory: "i-construction-speedup",
-    training: "i-training-speedup",
-    research: "i-research-speedup",
-    raven: "i-raven-essence",
-    heroes: "i-hero-shard",
+  // What scores in each theme's rounds, from the game's "How to Earn Points" list, with its points.
+  // Every round also gives 30 points for buying a pack of Diamonds, left out here. Listed under
+  // the theme on the rest day and with "Show all" on. A Duel objective with `sb` is one of its
+  // theme's tasks, written with the same `text`, so the task shows as scoring in the Duel too.
+  tasks: {
+    territory: [
+      { text: "Construction speedups", icon: "i-construction-speedup", points: "+10/min" },
+      { text: "Building Might (finish builds)", icon: "i-build-hammer", points: "+1 per Might" },
+    ],
+    training: [
+      { text: "Training speedups", icon: "i-training-speedup", points: "+10/min" },
+      // Points by soldier level: 5, 6, 7, 13, 15, 19, 22, 25, 28, 31.
+      { text: "Soldier training", icon: "i-train-now", points: "+5–31 each" },
+    ],
+    research: [
+      { text: "Research speedups", icon: "i-research-speedup", points: "+10/min" },
+      { text: "Tech Might (finish research)", icon: "i-instant-research", points: "+1 per Might" },
+    ],
+    raven: [
+      { text: "Stamina", icon: "i-stamina", points: "+100 each" },
+      { text: "Raven Fruit", icon: "i-raven-fruit", points: "+1 per 10" },
+    ],
+    heroes: [
+      { text: "Hero recruitment", icon: "i-recruit-ticket", points: "+400 each" },
+      { text: "Antitoxin", icon: "i-antitoxin", points: "+1 per 1,950" },
+    ],
   },
   schedule: {
     1: ["heroes", "territory", "training", "research", "raven", "heroes"],
