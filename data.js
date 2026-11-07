@@ -147,7 +147,6 @@ window.DUEL_DAYS = [
   { day: 6, title: "Combat & Final Speedups", art: "h-daskal", icon: "i-eliminate", objectives: [
     { text: "UR Caravans", icon: "i-trade-agreement" },
     { text: "UR Covert Ops", icon: "i-covert-order" },
-    { text: "Kills in the specific match", icon: "i-eliminate" },
     { text: "Soldier losses", icon: "i-weakened" },
     { text: "Healing speedups", icon: "i-healing-speedup" },
     { text: "Construction speedups", icon: "i-construction-speedup", sb: "territory" },
