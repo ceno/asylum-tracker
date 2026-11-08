@@ -185,7 +185,7 @@
     const anytime = info.objectives.filter((o) => !timed.has(o));
 
     $("duel-body").replaceChildren(...[
-      rest ? el("p", { class: "sub" }, info.note || "") : null,
+      info.note ? el("p", { class: "sub" }, info.note) : null,
       anytime.length && all.length ? el("p", { class: "minor-head" }, "Anytime") : null,
       anytime.length ? pairs(anytime) : null,
       all.length ? sbHead(rest, showAll) : null,

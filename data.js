@@ -106,8 +106,11 @@ window.LAST_CHANCE = [
 // those rounds' times instead of under "Anytime". Its `text` is the same as the theme's task in
 // SURVIVAL_BATTLE.tasks.
 // `art` is the picture on the day's banner and `icon` the one on its day button.
+// `note`, if any, is shown at the top of the day's card.
 window.DUEL_DAYS = [
-  { day: 1, title: "Enhance Raven", art: "b-falcon-tower-lg", icon: "i-raven-essence", objectives: [
+  { day: 1, title: "Enhance Raven", art: "b-falcon-tower-lg", icon: "i-raven-essence",
+    note: "Don't open Raven Gear Chests: save them for Day 3. Save Antitoxin for Day 4 too, unless you need some to reach the next Duel chest.",
+    objectives: [
     { text: "Raven Essence", icon: "i-raven-essence" },
     { text: "Falcon Quests", icon: "b-falcon-tower" },
     { text: "Stamina", icon: "i-stamina", sb: "raven" },
@@ -144,7 +147,9 @@ window.DUEL_DAYS = [
     { text: "Construction speedups", icon: "i-construction-speedup", sb: "territory" },
     { text: "Falcon Quests", icon: "b-falcon-tower" },
   ] },
-  { day: 6, title: "Combat & Final Speedups", art: "h-daskal", icon: "i-eliminate", objectives: [
+  { day: 6, title: "Combat & Final Speedups", art: "h-daskal", icon: "i-eliminate",
+    note: "Shield up whenever you're not fighting. Offline without one, you'll likely be zeroed.",
+    objectives: [
     { text: "UR Caravans", icon: "i-trade-agreement" },
     { text: "UR Covert Ops", icon: "i-covert-order" },
     { text: "Kills in the specific match", icon: "i-eliminate" },
@@ -218,10 +223,14 @@ window.PREP = {
   1: [
     { text: "Leave Falcon Quests on the red dot", icon: "b-falcon-tower" },
     { text: "Count your Raven Essence and Fruit", icon: "i-raven-essence" },
+    { text: "Send squads to gather so they return just after reset", icon: "i-resource-supply" },
+    { text: "Don't tap finished builds: save them for Day 2", icon: "i-build-hammer" },
   ],
   2: [
     { text: "Start long builds that will finish after reset", icon: "i-build-hammer" },
     { text: "Save UR Caravans and Covert Ops", icon: "i-trade-agreement" },
+    { text: "Bring gathering squads home before reset", icon: "i-resource-supply" },
+    { text: "Don't tap finished builds until after reset", icon: "i-build-hammer" },
   ],
   3: [
     { text: "Start long research that will finish after reset", icon: "i-instant-research" },
@@ -229,15 +238,18 @@ window.PREP = {
   ],
   4: [
     { text: "Keep all Hero Shards, Skill Books and Antitoxin", icon: "i-hero-shard" },
+    { text: "Don't tap finished builds: save them for Day 5", icon: "i-build-hammer" },
   ],
   5: [
     { text: "Start long builds and research that will finish after reset", icon: "i-build-hammer" },
     { text: "Stock up on low-tier troops to promote", icon: "i-training-speedup" },
     { text: "Leave Falcon Quests on the red dot", icon: "b-falcon-tower" },
+    { text: "Don't tap finished builds until after reset", icon: "i-build-hammer" },
   ],
   6: [
     { text: "Coordinate targets with your alliance", icon: "i-rally" },
     { text: "Keep UR Caravans and Covert Ops for tomorrow", icon: "i-trade-agreement" },
+    { text: "Buy a shield in the Alliance Shop", icon: "i-shield" },
   ],
   7: [],
 };
