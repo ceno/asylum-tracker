@@ -231,13 +231,13 @@
       }, "Show all"));
   }
 
-  // Survival Battle rounds on a timeline: a dot at each round's start, with the Duel objectives it
-  // scores. The next round's dot marks where a round ends, so a round's end time gets its own
-  // (smaller) dot only when no shown round starts then: after the last round, or before a gap.
-  // The current round's dot is gold.
-  // With `full` (the rest day, or "Show all" on), every round is headed by its theme and lists all
-  // the tasks that score in it. On a Duel day (`duelDay`), a round that also
-  // scores in the Duel is tagged "Duel", and the tasks and rounds that don't are greyed.
+  // Survival Battle rounds on a timeline: a dot at each round's start, headed by the round's theme,
+  // with the Duel objectives it scores. The next round's dot marks where a round ends, so a round's
+  // end time gets its own (smaller) dot only when no shown round starts then: after the last round,
+  // or before a gap. The current round's dot is gold.
+  // With `full` (the rest day, or "Show all" on), every round is shown and lists all the tasks that
+  // score in it. On a Duel day (`duelDay`), a round that also scores in the Duel is tagged "Duel",
+  // and the tasks and rounds that don't are greyed.
   function timeline(slots, full, duelDay) {
     const now = new Date();
     const rows = [];
@@ -253,10 +253,8 @@
         el("time", { class: "slot" }, hhmm(s.start)),
         el("div", { class: "what" },
           phase === "now" ? el("span", { class: "sr-only" }, "Now: ") : null,
-          full ? [
-            el("span", { class: "item theme" }, el("span", { class: "pair" }, SB.themes[s.theme])),
-            el("span", { class: "item" }, tasks(s)),
-          ] : el("span", { class: "item" }, objectives(s))),
+          el("span", { class: "item theme" }, el("span", { class: "pair" }, SB.themes[s.theme])),
+          el("span", { class: "item" }, full ? tasks(s) : objectives(s))),
         tagged && duel ? el("span", { class: "duel-tag" }, "Duel") : null));
       const next = slots[i + 1];
       if (!next || +next.start !== +s.end) {
