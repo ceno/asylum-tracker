@@ -131,7 +131,7 @@ window.DUEL_DAYS = [
   ] },
   { day: 4, title: "Hero Day", art: "h-marlena", icon: "i-hero-shard", objectives: [
     { text: "Hero Shards", icon: "i-hero-shard" },
-    { text: "Skill Books", icon: "i-skill-book" },
+    { text: "Skill Badges", icon: "i-skill-book" },
     { text: "Antitoxin", icon: "i-antitoxin", sb: "heroes" },
     { text: "Hero recruitment", icon: "i-recruit-ticket", sb: "heroes" },
   ] },
@@ -228,7 +228,7 @@ window.PREP = {
     { text: "Leave Falcon Quests on the red dot", icon: "b-falcon-tower" },
   ],
   4: [
-    { text: "Keep all Hero Shards, Skill Books and Antitoxin", icon: "i-hero-shard" },
+    { text: "Keep all Hero Shards, Skill Badges and Antitoxin", icon: "i-hero-shard" },
   ],
   5: [
     { text: "Start long builds and research that will finish after reset", icon: "i-build-hammer" },
