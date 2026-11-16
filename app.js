@@ -9,20 +9,43 @@
 
   // ---- storage -------------------------------------------------------------
 
-  function defaultResetTime() {
-    // Fall back to midnight UTC, shown in the viewer's local time.
-    const d = new Date();
-    d.setUTCHours(0, 0, 0, 0);
-    return `${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
-  }
-
+  // The daily reset is kept as minutes after midnight UTC (`resetUTC`), midnight UTC unless set,
+  // so it stays with the game when the local clocks change.
   function load() {
     let data = null;
     try { data = JSON.parse(localStorage.getItem(STORE_KEY)); } catch (_) { /* storage unavailable */ }
     if (!data || typeof data !== "object") data = {};
-    data.settings = Object.assign({ reset: defaultResetTime(), start: 1 }, data.settings);
+    data.settings = data.settings || {};
     data.days = data.days || {};
+    if (data.settings.resetUTC == null && data.settings.reset != null) {
+      fromLocalReset(data);
+      try { localStorage.setItem(STORE_KEY, JSON.stringify(data)); } catch (_) { /* ignore */ }
+    }
+    data.settings = Object.assign({ resetUTC: 0, start: 1 }, data.settings);
     return data;
+  }
+
+  // Data saved before the reset was kept in UTC has it as a local time (`reset`, "HH:MM") and
+  // ticks under the local date each game day started on. Convert the reset by today's clock, and
+  // move each day's ticks to that game day's server date, which west of UTC is a day later.
+  function fromLocalReset(data) {
+    const [h, m] = String(data.settings.reset).split(":").map((n) => Number(n) || 0);
+    data.settings.resetUTC = toUTC(h, m);
+    delete data.settings.reset;
+    const days = {};
+    for (const [key, ticks] of Object.entries(data.days)) {
+      const [y, mo, d] = key.split("-").map(Number);
+      const mid = new Date(y, mo - 1, d, h + 12, m); // the middle of that game day
+      if (!isNaN(mid)) days[dateKey(mid)] = ticks;
+    }
+    data.days = days;
+  }
+
+  // Local time h:m today, as minutes after midnight UTC.
+  function toUTC(h, m) {
+    const at = new Date();
+    at.setHours(h, m, 0, 0);
+    return at.getUTCHours() * 60 + at.getUTCMinutes();
   }
 
   function save() {
@@ -37,46 +60,40 @@
 
   // ---- game-day maths --------------------------------------------------------
 
-  function resetMinutes() {
-    const [h, m] = state.settings.reset.split(":").map(Number);
-    return (h || 0) * 60 + (m || 0);
+  const DAY = 86400000;
+
+  // The daily reset in ms from midnight UTC, taken to within 12 hours of it, so that a reset late
+  // in the UTC day starts the next date's game day.
+  function resetOffset() {
+    const m = (((Number(state.settings.resetUTC) || 0) % 1440) + 1440) % 1440;
+    return (m >= 720 ? m - 1440 : m) * 60000;
   }
 
-  // The calendar date of the in-game day that `now` falls in (local midnight).
-  function gameDate(now) {
-    const shifted = new Date(now.getTime() - resetMinutes() * 60000);
-    return new Date(shifted.getFullYear(), shifted.getMonth(), shifted.getDate());
+  // The game day that time `t` falls in, named by the server's date: the UTC date in the middle of
+  // the game day, as midnight UTC. Read it with getUTC*. Ticks, Duel days and shop weeks all go by
+  // it, so they match the game wherever the viewer is. West of UTC, a game day starts the
+  // afternoon before its date.
+  function gameDate(t) {
+    return new Date(Math.floor((t - resetOffset()) / DAY) * DAY);
   }
 
-  function addDays(d, n) { const c = new Date(d); c.setDate(c.getDate() + n); return c; }
+  // When game day `d` starts.
+  function dayStart(d) { return new Date(d.getTime() + resetOffset()); }
 
-  function dateKey(d) {
-    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
-  }
+  function addDays(d, n) { return new Date(d.getTime() + n * DAY); }
+
+  function dateKey(d) { return d.toISOString().slice(0, 10); }
 
   function duelDayOf(d) {
-    return ((d.getDay() - Number(state.settings.start) + 7) % 7) + 1;
+    return ((d.getUTCDay() - Number(state.settings.start) + 7) % 7) + 1;
   }
 
-  function nextReset(now) {
-    const r = addDays(gameDate(now), 1);
-    r.setMinutes(resetMinutes());
-    return r;
-  }
+  function nextReset(now) { return dayStart(addDays(gameDate(now), 1)); }
 
-  // The server's date for game day `d`, to read with getUTC*: the middle of the game day in UTC.
-  // Shop weeks and months turn over on the server's date, which west of UTC can be a day after the
-  // local `d`. This holds as long as the reset is within 12 hours of midnight UTC.
-  function serverDate(d) {
-    const mid = new Date(d);
-    mid.setMinutes(resetMinutes() + 12 * 60);
-    return mid;
-  }
-
-  // Whether a server date is the last day of a shop's reset period (`resets` in LAST_CHANCE).
+  // Whether game day `d` is the last day of a shop's reset period (`resets` in LAST_CHANCE).
   const LAST_DAY = {
-    week: (s) => s.getUTCDay() === 0, // Sunday
-    month: (s) => new Date(s.getTime() + 86400000).getUTCDate() === 1,
+    week: (d) => d.getUTCDay() === 0, // Sunday
+    month: (d) => addDays(d, 1).getUTCDate() === 1,
   };
 
   // ---- rendering -------------------------------------------------------------
@@ -134,8 +151,8 @@
 
   // "today" or "tomorrow" by the real game day, otherwise the weekday, e.g. "Thu".
   function when(d) {
-    const diff = Math.round((d - today) / 86400000);
-    return diff === 0 ? "today" : diff === 1 ? "tomorrow" : WEEKDAYS[d.getDay()];
+    const diff = Math.round((d - today) / DAY);
+    return diff === 0 ? "today" : diff === 1 ? "tomorrow" : WEEKDAYS[d.getUTCDay()];
   }
 
   function renderTabs() {
@@ -148,12 +165,12 @@
         class: day === todayDay ? "today" : "",
         "data-day": day,
         "aria-pressed": String(day === selected),
-        "aria-label": `${day === 7 ? "Rest day" : `Day ${day}`}, ${WEEKDAYS[d.getDay()]}`,
+        "aria-label": `${day === 7 ? "Rest day" : `Day ${day}`}, ${WEEKDAYS[d.getUTCDay()]}`,
         onclick: () => { selected = day; render(); window.scrollTo({ top: 0, behavior: "smooth" }); },
       },
         icon(art, "tab-ico"),
         el("span", { class: "num" }, day === 7 ? "Rest" : ROMAN[day]),
-        el("small", {}, WEEKDAYS[d.getDay()]));
+        el("small", {}, WEEKDAYS[d.getUTCDay()]));
     }));
   }
 
@@ -167,7 +184,7 @@
     $("duel-art").dataset.kind = info.art.split("-")[0];
     $("duel-meta").textContent = selected === todayDay
       ? `Ends in ${untilReset()}`
-      : `${WEEKDAYS[date.getDay()]} ${date.getDate()} ${date.toLocaleString("en", { month: "short" })}`;
+      : `${WEEKDAYS[date.getUTCDay()]} ${date.getUTCDate()} ${date.toLocaleString("en", { month: "short", timeZone: "UTC" })}`;
 
     // The next day with objectives, so Day 6 saves for Day 1 instead of the rest day.
     let gap = 1;
@@ -192,7 +209,7 @@
       slots.length ? timeline(slots, showAll, !rest)
         : all.length ? el("p", { class: "sub" }, "No Duel objective scores in today's rounds") : null,
       el("h3", { class: "group-head" },
-        gap === 1 ? `Save for ${when(nextDate)}` : `Save for Day ${next} (${WEEKDAYS[nextDate.getDay()]})`),
+        gap === 1 ? `Save for ${when(nextDate)}` : `Save for Day ${next} (${WEEKDAYS[nextDate.getUTCDay()]})`),
       gap === 1 ? null : el("p", { class: "sub" }, "After the rest day"),
       pairs(window.DUEL_DAYS[next - 1].objectives),
     ].filter(Boolean));
@@ -275,18 +292,16 @@
 
   // Rounds are counted from the daily reset.
   function roundStart(day, i) {
-    const d = dateForDuelDay(day);
-    d.setMinutes(resetMinutes() + i * SB.hours * 60);
-    return d;
+    return new Date(dayStart(dateForDuelDay(day)).getTime() + i * SB.hours * 3600000);
   }
 
-  // Whether a round overlaps the SB.show hours. A game day that starts after midnight runs into the
-  // next calendar date, so both dates' hours are checked.
+  // Whether a round overlaps the SB.show hours, in local time. A game day that starts after local
+  // midnight runs into the next local date, so both dates' hours are checked.
   function shown(day, start, end) {
+    const s = dayStart(dateForDuelDay(day));
     return [0, 1].some((n) => {
-      const from = addDays(dateForDuelDay(day), n), to = new Date(from);
-      from.setHours(SB.show.from);
-      to.setHours(SB.show.to);
+      const from = new Date(s.getFullYear(), s.getMonth(), s.getDate() + n, SB.show.from);
+      const to = new Date(s.getFullYear(), s.getMonth(), s.getDate() + n, SB.show.to);
       return start < to && end > from;
     });
   }
@@ -347,7 +362,7 @@
   // and the `notSunday: true` tasks on the server's Sunday.
   function forToday(block) {
     const rest = todayDay === 7;
-    const sunday = LAST_DAY.week(serverDate(today));
+    const sunday = LAST_DAY.week(today);
     const keep = (tasks) => tasks.filter((t) => !(rest && t.duel) && !(sunday && t.notSunday));
     return block.groups
       ? { ...block, groups: block.groups.filter((g) => !(rest && g.duel)).map((g) => ({ ...g, tasks: keep(g.tasks) })) }
@@ -361,8 +376,7 @@
 
   // On the last game day of a week or month, the shops that reset after it: the last chance to buy.
   function renderLastChance() {
-    const s = serverDate(today);
-    const tasks = (window.LAST_CHANCE || []).filter((t) => LAST_DAY[t.resets]?.(s));
+    const tasks = (window.LAST_CHANCE || []).filter((t) => LAST_DAY[t.resets]?.(today));
     const periods = Object.keys(LAST_DAY).filter((p) => tasks.some((t) => t.resets === p));
     const shops = periods.map((p) => `${p}ly`).join(" and ");
     $("last-chance").replaceChildren(...(tasks.length ? [
@@ -492,17 +506,22 @@
 
   // ---- settings --------------------------------------------------------------
 
+  // The reset is kept in UTC and shown in local time, so it moves with the clocks when they change.
+  function showReset() { $("reset-hour").value = hhmm(nextReset(new Date())); }
+
   $("settings-btn").addEventListener("click", () => {
     const s = $("settings");
     s.hidden = !s.hidden;
     $("settings-btn").setAttribute("aria-expanded", String(!s.hidden));
-    if (!s.hidden) renderStorageInfo();
+    if (!s.hidden) { showReset(); renderStorageInfo(); }
   });
-  $("reset-hour").value = state.settings.reset;
+  showReset();
   $("start-weekday").value = String(state.settings.start);
   $("reset-hour").addEventListener("change", (e) => {
-    state.settings.reset = e.target.value || "00:00";
-    save(); today = null; refreshDay();
+    // A cleared field goes back to midnight UTC.
+    const [h, m] = e.target.value.split(":").map(Number);
+    state.settings.resetUTC = e.target.value ? toUTC(h || 0, m || 0) : 0;
+    save(); today = null; refreshDay(); showReset();
   });
   $("start-weekday").addEventListener("change", (e) => {
     state.settings.start = Number(e.target.value);
