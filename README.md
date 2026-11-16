@@ -5,7 +5,7 @@ A daily checklist for **Last Asylum: Plague** for free-to-play players who want 
 **Live site:** https://ceno.github.io/asylum-tracker/
 
 - Static site with no build step. Serve the repo root with GitHub Pages (Settings → Pages → Deploy from branch → `main` / root).
-- Ticks are saved in `localStorage` for each game day and clear at the daily reset. You can set the reset time and the weekday Duel Day 1 falls on (⚙ settings). The settings also show the time this device started keeping ticks, so you can tell if the phone wiped them.
+- Ticks are saved in `localStorage` for each game day and clear at the daily reset. You can set the reset time and the weekday Duel Day 1 falls on (⚙ settings). Both go by the game's clock, so the app works in any time zone and the reset follows daylight saving. The settings also show the time this device started keeping ticks, so you can tell if the phone wiped them.
 - The Home Screen app checks for a new deploy each time you switch back to it and reloads itself, so you don't need to force-quit it.
 - It's styled after the game's event screens, with game art for every task and objective: item icons on tiles coloured by rarity, building renders and hero art. Art and fonts are in `assets/`.
 - The Duel card shows the day's objectives under "Anytime", then a timeline of the Survival Battle rounds where the same task scores in both events, e.g. construction speedups from 10:00. "Show all" fills in the rest of the day's rounds, greyed, with the ones that also score in the Duel tagged "Duel".
