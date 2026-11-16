@@ -35,4 +35,6 @@ There is a private claude.ai artifact of the page at https://claude.ai/artifact/
 - `file_path`: `index.html`
 - `files`: a list of `style.css`, `data.js`, `app.js` and every file under `assets/` (`[{"path": "style.css"}, …, {"path": "assets/i-stamina.webp"}, …]`), so the images and fonts are published beside the page. Before the first publish in a session, also list the artifact's files with `action: "list", scope: "files"`, so the publish may replace the ones already there
 
+Publish your own branch's files as they are, so the preview shows `main` plus your change. If the preview holds changes from another branch that aren't on `main`, don't keep them: overwrite its files with yours, and remove any file only they added by passing `null` for it.
+
 Never publish without `url`. That creates a second artifact instead of updating this one. Ticks saved in the artifact are separate from the live site's. `sw.js` is left out on purpose: the preview runs without a service worker, so it never reloads itself.
