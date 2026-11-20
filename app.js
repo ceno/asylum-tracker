@@ -359,11 +359,13 @@
   }
 
   // Drops the `duel: true` groups and tasks on the rest day, when the Duel doesn't score,
-  // and the `notSunday: true` tasks on the server's Sunday.
+  // the `notSunday: true` tasks on the server's Sunday, and `weekday` tasks on other weekdays.
   function forToday(block) {
     const rest = todayDay === 7;
     const sunday = LAST_DAY.week(today);
-    const keep = (tasks) => tasks.filter((t) => !(rest && t.duel) && !(sunday && t.notSunday));
+    const weekday = WEEKDAYS[today.getUTCDay()];
+    const keep = (tasks) => tasks.filter((t) =>
+      !(rest && t.duel) && !(sunday && t.notSunday) && !(t.weekday && t.weekday !== weekday));
     return block.groups
       ? { ...block, groups: block.groups.filter((g) => !(rest && g.duel)).map((g) => ({ ...g, tasks: keep(g.tasks) })) }
       : { ...block, tasks: keep(block.tasks) };

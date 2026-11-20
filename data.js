@@ -14,7 +14,8 @@ window.ROUTINE = [
     art: "b-sanctuary",
     // groups split a block under sub-headers; ids stay unique across the whole block.
     // A group or task with `duel: true` is hidden on the Duel rest day, when nothing scores.
-    // A task with `notSunday: true` is hidden on the server's Sunday.
+    // A task with `notSunday: true` is hidden on the server's Sunday, and one with
+    // `weekday: "Fri"` (a name from WEEKDAYS in app.js) is only shown on that server weekday.
     groups: [
       {
         title: "Base",
@@ -85,6 +86,7 @@ window.ROUTINE = [
       { id: "dismantle-gear", text: "Disassemble gear", icon: "i-refined-iron" },
       { id: "ur-gear", text: "Attempt to make UR gear", icon: "i-ur-sword" },
       { id: "diamonds", text: "Consume Diamonds", icon: "i-diamonds" },
+      { id: "raise-shield", text: "Raise shield", icon: "i-shield", weekday: "Fri" },
     ],
   },
 ];
