@@ -213,36 +213,6 @@ window.SURVIVAL_BATTLE = {
   },
 };
 
-// What to set up the day *before* each Duel day (indexed by the upcoming day).
-// Ticks are kept by position as `prep:<day>:<n>`, so add new items at the end.
-window.PREP = {
-  1: [
-    { text: "Leave Falcon Quests on the red dot", icon: "b-falcon-tower" },
-    { text: "Count your Raven Essence and Fruit", icon: "i-raven-essence" },
-  ],
-  2: [
-    { text: "Start long builds that will finish after reset", icon: "i-build-hammer" },
-    { text: "Save UR Caravans and Covert Ops", icon: "i-trade-agreement" },
-  ],
-  3: [
-    { text: "Start long research that will finish after reset", icon: "i-instant-research" },
-    { text: "Leave Falcon Quests on the red dot", icon: "b-falcon-tower" },
-  ],
-  4: [
-    { text: "Keep all Hero Shards, Skill Badges and Antitoxin", icon: "i-hero-shard" },
-  ],
-  5: [
-    { text: "Start long builds and research that will finish after reset", icon: "i-build-hammer" },
-    { text: "Stock up on low-tier troops to promote", icon: "i-training-speedup" },
-    { text: "Leave Falcon Quests on the red dot", icon: "b-falcon-tower" },
-  ],
-  6: [
-    { text: "Coordinate targets with your alliance", icon: "i-rally" },
-    { text: "Keep UR Caravans and Covert Ops for tomorrow", icon: "i-trade-agreement" },
-  ],
-  7: [],
-};
-
 // The tile colour behind each item icon (i-), as the game frames items by rarity. Blue unless listed.
 window.ICON_RARITY = {
   purple: ["i-raven-essence", "i-raven-fruit", "i-raven-chest", "i-feather", "i-hero-shard", "i-skill-book", "i-study-scroll"],

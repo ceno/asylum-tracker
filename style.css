@@ -311,9 +311,9 @@ h1 { font-size: 1.3rem; }
 .check:has(input:checked) .ico { opacity: .75; }
 @keyframes pop { 0% { transform: scale(.4); } 70% { transform: scale(1.2); } 100% { transform: none; } }
 
-/* ---- prep, settings ---------------------------------------------------------------------- */
+/* ---- settings ---------------------------------------------------------------------------- */
 
-#prep-card h2, .settings h2 { font-size: 1.25rem; color: #2b4565; }
+.settings h2 { font-size: 1.25rem; color: #2b4565; }
 
 /* A light panel on the dark page, so its form controls are drawn light: white boxes, dark text. */
 .settings { color-scheme: light; }

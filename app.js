@@ -390,16 +390,6 @@
     ] : []));
   }
 
-  function renderPrep() {
-    const next = (selected % 7) + 1;
-    const items = window.PREP[next] || [];
-    const info = window.DUEL_DAYS[next - 1];
-    const key = dateKey(dateForDuelDay(selected));
-    $("prep-card").hidden = items.length === 0;
-    $("prep-sub").textContent = `Next: ${next === 7 ? "Rest day" : `Day ${next}`}, ${info.title}`;
-    $("prep-list").replaceChildren(...items.map((t, i) => checkItem(key, `prep:${next}:${i}`, t.text, t)));
-  }
-
   function updateProgress() {
     for (const card of document.querySelectorAll(".card.foldable")) {
       const boxes = card.querySelectorAll("input[type=checkbox]");
@@ -438,7 +428,6 @@
     renderLastChance();
     renderDuel();
     renderRoutine();
-    renderPrep();
     renderStatus();
     updateProgress();
   }
